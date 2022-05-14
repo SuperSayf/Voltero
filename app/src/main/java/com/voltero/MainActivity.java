@@ -23,7 +23,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToLogin(View v) {
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_main);
+    }
+
+    public void goToRegister(View v) {
+        setContentView(R.layout.activity_register);
     }
 
     public void doRegistration(View v) {
@@ -81,6 +85,8 @@ public class MainActivity extends AppCompatActivity {
         }).start();
     }
 
+    String FormChoice = "";
+
     public void doLogin(View v) {
         new Thread(new Runnable() {
             @Override
@@ -94,13 +100,9 @@ public class MainActivity extends AppCompatActivity {
                     TextView txtEmail = findViewById(R.id.txtLoginEmail);
                     TextView txtPassword = findViewById(R.id.txtLoginPassword);
 
-                    // Hash the password
-                    String password = txtPassword.getText().toString();
-                    String bcryptedPassword = BCrypt.withDefaults().hashToString(12, password.toCharArray());
-
                     // Add the values to the url
                     urlBuilder.addQueryParameter("user_email", txtEmail.getText().toString());
-                    urlBuilder.addQueryParameter("user_password", bcryptedPassword);
+                    urlBuilder.addQueryParameter("user_password", txtPassword.getText().toString());
 
                     // Build the url
                     String url = urlBuilder.build().toString();
@@ -112,6 +114,8 @@ public class MainActivity extends AppCompatActivity {
                     Response response = client.newCall(request).execute();
                     final String result = Objects.requireNonNull(response.body()).string();
 
+                    FormChoice = result;
+
                     runOnUiThread(new Runnable() {
                                       @Override
                                       public void run() {
@@ -120,10 +124,29 @@ public class MainActivity extends AppCompatActivity {
                                       }
                                   }
                     );
+
+                    // If result is equal to "1", then stop the thread and go to the next activity
+                    if (result.equals("1")) {
+                        setContentView(R.layout.activity_home_shopper);
+                    } else if (result.equals("0")) {
+                        setContentView(R.layout.activity_home_volunteer);
+                    }
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }).start();
+
+        // TODO: Need to fix where the user is directed to after login
+
+        if (FormChoice.equals("1")) {
+            // Stop this form and go to the next form
+            setContentView(R.layout.activity_home_shopper);
+
+
+        } else if (FormChoice.equals("0")) {
+            setContentView(R.layout.activity_home_volunteer);
+        }
     }
 }
