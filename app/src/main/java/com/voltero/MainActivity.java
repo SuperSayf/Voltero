@@ -86,8 +86,6 @@ public class MainActivity extends AppCompatActivity {
         }).start();
     }
 
-    String FormChoice = "";
-
     public void doLogin(View v) {
         new Thread(new Runnable() {
             @Override
@@ -115,18 +113,16 @@ public class MainActivity extends AppCompatActivity {
                     Response response = client.newCall(request).execute();
                     final String result = Objects.requireNonNull(response.body()).string();
 
-                    FormChoice = result;
-
                     runOnUiThread(new Runnable() {
                                       @Override
                                       public void run() {
                                           TextView textView = findViewById(R.id.txtLoginOutput);
                                           textView.setText(result);
 
-                                          if (FormChoice.equals("1")) {
+                                          if (result.equals("1")) {
                                               setContentView(R.layout.activity_home_shopper);
 
-                                          } else if (FormChoice.equals("0")) {
+                                          } else if (result.equals("0")) {
                                               setContentView(R.layout.activity_home_volunteer);
                                           }
                                       }
