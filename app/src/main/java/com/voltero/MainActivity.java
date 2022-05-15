@@ -122,6 +122,13 @@ public class MainActivity extends AppCompatActivity {
                                       public void run() {
                                           TextView textView = findViewById(R.id.txtLoginOutput);
                                           textView.setText(result);
+
+                                          if (FormChoice.equals("1")) {
+                                              setContentView(R.layout.activity_home_shopper);
+
+                                          } else if (FormChoice.equals("0")) {
+                                              setContentView(R.layout.activity_home_volunteer);
+                                          }
                                       }
                                   }
                     );
@@ -131,17 +138,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }).start();
-
-        // TODO: Need to fix password hasher for this to work. Been tested.
-        // Stop this form and go to the next form
-        if (FormChoice.equals("1")) {
-            Intent i = new Intent(this,HomeShopper.class);
-            startActivity(i);
-
-        } else if (FormChoice.equals("0")) {
-            Intent i = new Intent(this,HomeVolunteer.class);
-            startActivity(i);
-        }
     }
 
 
