@@ -125,13 +125,6 @@ public class MainActivity extends AppCompatActivity {
                                   }
                     );
 
-                    // If result is equal to "1", then stop the thread and go to the next activity
-                    if (result.equals("1")) {
-                        setContentView(R.layout.activity_home_shopper);
-                    } else if (result.equals("0")) {
-                        setContentView(R.layout.activity_home_volunteer);
-                    }
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
