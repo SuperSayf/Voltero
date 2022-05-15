@@ -1,10 +1,11 @@
 package com.voltero;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Objects;
 
@@ -138,15 +139,17 @@ public class MainActivity extends AppCompatActivity {
             }
         }).start();
 
-        // TODO: Need to fix where the user is directed to after login
-
+        // TODO: Need to fix password hasher for this to work. Been tested.
+        // Stop this form and go to the next form
         if (FormChoice.equals("1")) {
-            // Stop this form and go to the next form
-            setContentView(R.layout.activity_home_shopper);
-
+            Intent i = new Intent(this,HomeShopper.class);
+            startActivity(i);
 
         } else if (FormChoice.equals("0")) {
-            setContentView(R.layout.activity_home_volunteer);
+            Intent i = new Intent(this,HomeVolunteer.class);
+            startActivity(i);
         }
     }
+
+
 }
