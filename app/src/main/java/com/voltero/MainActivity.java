@@ -1,11 +1,16 @@
 package com.voltero;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Objects;
 
@@ -32,108 +37,70 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void doRegistration(View v) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    OkHttpClient client = new OkHttpClient();
+        // Get TextView txtFirstName, txtSurname, txtEmail, txtPassword and txtAddress from the layout
+        TextView txtFirstName = findViewById(R.id.txtFirstName);
+        TextView txtSurname = findViewById(R.id.txtSurname);
+        TextView txtEmail = findViewById(R.id.txtEmail);
+        TextView txtPassword = findViewById(R.id.txtPassword);
+        TextView txtAddress = findViewById(R.id.txtAddress);
+        TextView txtCell = findViewById(R.id.txtCell);
 
-                    HttpUrl.Builder urlBuilder = Objects.requireNonNull(HttpUrl.parse("https://lamp.ms.wits.ac.za/~s2430888/addUser.php")).newBuilder();
+        // Hash the password
+        String password = txtPassword.getText().toString();
+        String bPassword = BCrypt.withDefaults().hashToString(12, password.toCharArray());
 
-                    // Get TextView txtFirstName, txtSurname, txtEmail, txtPassword and txtAddress from the layout
-                    TextView txtFirstName = findViewById(R.id.txtFirstName);
-                    TextView txtSurname = findViewById(R.id.txtSurname);
-                    TextView txtEmail = findViewById(R.id.txtEmail);
-                    TextView txtPassword = findViewById(R.id.txtPassword);
-                    TextView txtAddress = findViewById(R.id.txtAddress);
-                    TextView txtCell = findViewById(R.id.txtCell);
+        // Create the ContentValues
+        ContentValues params = new ContentValues();
+        params.put("user_firstname", txtFirstName.getText().toString());
+        params.put("user_surname", txtSurname.getText().toString());
+        params.put("user_email", txtEmail.getText().toString());
+        params.put("user_password", bPassword);
+        params.put("user_address", txtAddress.getText().toString());
+        params.put("user_type", "1");
+        params.put("user_cell", txtCell.getText().toString());
 
-                    // Hash the password
-                    String password = txtPassword.getText().toString();
-                    String bcryptedPassword = BCrypt.withDefaults().hashToString(12, password.toCharArray());
+        // Create the request
+        Requests.request(this, "addUser", params, response -> {
+            try {
+                // Get the response
+                JSONObject jsonObject = new JSONObject(response);
 
-                    // Add the values to the url
-                    urlBuilder.addQueryParameter("user_firstname", txtFirstName.getText().toString());
-                    urlBuilder.addQueryParameter("user_surname", txtSurname.getText().toString());
-                    urlBuilder.addQueryParameter("user_email", txtEmail.getText().toString());
-                    urlBuilder.addQueryParameter("user_password", bcryptedPassword);
-                    urlBuilder.addQueryParameter("user_address", txtAddress.getText().toString());
-                    urlBuilder.addQueryParameter("user_type", "1");
-                    urlBuilder.addQueryParameter("user_cell", txtCell.getText().toString());
-
-                    // Build the url
-                    String url = urlBuilder.build().toString();
-
-                    Request request = new Request.Builder()
-                            .url(url)
-                            .build();
-
-                    Response response = client.newCall(request).execute();
-                    final String result = Objects.requireNonNull(response.body()).string();
-
-                    runOnUiThread(new Runnable() {
-                                      @Override
-                                      public void run() {
-                                          TextView textView = findViewById(R.id.txtOutput);
-                                          textView.setText(result);
-                                      }
-                                  }
-                    );
-                } catch (Exception e) {
-                    e.printStackTrace();
+                if (jsonObject.getString("success").equals("true")) {
+                    // Show the activity_main and close this activity
+                    Intent intent = new Intent(this, MainActivity.class);
+                    startActivity(intent);
+                } else {
+                    // Show the error
+                    Requests.showMessage(this, jsonObject.getString("message"));
                 }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        }).start();
+        });
     }
 
     public void doLogin(View v) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    OkHttpClient client = new OkHttpClient();
+        ContentValues params = new ContentValues();
+        params.put("user_email", ((TextView) findViewById(R.id.txtLoginEmail)).getText().toString());
+        params.put("user_password", ((TextView) findViewById(R.id.txtLoginPassword)).getText().toString());
 
-                    HttpUrl.Builder urlBuilder = Objects.requireNonNull(HttpUrl.parse("https://lamp.ms.wits.ac.za/~s2430888/userLogin.php")).newBuilder();
-
-                    // Get TextView txtEmail and txtPassword from the layout
-                    TextView txtEmail = findViewById(R.id.txtLoginEmail);
-                    TextView txtPassword = findViewById(R.id.txtLoginPassword);
-
-                    // Add the values to the url
-                    urlBuilder.addQueryParameter("user_email", txtEmail.getText().toString());
-                    urlBuilder.addQueryParameter("user_password", txtPassword.getText().toString());
-
-                    // Build the url
-                    String url = urlBuilder.build().toString();
-
-                    Request request = new Request.Builder()
-                            .url(url)
-                            .build();
-
-                    Response response = client.newCall(request).execute();
-                    final String result = Objects.requireNonNull(response.body()).string();
-
-                    runOnUiThread(new Runnable() {
-                                      @Override
-                                      public void run() {
-                                          TextView textView = findViewById(R.id.txtLoginOutput);
-                                          textView.setText(result);
-
-                                          if (result.equals("1")) {
-                                              setContentView(R.layout.activity_home_shopper);
-
-                                          } else if (result.equals("0")) {
-                                              setContentView(R.layout.activity_home_volunteer);
-                                          }
-                                      }
-                                  }
-                    );
-
-                } catch (Exception e) {
-                    e.printStackTrace();
+        Requests.request(this, "userLogin", params, response -> {
+            try {
+                // Get the response
+                JSONObject jsonObject = new JSONObject(response);
+                if (jsonObject.getString("user_type").equals("1")) {
+                    // Open the shopper activity
+                    Intent intent = new Intent(this, HomeShopper.class);
+                    startActivity(intent);
+                } else if (jsonObject.getString("user_type").equals("0")) {
+                    // Open the volunteer activity
+                    Intent intent = new Intent(this, HomeVolunteer.class);
+                    startActivity(intent);
                 }
+            } catch (JSONException e) {
+                Requests.showMessage(this, "Error logging in");
             }
-        }).start();
+        });
     }
 
 
