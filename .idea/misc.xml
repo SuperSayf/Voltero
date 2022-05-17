@@ -3,14 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_chat.xml" value="0.358695652173913" />
         <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_home.xml" value="0.358695652173913" />
         <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_home_volunteer.xml" value="0.358695652173913" />
         <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
+        <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_register.xml" value="0.358695652173913" />
         <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/layout/login.xml" value="0.358695652173913" />
+        <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/layout/message_list_item.xml" value="0.358695652173913" />
         <entry key="..\:/Users/Abdullah Karolia/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_home_shopper.xml" value="0.15714285714285714" />
         <entry key="..\:/Users/Abdullah Karolia/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_home_volunteer.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/Abdullah Karolia/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_main.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/Abdullah Karolia/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_register.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/muaaz/AndroidStudioProjects/Voltero/app/src/main/res/drawable/bg_btn.xml" value="0.209" />
+        <entry key="..\:/Users/muaaz/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_chat.xml" value="0.2803442028985507" />
+        <entry key="..\:/Users/muaaz/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/muaaz/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_register.xml" value="0.2803442028985507" />
       </map>
     </option>
   </component>
