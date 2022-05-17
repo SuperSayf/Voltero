@@ -36,6 +36,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
     }
 
+    public void goToChat(View v) {
+        // Intent to the ChatActivity
+        Intent intent = new Intent(this, Chat.class);
+        startActivity(intent);
+    }
+
     public void doRegistration(View v) {
         // Get TextView txtFirstName, txtSurname, txtEmail, txtPassword and txtAddress from the layout
         TextView txtFirstName = findViewById(R.id.txtFirstName);
