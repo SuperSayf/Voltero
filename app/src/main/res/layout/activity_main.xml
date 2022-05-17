@@ -95,7 +95,7 @@
         app:layout_constraintVertical_bias="0.971" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/txtDontHaveAccount"
         android:layout_width="144dp"
         android:layout_height="26dp"
         android:text="Don’t have account?"
@@ -109,21 +109,24 @@
         app:layout_constraintVertical_bias="0.804" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/txtCreateNow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_medium"
+        android:minHeight="48dp"
+        android:onClick="goToRegister"
         android:text="Create now"
         android:textColor="#FFFFFF"
         android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.688"
+        app:layout_constraintHorizontal_bias="0.754"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.799" />
+        app:layout_constraintVertical_bias="0.83" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imgLogo"
         android:layout_width="262dp"
         android:layout_height="124dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -132,7 +135,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.054"
-        app:srcCompat="@drawable/VolteroLogoFinalWhiteText" />
+        app:srcCompat="@drawable/voltero_logo_final_white_text" />
 
     <TextView
         android:id="@+id/textView4"
