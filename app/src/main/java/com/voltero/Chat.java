@@ -2,7 +2,10 @@ package com.voltero;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -19,6 +22,7 @@ import java.util.List;
 public class Chat extends AppCompatActivity {
 
     private MessageAdapter adapter;
+    private Handler mHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +56,32 @@ public class Chat extends AppCompatActivity {
             }
         });
     }
+
+//    public void startRepeating() {
+//        mHandler.postDelayed(mHandlerTask, 500);
+//    }
+//
+//    public void stopRepeating() {
+//        mHandler.removeCallbacks(mHandlerTask);
+//    }
+//
+//    private Runnable mHandlerTask = new Runnable() {
+//        @Override
+//        public void run() {
+//            ContentValues params = new ContentValues();
+//            // TODO: add params
+//
+//            Requests.request(this, "userLogin", params, response -> {
+//                try {
+//                    // TODO: parse response
+//                } catch (JSONException e) {
+//                    // TODO: handle error
+//                }
+//            });
+//
+//            mHandler.postDelayed(this, 2000);
+//        }
+//    };
 
     public class MessageAdapter extends BaseAdapter {
         List<JSONObject> messagesList = new ArrayList<>();
