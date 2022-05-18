@@ -6,25 +6,22 @@
     android:layout_height="match_parent"
     android:background="#000113">
 
-    <EditText
-        android:id="@+id/txtLoginPassword"
+    <Button
+        android:id="@+id/btnLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:width="298dp"
-        android:backgroundTint="#CCCCCC"
-        android:ems="10"
-        android:fontFamily="@font/roboto"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:minHeight="48dp"
-        android:textColor="#CCCCCC"
-        android:textColorHint="#CCCCCC"
+        android:background="@drawable/bg_btn"
+        android:fontFamily="@font/roboto_medium"
+        android:onClick="doLogin"
+        android:text="Login"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.408" />
+        app:layout_constraintVertical_bias="0.626" />
 
     <EditText
         android:id="@+id/txtLoginEmail"
@@ -46,24 +43,27 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.27" />
+        app:layout_constraintVertical_bias="0.33" />
 
-    <Button
-        android:id="@+id/btnLogin"
+    <EditText
+        android:id="@+id/txtLoginPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:width="298dp"
-        android:background="@drawable/bg_btn"
-        android:fontFamily="@font/roboto_medium"
-        android:onClick="doLogin"
-        android:text="Login"
-        android:textColor="#FFFFFF"
+        android:backgroundTint="#CCCCCC"
+        android:ems="10"
+        android:fontFamily="@font/roboto"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:textColor="#CCCCCC"
+        android:textColorHint="#CCCCCC"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.565" />
+        app:layout_constraintVertical_bias="0.469" />
 
     <Button
         android:id="@+id/button2"
@@ -135,5 +135,18 @@
         app:layout_constraintStart_toStartOf="@+id/txtLoginPassword"
         app:layout_constraintTop_toTopOf="@+id/txtLoginPassword"
         app:layout_constraintVertical_bias="0.413" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Login"
+        android:textColor="#FFFFFF"
+        android:textSize="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtLoginEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgLogo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
