@@ -17,6 +17,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".CardBuilder"
+            android:exported="false" />
+        <activity
+            android:name=".Categories"
+            android:exported="false" />
+        <activity
             android:name=".Categories"
             android:exported="false" />
         <activity
