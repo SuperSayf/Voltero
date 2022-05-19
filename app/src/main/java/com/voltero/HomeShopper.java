@@ -1,10 +1,12 @@
 package com.voltero;
 
+
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 
 public class HomeShopper extends AppCompatActivity {
@@ -17,14 +19,14 @@ public class HomeShopper extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_home_shopper);
         courseRV = findViewById(R.id.idRVCourse);
 
         // here we have created new array list and added data to it.
         cardBuilderArrayList = new ArrayList<>();
         cardBuilderArrayList.add(new CardBuilder("DSA in Java", R.drawable.ic_launcher_foreground));
         cardBuilderArrayList.add(new CardBuilder("Java Course",  R.drawable.ic_launcher_foreground));
-        cardBuilderArrayList.add(new CardBuilder("C++ Course",  R.drawable.ic_launcher_foreground));
+        cardBuilderArrayList.add(new CardBuilder("C++ COurse",  R.drawable.ic_launcher_foreground));
         cardBuilderArrayList.add(new CardBuilder("DSA in C++",  R.drawable.ic_launcher_foreground));
         cardBuilderArrayList.add(new CardBuilder("Kotlin for Android",  R.drawable.ic_launcher_foreground));
         cardBuilderArrayList.add(new CardBuilder("Java for Android",  R.drawable.ic_launcher_foreground));
