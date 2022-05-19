@@ -20,6 +20,9 @@
             android:name=".Categories"
             android:exported="false" />
         <activity
+            android:name=".Register"
+            android:exported="false" />
+        <activity
             android:name=".Chat"
             android:exported="false" />
         <activity

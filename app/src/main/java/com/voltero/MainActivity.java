@@ -4,7 +4,11 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,11 +33,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToLogin(View v) {
-        setContentView(R.layout.activity_main);
+        // Intent to the LoginActivity
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     public void goToRegister(View v) {
-        setContentView(R.layout.activity_register);
+        // Intent to the RegisterActivity
+        Intent intent = new Intent(this, Register.class);
+        startActivity(intent);
     }
 
     public void goToChat(View v) {
@@ -62,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         params.put("user_email", txtEmail.getText().toString());
         params.put("user_password", bPassword);
         params.put("user_address", txtAddress.getText().toString());
-        params.put("user_type", "1");
+        params.put("user_type", "0");
         params.put("user_cell", txtCell.getText().toString());
 
         // Create the request
