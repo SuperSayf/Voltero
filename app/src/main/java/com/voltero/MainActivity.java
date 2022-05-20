@@ -13,6 +13,10 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
+    // Global variables
+    public static String user_email = "";
+    public static String user_type = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,19 +42,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void doLogin(View v) {
+        user_email = ((TextView) findViewById(R.id.txtLoginEmail)).getText().toString();
+
         ContentValues params = new ContentValues();
-        params.put("user_email", ((TextView) findViewById(R.id.txtLoginEmail)).getText().toString());
+        params.put("user_email", user_email);
         params.put("user_password", ((TextView) findViewById(R.id.txtLoginPassword)).getText().toString());
 
         Requests.request(this, "userLogin", params, response -> {
             try {
                 // Get the response
                 JSONObject jsonObject = new JSONObject(response);
-                if (jsonObject.getString("user_type").equals("1")) {
+                user_type = jsonObject.getString("user_type");
+                if (user_type.equals("1")) {
                     // Open the shopper activity
                     Intent intent = new Intent(this, HomeShopper.class);
                     startActivity(intent);
-                } else if (jsonObject.getString("user_type").equals("0")) {
+                } else if (user_type.equals("0")) {
                     // Open the volunteer activity
                     Intent intent = new Intent(this, HomeVolunteer.class);
                     startActivity(intent);

@@ -3,7 +3,6 @@ package com.voltero;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -12,22 +11,34 @@ import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class Chat extends AppCompatActivity {
 
     private MessageAdapter adapter;
     private Handler mHandler = new Handler();
+    public static String session_email = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+
+        startRepeating();
+
+        getSessionEmail();
 
         ListView messageList = findViewById(R.id.messageList);
         final EditText messageBox = findViewById(R.id.messageBox);
@@ -49,6 +60,30 @@ public class Chat extends AppCompatActivity {
                         json.put("byServer", "false");
 
                         adapter.addItem(json);
+
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    OkHttpClient client = new OkHttpClient();
+                                    HttpUrl.Builder urlBuilder = Objects.requireNonNull(HttpUrl.parse("https://lamp.ms.wits.ac.za/~s2430888/sendMessage.php")).newBuilder();
+                                    urlBuilder.addQueryParameter("session_id", "33");
+                                    urlBuilder.addQueryParameter("user_email", session_email);
+                                    urlBuilder.addQueryParameter("msg_content", message);
+                                    urlBuilder.addQueryParameter("msg_seen", "false");
+
+                                    String url = urlBuilder.build().toString();
+
+                                    Request request = new Request.Builder()
+                                            .url(url)
+                                            .build();
+                                    Response response = client.newCall(request).execute();
+                                    final String result = Objects.requireNonNull(response.body()).string();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }).start();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -57,31 +92,82 @@ public class Chat extends AppCompatActivity {
         });
     }
 
-//    public void startRepeating() {
-//        mHandler.postDelayed(mHandlerTask, 500);
-//    }
-//
-//    public void stopRepeating() {
-//        mHandler.removeCallbacks(mHandlerTask);
-//    }
-//
-//    private Runnable mHandlerTask = new Runnable() {
-//        @Override
-//        public void run() {
-//            ContentValues params = new ContentValues();
-//            // TODO: add params
-//
-//            Requests.request(this, "userLogin", params, response -> {
-//                try {
-//                    // TODO: parse response
-//                } catch (JSONException e) {
-//                    // TODO: handle error
-//                }
-//            });
-//
-//            mHandler.postDelayed(this, 2000);
-//        }
-//    };
+    public void getSessionEmail() {
+        ContentValues params = new ContentValues();
+        params.put("user_email", MainActivity.user_email);
+        params.put("user_type", MainActivity.user_type);
+
+        Requests.request(this, "getSessionWith", params, response -> {
+            try {
+                // Get the response
+                JSONObject jsonObject = new JSONObject(response);
+                session_email = jsonObject.getString("session_with");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public void startRepeating() {
+        mHandler.postDelayed(mHandlerTask, 500);
+    }
+
+    public void stopRepeating() {
+        mHandler.removeCallbacks(mHandlerTask);
+    }
+
+    private Runnable mHandlerTask = new Runnable() {
+        @Override
+        public void run() {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        OkHttpClient client = new OkHttpClient();
+                        HttpUrl.Builder urlBuilder = Objects.requireNonNull(HttpUrl.parse("https://lamp.ms.wits.ac.za/~s2430888/checkForMessages.php")).newBuilder();
+                        urlBuilder.addQueryParameter("session_id", "33");
+                        urlBuilder.addQueryParameter("user_email", MainActivity.user_email);
+
+                        String url = urlBuilder.build().toString();
+
+                        Request request = new Request.Builder()
+                                .url(url)
+                                .build();
+                        Response response = client.newCall(request).execute();
+                        final String result = Objects.requireNonNull(response.body()).string();
+                        // Create json object from the response
+                        JSONObject jsonObject = new JSONObject(result);
+                        runOnUiThread(new Runnable() {
+                                          @Override
+                                          public void run() {
+                                              try {
+                                                  if (jsonObject.getString("found").equals("true")) {
+                                                      String message = jsonObject.getString("msg_content");
+                                                      JSONObject json = new JSONObject();
+                                                      try {
+                                                          json.put("message", message);
+                                                          json.put("byServer", "true");
+
+                                                          adapter.addItem(json);
+                                                      } catch (JSONException e) {
+                                                          e.printStackTrace();
+                                                      }
+                                                  }
+                                              } catch (JSONException e) {
+                                                  e.printStackTrace();
+                                              }
+                                          }
+                                      }
+                        );
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+
+            mHandler.postDelayed(this, 2000);
+        }
+    };
 
     public class MessageAdapter extends BaseAdapter {
         List<JSONObject> messagesList = new ArrayList<>();
