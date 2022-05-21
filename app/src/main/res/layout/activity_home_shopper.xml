@@ -12,64 +12,49 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="3dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="horizontal">
 
-        <com.google.android.material.tabs.TabItem
+        <ImageButton
+            android:id="@+id/Account"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Home" />
+            android:layout_weight="1"
+            tools:srcCompat="@tools:sample/avatars" />
 
-        <com.google.android.material.tabs.TabItem
+        <ImageButton
+            android:id="@+id/My_cart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Categories" />
+            android:layout_weight="1"
+            app:srcCompat="@android:drawable/ic_menu_send" />
 
-        <com.google.android.material.tabs.TabItem
+        <ImageButton
+            android:id="@+id/Search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Search" />
+            android:layout_weight="1"
+            app:srcCompat="@android:drawable/btn_star" />
 
-        <com.google.android.material.tabs.TabItem
+        <ImageButton
+            android:id="@+id/Categories_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="My cart" />
+            android:layout_weight="1"
+            app:srcCompat="@android:drawable/btn_dialog" />
 
-        <com.google.android.material.tabs.TabItem
+        <ImageButton
+            android:id="@+id/chat_Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chat" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Account" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:onClick="goToChat"
-            android:text="Text" />
-    </com.google.android.material.tabs.TabLayout>
+            app:srcCompat="@android:drawable/ic_menu_myplaces" />
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="317dp"
-        android:layout_marginBottom="683dp"
-        android:onClick="goToChat"
-        android:text="Chat" />
+
+    </LinearLayout>
 
 </RelativeLayout>
