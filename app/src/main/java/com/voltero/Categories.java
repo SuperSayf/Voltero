@@ -3,10 +3,9 @@ package com.voltero;
 
 import android.content.ContentValues;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONArray;
@@ -35,7 +34,6 @@ public class Categories extends AppCompatActivity {
 
         Requests.request(this, "getCategories", params, response -> {
             try {
-                // Get the response
                 JSONArray categories = new JSONArray(response);
                 courseRV = findViewById(R.id.idRVCourse);
                 cardBuilderArrayList = new ArrayList<>();
@@ -52,7 +50,7 @@ public class Categories extends AppCompatActivity {
                     @Override
                     public void run() {
                         CardListMaker cardListMaker = new CardListMaker(Categories.this, cardBuilderArrayList);
-                        courseRV.setLayoutManager(new GridLayoutManager(Categories.this, 2));
+                        courseRV.setLayoutManager(new LinearLayoutManager(Categories.this));
                         courseRV.setAdapter(cardListMaker);
                     }
                 });
