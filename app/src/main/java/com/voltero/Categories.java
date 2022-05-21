@@ -3,18 +3,17 @@ package com.voltero;
 
 import android.content.ContentValues;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.Objects;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import okhttp3.HttpUrl;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+import java.util.ArrayList;
 
 public class Categories extends AppCompatActivity {
 
@@ -32,28 +31,33 @@ public class Categories extends AppCompatActivity {
         cardBuilderArrayList = new ArrayList<>();
 
         ContentValues params = new ContentValues();
+//
+//        // Create the request
+        Requests.request(this, "getCategories", params, response -> {
+            try {
+                // Get the response
+                JSONArray categories = new JSONArray(response);
+                Log.e("test", "this shit is broken");
 
-        // Create the request
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    OkHttpClient client = new OkHttpClient();
-                    HttpUrl.Builder urlBuilder = Objects.requireNonNull(HttpUrl.parse("https://lamp.ms.wits.ac.za/~s2430888/getCategories.php")).newBuilder();
-
-                    String url = urlBuilder.build().toString();
-
-                    Request request = new Request.Builder()
-                            .url(url)
-                            .build();
-                    Response response = client.newCall(request).execute();
-
-                    final String result = Objects.requireNonNull(response.body()).string();
-                } catch (Exception e) {
-                    e.printStackTrace();
+                for (int i = 0; i < categories.length(); ++i) {
+                    JSONObject object = categories.getJSONObject(i);
+                    //System.out.println(object);
+                    String cat_name = object.getString("cat_name");
+                    //String cat_image = object.getString("cat_image");
+                    //System.out.println(cat_name);
+                    cardBuilderArrayList.add(new CardBuilder(cat_name, R.drawable.ic_launcher_foreground));
                 }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        }).start();
+
+        });
+
+//        for (int i = 0; i < 10; ++i) {
+//            cardBuilderArrayList.add(new CardBuilder("stand in val", R.drawable.ic_launcher_background));
+//        }
+
+
 
         // here we have created new array list and added data to it.
 
