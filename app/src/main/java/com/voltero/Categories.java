@@ -41,17 +41,17 @@ public class Categories extends AppCompatActivity {
                     JSONObject object = categories.getJSONObject(i);
                     //System.out.println(object);
                     String cat_name = object.getString("cat_name");
-                    //String cat_image = object.getString("cat_image");
+                    String cat_image = object.getString("cat_image");
                     System.out.println(cat_name);
-                    cardBuilderArrayList.add(new CardBuilder(cat_name, R.drawable.ic_launcher_foreground));
+                    cardBuilderArrayList.add(new CardBuilder(cat_name, cat_image));
                 }
                 runOnUiThread(new Runnable() {
 
                     @Override
                     public void run() {
-                        CardListMaker cardListMaker = new CardListMaker(Categories.this, cardBuilderArrayList);
+                        LinearCardListMaker linearCardListMaker = new LinearCardListMaker(Categories.this, cardBuilderArrayList);
                         courseRV.setLayoutManager(new LinearLayoutManager(Categories.this));
-                        courseRV.setAdapter(cardListMaker);
+                        courseRV.setAdapter(linearCardListMaker);
                     }
                 });
             } catch (JSONException e) {

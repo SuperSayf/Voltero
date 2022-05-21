@@ -6,34 +6,42 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
-public class CardListMaker extends RecyclerView.Adapter<CardListMaker.Viewholder> {
+public class GridCardListMaker extends RecyclerView.Adapter<GridCardListMaker.Viewholder> {
     private Context context;
     private ArrayList<CardBuilder> cardBuilderArrayList;
 
     // Constructor
-    public CardListMaker(Context context, ArrayList<CardBuilder> cardBuilderArrayList) {
+    public GridCardListMaker(Context context, ArrayList<CardBuilder> cardBuilderArrayList) {
         this.context = context;
         this.cardBuilderArrayList = cardBuilderArrayList;
     }
 
     @NonNull
     @Override
-    public CardListMaker.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public GridCardListMaker.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // to inflate the layout for each item of recycler view.
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_layout, parent, false);
         return new Viewholder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CardListMaker.Viewholder holder, int position) {
+    public void onBindViewHolder(@NonNull GridCardListMaker.Viewholder holder, int position) {
         // to set data to textview and imageview of each card layout
         CardBuilder model = cardBuilderArrayList.get(position);
         holder.courseNameTV.setText(model.getCourse_name());
-        holder.courseIV.setImageResource(model.getCourse_image());
+        Picasso.get()
+                .load(model.getCourse_image()) // internet path
+                .placeholder(android.R.drawable.screen_background_light_transparent)
+                .resize(500, 500).centerCrop()
+                .into(holder.courseIV);
     }
 
     @Override
