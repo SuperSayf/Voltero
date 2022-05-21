@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Voltero</string>
+    <string name="tester"> hello world!</string>
+
+    //Spinner
+    <string-array name="spinner_items">
+        <item>Shopper</item>
+        <item>Volunteer</item>
+    </string-array>
 </resources>
