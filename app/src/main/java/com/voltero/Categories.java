@@ -57,9 +57,43 @@ public class Categories extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
         });
     }
 
+    public void clickable() {
+//        ContentValues params = new ContentValues();
+//
+//        for(int i = 0; i < cardBuilderArrayList.size(); i++) {
+//            params.put("cat_name", cardBuilderArrayList.get(i).getCourse_name());
+//        }
+//
+//        // Create the request
+//        Requests.request(this, "categoryToGroceries", params, response -> {
+//            try {
+//                JSONArray categories = new JSONArray(response);
+//                courseRV = findViewById(R.id.idRVCourse);
+//                cardBuilderArrayList = new ArrayList<>();
+//                for (int i = 0; i < categories.length(); ++i) {
+//                    JSONObject object = categories.getJSONObject(i);
+//                    //System.out.println(object);
+//                    String cat_name = object.getString("cat_name");
+//                    String cat_image = object.getString("cat_image");
+//                    System.out.println(cat_name);
+//                    cardBuilderArrayList.add(new CardBuilder(cat_name, cat_image));
+//                }
+//                runOnUiThread(new Runnable() {
+//
+//                    @Override
+//                    public void run() {
+//                        LinearCardListMaker linearCardListMaker = new LinearCardListMaker(Categories.this, cardBuilderArrayList);
+//                        courseRV.setLayoutManager(new LinearLayoutManager(Categories.this));
+//                        courseRV.setAdapter(linearCardListMaker);
+//                    }
+//                });
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//        });
+    }
 
 }

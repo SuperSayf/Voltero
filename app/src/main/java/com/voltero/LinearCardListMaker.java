@@ -1,6 +1,7 @@
 package com.voltero;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -42,6 +44,13 @@ public class LinearCardListMaker extends RecyclerView.Adapter<LinearCardListMake
                 .placeholder(android.R.drawable.screen_background_light_transparent)
                 .resize(500, 500).centerCrop()
                 .into(holder.courseIV);
+
+
+        holder.cardView.setOnClickListener(v -> {
+            GroupedGroceries.category_name =  model.getCourse_name();
+            Intent intent = new Intent(context, GroupedGroceries.class);
+            context.startActivity(intent);
+        });
     }
 
     @Override
@@ -56,11 +65,18 @@ public class LinearCardListMaker extends RecyclerView.Adapter<LinearCardListMake
     public class Viewholder extends RecyclerView.ViewHolder {
         private ImageView courseIV;
         private TextView courseNameTV;
+        private CardView cardView;
 
         public Viewholder(@NonNull View itemView) {
             super(itemView);
             courseIV = itemView.findViewById(R.id.idIVCourseImage);
             courseNameTV = itemView.findViewById(R.id.idTVCourseName);
+            cardView = itemView.findViewById(R.id.testView);
         }
     }
+
+    public void pageChanger(View v) {
+
+    }
+
 }
