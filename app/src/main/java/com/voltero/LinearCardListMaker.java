@@ -20,7 +20,6 @@ public class LinearCardListMaker extends RecyclerView.Adapter<LinearCardListMake
     private Context context;
     private ArrayList<CardBuilder> cardBuilderArrayList;
 
-    // Constructor
     public LinearCardListMaker(Context context, ArrayList<CardBuilder> cardBuilderArrayList) {
         this.context = context;
         this.cardBuilderArrayList = cardBuilderArrayList;
@@ -29,22 +28,19 @@ public class LinearCardListMaker extends RecyclerView.Adapter<LinearCardListMake
     @NonNull
     @Override
     public LinearCardListMaker.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // to inflate the layout for each item of recycler view.
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_layout, parent, false);
         return new Viewholder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull LinearCardListMaker.Viewholder holder, int position) {
-        // to set data to textview and imageview of each card layout
         CardBuilder model = cardBuilderArrayList.get(position);
         holder.courseNameTV.setText(model.getCourse_name());
         Picasso.get()
-                .load(model.getCourse_image()) // internet path
+                .load(model.getCourse_image())
                 .placeholder(android.R.drawable.screen_background_light_transparent)
                 .resize(500, 500).centerCrop()
                 .into(holder.courseIV);
-
 
         holder.cardView.setOnClickListener(v -> {
             GroupedGroceries.category_name =  model.getCourse_name();
@@ -54,14 +50,8 @@ public class LinearCardListMaker extends RecyclerView.Adapter<LinearCardListMake
     }
 
     @Override
-    public int getItemCount() {
-        // this method is used for showing number
-        // of card items in recycler view.
-        return cardBuilderArrayList.size();
-    }
+    public int getItemCount() { return cardBuilderArrayList.size(); }
 
-    // View holder class for initializing of
-    // your views such as TextView and Imageview.
     public class Viewholder extends RecyclerView.ViewHolder {
         private ImageView courseIV;
         private TextView courseNameTV;
@@ -74,9 +64,4 @@ public class LinearCardListMaker extends RecyclerView.Adapter<LinearCardListMake
             cardView = itemView.findViewById(R.id.testView);
         }
     }
-
-    public void pageChanger(View v) {
-
-    }
-
 }

@@ -2,9 +2,7 @@ package com.voltero;
 
 
 import android.content.ContentValues;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -42,10 +40,8 @@ public class HomeShopper extends AppCompatActivity {
                 cardBuilderArrayList = new ArrayList<>();
                 for (int i = 0; i < categories.length(); ++i) {
                     JSONObject object = categories.getJSONObject(i);
-                    //System.out.println(object);
                     String grc_name = object.getString("grc_name");
                     String grc_image = object.getString("grc_image");
-                    System.out.println(grc_name);
                     cardBuilderArrayList.add(new CardBuilder(grc_name, grc_image));
                 }
                 runOnUiThread(new Runnable() {
@@ -64,9 +60,4 @@ public class HomeShopper extends AppCompatActivity {
         });
     }
 
-    public void goToChat(View v) {
-        // Intent to the ChatActivity
-        Intent intent = new Intent(this, Chat.class);
-        startActivity(intent);
-    }
 }

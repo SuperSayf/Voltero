@@ -39,10 +39,8 @@ public class Categories extends AppCompatActivity {
                 cardBuilderArrayList = new ArrayList<>();
                 for (int i = 0; i < categories.length(); ++i) {
                     JSONObject object = categories.getJSONObject(i);
-                    //System.out.println(object);
                     String cat_name = object.getString("cat_name");
                     String cat_image = object.getString("cat_image");
-                    System.out.println(cat_name);
                     cardBuilderArrayList.add(new CardBuilder(cat_name, cat_image));
                 }
                 runOnUiThread(new Runnable() {
