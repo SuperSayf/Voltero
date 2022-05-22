@@ -3,12 +3,24 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/drawable/ic_cart.xml" value="0.2085" />
+        <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/drawable/ic_category.xml" value="0.2085" />
+        <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/drawable/ic_chat.xml" value="0.2085" />
+        <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/drawable/ic_history.xml" value="0.2085" />
+        <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/drawable/ic_home.xml" value="0.2085" />
+        <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/drawable/ic_map.xml" value="0.2085" />
+        <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/drawable/ic_profile.xml" value="0.2085" />
+        <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/drawable/ic_search.xml" value="0.2085" />
         <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_chat.xml" value="0.358695652173913" />
         <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_home.xml" value="0.358695652173913" />
         <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_home_shopper.xml" value="0.358695652173913" />
         <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_home_volunteer.xml" value="0.358695652173913" />
         <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
         <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_register.xml" value="0.358695652173913" />
+        <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/layout/fragment_volunteer__chat_.xml" value="0.358695652173913" />
+        <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/layout/fragment_volunteer__history_.xml" value="0.358695652173913" />
+        <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/layout/fragment_volunteer__home_.xml" value="0.358695652173913" />
+        <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/layout/fragment_volunteer__profile_.xml" value="0.358695652173913" />
         <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/layout/login.xml" value="0.358695652173913" />
         <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/layout/message_list_item.xml" value="0.358695652173913" />
         <entry key="..\:/Users/Abdullah Karolia/AndroidStudioProjects/Voltero/app/src/main/res/drawable/bg_btn.xml" value="0.181" />
