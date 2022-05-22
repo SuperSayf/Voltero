@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
                 JSONObject jsonObject = new JSONObject(response);
                 user_type = jsonObject.getString("user_type");
                 if (user_type.equals("1")) {
-                    // TODO: change back to ShopperHome
                     // Open the shopper activity
                     Intent intent = new Intent(this, HomeShopper.class);
                     startActivity(intent);

@@ -1,10 +1,8 @@
 package com.voltero;
 
-
 import android.content.ContentValues;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -16,7 +14,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class HomeShopper extends AppCompatActivity {
+public class GroupedGroceries extends AppCompatActivity {
+
+    public static String category_name;
 
     private RecyclerView courseRV;
 
@@ -26,34 +26,35 @@ public class HomeShopper extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_shopper);
+        setContentView(R.layout.activity_grouped_groceries);
 
         addNewCard();
     }
 
     public void addNewCard() {
         ContentValues params = new ContentValues();
+        params.put("cat_name", category_name);
+        Log.e("test", category_name);
 
-        Requests.request(this, "getGroceries", params, response -> {
+        Requests.request(this, "categoryToGroceries", params, response -> {
             try {
                 //TODO: change categories
-                JSONArray categories = new JSONArray(response);
+                JSONArray groceries = new JSONArray(response);
+                Log.e("list", String.valueOf(groceries));
                 courseRV = findViewById(R.id.idRVCourse);
                 cardBuilderArrayList = new ArrayList<>();
-                for (int i = 0; i < categories.length(); ++i) {
-                    JSONObject object = categories.getJSONObject(i);
-                    //System.out.println(object);
+                for (int i = 0; i < groceries.length(); ++i) {
+                    JSONObject object = groceries.getJSONObject(i);
                     String grc_name = object.getString("grc_name");
                     String grc_image = object.getString("grc_image");
-                    System.out.println(grc_name);
                     cardBuilderArrayList.add(new CardBuilder(grc_name, grc_image));
                 }
                 runOnUiThread(new Runnable() {
 
                     @Override
                     public void run() {
-                        LinearCardListMaker cardListMaker = new LinearCardListMaker(HomeShopper.this, cardBuilderArrayList);
-                        courseRV.setLayoutManager(new GridLayoutManager(HomeShopper.this, 2));
+                        LinearCardListMaker cardListMaker = new LinearCardListMaker(GroupedGroceries.this, cardBuilderArrayList);
+                        courseRV.setLayoutManager(new GridLayoutManager(GroupedGroceries.this, 2));
                         courseRV.setAdapter(cardListMaker);
                     }
                 });
@@ -62,11 +63,5 @@ public class HomeShopper extends AppCompatActivity {
             }
 
         });
-    }
-
-    public void goToChat(View v) {
-        // Intent to the ChatActivity
-        Intent intent = new Intent(this, Chat.class);
-        startActivity(intent);
     }
 }

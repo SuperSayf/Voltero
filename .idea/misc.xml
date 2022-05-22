@@ -13,13 +13,15 @@
         <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/layout/message_list_item.xml" value="0.358695652173913" />
         <entry key="..\:/Users/Abdullah Karolia/AndroidStudioProjects/Voltero/app/src/main/res/drawable/bg_btn.xml" value="0.181" />
         <entry key="..\:/Users/Abdullah Karolia/AndroidStudioProjects/Voltero/app/src/main/res/drawable/ic_launcher_background.xml" value="0.181" />
+        <entry key="..\:/Users/Abdullah Karolia/AndroidStudioProjects/Voltero/app/src/main/res/font/roboto.xml" value="0.2546875" />
         <entry key="..\:/Users/Abdullah Karolia/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_categories.xml" value="0.12407407407407407" />
         <entry key="..\:/Users/Abdullah Karolia/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_chat.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/Abdullah Karolia/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_grouped_groceries.xml" value="0.1" />
         <entry key="..\:/Users/Abdullah Karolia/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_home_shopper.xml" value="0.25" />
         <entry key="..\:/Users/Abdullah Karolia/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_home_volunteer.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/Abdullah Karolia/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_main.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/Abdullah Karolia/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_register.xml" value="0.22447916666666667" />
-        <entry key="..\:/Users/Abdullah Karolia/AndroidStudioProjects/Voltero/app/src/main/res/layout/card_layout.xml" value="0.22" />
+        <entry key="..\:/Users/Abdullah Karolia/AndroidStudioProjects/Voltero/app/src/main/res/layout/card_layout.xml" value="0.1935483870967742" />
         <entry key="..\:/Users/muaaz/AndroidStudioProjects/Voltero/app/src/main/res/drawable/bg_btn.xml" value="0.209" />
         <entry key="..\:/Users/muaaz/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_categories.xml" value="0.2318840579710145" />
         <entry key="..\:/Users/muaaz/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_chat.xml" value="0.2803442028985507" />
@@ -28,7 +30,6 @@
         <entry key="..\:/Users/muaaz/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_register.xml" value="0.2803442028985507" />
         <entry key="..\:/Users/muaaz/AndroidStudioProjects/Voltero/app/src/main/res/layout/card_layout.xml" value="0.2318840579710145" />
         <entry key="..\:/Users/muaaz/AndroidStudioProjects/Voltero/app/src/main/res/layout/my_selected_item_spinner.xml" value="0.2318840579710145" />
-        <entry key="..\:/Users/rayha/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_home_shopper.xml" value="0.25" />
       </map>
     </option>
   </component>
