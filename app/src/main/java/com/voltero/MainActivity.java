@@ -41,6 +41,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void goToCategories(View v) {
+        // Intent to the ChatActivity
+        Intent intent = new Intent(this, Categories.class);
+        startActivity(intent);
+    }
+
     public void doLogin(View v) {
         user_email = ((TextView) findViewById(R.id.txtLoginEmail)).getText().toString();
 
@@ -55,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 user_type = jsonObject.getString("user_type");
                 if (user_type.equals("1")) {
                     // Open the shopper activity
-                    Intent intent = new Intent(this, HomeShopper.class);
+                    Intent intent = new Intent(this, Categories.class);
                     startActivity(intent);
                 } else if (user_type.equals("0")) {
                     // Open the volunteer activity
