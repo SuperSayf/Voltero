@@ -5,7 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000113"
+    android:animateLayoutChanges="true"
     tools:context=".Chat">
+
+<!--    <FrameLayout-->
+<!--        android:id="@+id/send"-->
+<!--        android:layout_width="40dp"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_marginEnd="16dp"-->
+<!--        android:layout_marginRight="16dp"-->
+<!--        android:layout_marginBottom="12dp"-->
+<!--        android:background="@drawable/background_chat_input">-->
+
+<!--        <androidx.appcompat.widget.AppCompatImageView-->
+<!--            android:id="@id/send"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_marginStart="4dp"-->
+<!--            android:layout_marginLeft="4dp"-->
+<!--            android:padding="8dp"-->
+<!--            android:src="@drawable/ic_send"-->
+<!--            app:tint="@color/white" />-->
+
+<!--    </FrameLayout>-->
+
 
     <TextView
         android:id="@+id/send"
@@ -16,27 +41,82 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="32dp"
         android:text="Send"
         android:textColor="#CCCCCC"
         android:textSize="17sp" />
 
     <EditText
         android:id="@+id/messageBox"
-        android:layout_width="match_parent"
+        android:layout_width="334dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="12dp"
         android:layout_toStartOf="@id/send"
+        android:background="@drawable/background_chat_input"
+        android:hint="Enter a message"
+        android:padding="8dp"
         android:textColor="#CCCCCC"
-        android:textColorHint="#CCCCCC"
-        android:hint="Enter a message" />
+        android:textColorHint="#CCCCCC" />
 
-    <ListView
+
+        <ListView
+        android:id="@+id/messageList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/messageList"
-        android:dividerHeight="0dp"
+        android:layout_above="@id/messageBox"
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/background_content_top"
+
         android:divider="@null"
-        android:layout_above="@id/messageBox" />
+        android:dividerHeight="0dp"/>
+
+<!--    </ListView>-->
+
+<!--    <ImageView-->
+<!--        android:id="@+id/imageView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginEnd="387dp"-->
+<!--        android:layout_marginBottom="707dp"-->
+<!--        app:srcCompat="@drawable/ic_back" />-->
+
+<!--    <View-->
+<!--        android:id="@+id/viewBackground"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="650dp"-->
+<!--        android:background="@drawable/background_content_top" />-->
+
+<!--    <androidx.appcompat.widget.AppCompatImageView-->
+<!--        android:layout_width="30dp"-->
+<!--        android:layout_height="30dp"-->
+<!--        android:layout_above="@+id/messageBox"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:layout_marginLeft="16dp"-->
+<!--        android:layout_marginTop="12dp"-->
+<!--        android:layout_marginEnd="365dp"-->
+<!--        android:layout_marginBottom="637dp"-->
+<!--        android:padding="5dp"-->
+<!--        android:src="@drawable/ic_back" />-->
+
+<!--    <androidx.appcompat.widget.AppCompatImageView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="37dp"-->
+<!--        android:layout_above="@+id/messageBox"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_marginStart="350dp"-->
+<!--        android:layout_marginLeft="16dp"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:layout_marginEnd="16dp"-->
+<!--        android:layout_marginBottom="634dp"-->
+<!--        android:padding="5dp"-->
+<!--        android:src="@drawable/ic_info" />-->
 
 </RelativeLayout>
