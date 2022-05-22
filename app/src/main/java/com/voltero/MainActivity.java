@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 user_type = jsonObject.getString("user_type");
                 if (user_type.equals("1")) {
                     // Open the shopper activity
-                    Intent intent = new Intent(this, Categories.class);
+                    Intent intent = new Intent(this, HomeShopper.class);
                     startActivity(intent);
                 } else if (user_type.equals("0")) {
                     // Open the volunteer activity
