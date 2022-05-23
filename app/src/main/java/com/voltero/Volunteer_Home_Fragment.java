@@ -26,6 +26,14 @@ import java.util.Objects;
  */
 public class Volunteer_Home_Fragment extends Fragment {
 
+    public static String session_id;
+    public static String shopper_email;
+
+    private RecyclerView courseRV;
+
+    // Arraylist for storing data
+    private ArrayList<CardBuilder> cardBuilderArrayList;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -70,7 +78,48 @@ public class Volunteer_Home_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.fragment_volunteer__home_, container, false);
+        View view = inflater.inflate(R.layout.fragment_volunteer__home_, container, false);
+
+        ContentValues params = new ContentValues();
+
+        Requests.request(getActivity(), "findSessions", params, response -> {
+            try {
+                //TODO: change categories
+                JSONArray sessions = new JSONArray(response);
+                courseRV = view.findViewById(R.id.idRVCourse);
+                cardBuilderArrayList = new ArrayList<>();
+
+                if (sessions.getJSONObject(0).getString("message").equals("Found")) {
+                    for (int i = 0; i < sessions.length(); ++i) {
+                        JSONObject session = sessions.getJSONObject(i);
+                        session_id = session.getString("session_id");
+                        shopper_email = session.getString("user_email");
+                        // TODO: Update the session_with to the volunteer email
+                        cardBuilderArrayList.add(new CardBuilder(shopper_email, "https://bit.ly/3wGTdRm"));
+                    }
+                } else {
+                    cardBuilderArrayList.add(new CardBuilder("No sessions available", "https://bit.ly/3MHPwS8"));
+                }
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            courseRV.setHasFixedSize(true);
+                            LinearCardListMaker linearCardListMaker = new LinearCardListMaker(getActivity(), cardBuilderArrayList);
+                            courseRV.setLayoutManager(new LinearLayoutManager(getActivity()));
+                            courseRV.setAdapter(linearCardListMaker);
+                            // Stop the progressBar
+                            view.findViewById(R.id.progressBar).setVisibility(View.GONE);
+                        }
+                    });
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        });
+
+        return view;
     }
 
 }
