@@ -1,55 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000113"
+    android:animateLayoutChanges="true"
+    android:layout_marginBottom="69dp"
     tools:context=".Shopper_Chat_Fragment">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#000113"
-        android:animateLayoutChanges="true" />
-
-        <TextView
+        <FrameLayout
             android:id="@+id/send"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="32dp"
-            android:text="Send"
-            android:textColor="#CCCCCC"
-            android:textSize="17sp" />
-
-        <EditText
-            android:id="@+id/messageBox"
-            android:layout_width="334dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginBottom="12dp"
-            android:layout_toStartOf="@id/send"
-            android:background="@drawable/background_chat_input"
-            android:hint="Enter a message"
-            android:padding="8dp"
-            android:textColor="#CCCCCC"
-            android:textColorHint="#CCCCCC" />
+            android:background="@drawable/background_chat_input">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@id/send"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="4dp"
+                android:padding="8dp"
+                android:src="@drawable/ic_send"
+                app:tint="@color/white" />
+
+        </FrameLayout>
+
+    <EditText
+        android:id="@+id/messageBox"
+        android:layout_width="334dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="12dp"
+        android:layout_toStartOf="@id/send"
+        android:background="@drawable/background_chat_input"
+        android:hint="Enter a message"
+        android:padding="8dp"
+        android:textColor="#CCCCCC"
+        android:textColorHint="#CCCCCC" />
 
 
-        <ListView
-            android:id="@+id/messageList"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@id/messageBox"
-            android:layout_marginBottom="36dp"
-            android:background="@drawable/background_content_top"
+    <ListView
+        android:id="@+id/messageList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/messageBox"
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/background_content_top"
 
-            android:divider="@null"
-            android:dividerHeight="0dp" />
+        android:divider="@null"
+        android:dividerHeight="0dp" />
 
-</FrameLayout>
+</RelativeLayout>

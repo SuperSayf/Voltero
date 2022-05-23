@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="69dp"
     tools:context=".Shopper_Categories_Fragment">
 
     <androidx.recyclerview.widget.RecyclerView

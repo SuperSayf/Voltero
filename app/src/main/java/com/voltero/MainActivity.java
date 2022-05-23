@@ -37,12 +37,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void goToChat(View v) {
-        // Intent to the ChatActivity
-        Intent intent = new Intent(this, Chat.class);
-        startActivity(intent);
-    }
-
     public void doLogin(View v) {
         user_email = ((TextView) findViewById(R.id.txtLoginEmail)).getText().toString();
 
