@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="Search" type="id" />
+    <item name="My_cart" type="id" />
+    <item name="Account" type="id" />
+    <item name="Categories_button" type="id" />
+    <item name="chat_Button" type="id" />
+</resources>

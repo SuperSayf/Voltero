@@ -83,6 +83,35 @@ public class Requests
         });
     }
 
+//    public static void testrequest(Activity activity, String filename, RequestHandler handler)
+//    {
+//        HttpUrl.Builder URL = Objects.requireNonNull(HttpUrl.parse(URL_BASE + filename + ".php")).newBuilder();
+//
+//        String strURL = URL.build().toString();
+//        Request req = new Request.Builder().url(strURL).build();
+//
+//        final OkHttpClient client = new OkHttpClient();
+//
+//        client.newCall(req).enqueue(new Callback()
+//        {
+//            @Override
+//            public void onFailure(@NotNull Call call, @NotNull IOException e)
+//            {
+//                Toast.makeText(activity, ERROR_MSG, Toast.LENGTH_SHORT).show(); // Show error message
+//            }
+//
+//            @Override
+//            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException
+//            {
+//                try
+//                {
+//                    final String result = Objects.requireNonNull(response.body()).string();
+//                    JSONArray jsonArray = new JSONArray(result);
+//                } catch (JSONException ignored) {}
+//            }
+//        });
+//    }
+
     public static void showMessage(Activity activity, String message)
     {
         activity.runOnUiThread(() -> Toast.makeText(activity, message, Toast.LENGTH_SHORT).show());

@@ -2,6 +2,8 @@ package com.voltero;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -32,12 +34,6 @@ public class MainActivity extends AppCompatActivity {
     public void goToRegister(View v) {
         // Intent to the RegisterActivity
         Intent intent = new Intent(this, Register.class);
-        startActivity(intent);
-    }
-
-    public void goToChat(View v) {
-        // Intent to the ChatActivity
-        Intent intent = new Intent(this, Chat.class);
         startActivity(intent);
     }
 
