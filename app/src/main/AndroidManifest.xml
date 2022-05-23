@@ -20,9 +20,6 @@
             android:name=".GroupedGroceries"
             android:exported="false" />
         <activity
-            android:name=".Categories"
-            android:exported="false" />
-        <activity
             android:name=".Register"
             android:exported="false" />
         <activity

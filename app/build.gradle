@@ -44,4 +44,5 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.8'
     implementation 'com.etebarian:meow-bottom-navigation-java:1.2.0' // Bottom navigation library - Sayf
     implementation 'androidx.navigation:navigation-fragment:2.4.2' // Navigation library - Sayf
+    implementation 'com.frlgrd:animated-edit-text:1.0.0' // Animated Edit Text - Sayf
 }
