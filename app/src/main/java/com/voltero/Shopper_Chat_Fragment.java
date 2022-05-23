@@ -91,7 +91,7 @@ public class Shopper_Chat_Fragment extends Fragment {
 
         ListView messageList = view.findViewById(R.id.messageList);
         final EditText messageBox = view.findViewById(R.id.messageBox);
-        Toolbar send = view.findViewById(R.id.send);
+        AppCompatImageView send = view.findViewById(R.id.send);
 
 
         adapter = new Shopper_Chat_Fragment.MessageAdapter();
@@ -241,13 +241,13 @@ public class Shopper_Chat_Fragment extends Fragment {
         }
 
         @Override
-        public View getView(int i, View view, ViewGroup viewGroup) {
+        public View getView(int i, View viewM, ViewGroup viewGroup) {
 
-            if (view == null)
-                view = getLayoutInflater().inflate(R.layout.message_list_item, viewGroup, false);
+            if (viewM == null)
+                viewM = getLayoutInflater().inflate(R.layout.message_list_item, viewGroup, false);
 
-            TextView sentMessage = view.findViewById(R.id.sentMessage);
-            TextView receivedMessage = view.findViewById(R.id.receivedMessage);
+            TextView sentMessage = viewM.findViewById(R.id.sentMessage);
+            TextView receivedMessage = viewM.findViewById(R.id.receivedMessage);
             JSONObject item = messagesList.get(i);
             try {
                 if (item.getBoolean("byServer")) {
@@ -263,7 +263,7 @@ public class Shopper_Chat_Fragment extends Fragment {
                 e.printStackTrace();
             }
 
-            return view;
+            return viewM;
         }
 
         void addItem(JSONObject item) {
