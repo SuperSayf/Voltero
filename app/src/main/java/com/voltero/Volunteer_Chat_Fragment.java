@@ -1,12 +1,38 @@
 package com.voltero;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.ContentValues;
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.BaseAdapter;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.Toolbar;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,10 +81,71 @@ public class Volunteer_Chat_Fragment extends Fragment {
         }
     }
 
+    // On fragment size change, perform the refresh
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Refresh the recycler view
+        HomeVolunteer.adapter.notifyDataSetChanged();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_volunteer__chat_, container, false);
+        View view = inflater.inflate(R.layout.fragment_volunteer__chat_, container, false);
+
+        ListView messageList = view.findViewById(R.id.messageList);
+        final EditText messageBox = view.findViewById(R.id.messageBox);
+        final AppCompatImageView send = view.findViewById(R.id.send);
+
+        // Open keyboard
+        messageBox.requestFocus();
+        InputMethodManager imm = (InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(messageBox, InputMethodManager.SHOW_IMPLICIT);
+
+        messageList.setAdapter(HomeVolunteer.adapter);
+
+        send.setOnClickListener(v -> {
+            String message = messageBox.getText().toString();
+            if (!message.isEmpty()) {
+                messageBox.setText("");
+                JSONObject json = new JSONObject();
+                try {
+                    json.put("message", message);
+                    json.put("byServer", "false");
+
+                    HomeVolunteer.adapter.addItem(json);
+
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                OkHttpClient client = new OkHttpClient();
+                                HttpUrl.Builder urlBuilder = Objects.requireNonNull(HttpUrl.parse("https://lamp.ms.wits.ac.za/~s2430888/sendMessage.php")).newBuilder();
+                                urlBuilder.addQueryParameter("session_id", "33");
+                                urlBuilder.addQueryParameter("user_email", HomeVolunteer.session_email);
+                                urlBuilder.addQueryParameter("msg_content", message);
+                                urlBuilder.addQueryParameter("msg_seen", "false");
+
+                                String url = urlBuilder.build().toString();
+
+                                Request request = new Request.Builder()
+                                        .url(url)
+                                        .build();
+                                Response response = client.newCall(request).execute();
+                                final String result = Objects.requireNonNull(response.body()).string();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }).start();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        return view;
     }
 }
