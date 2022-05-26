@@ -9,7 +9,7 @@
     android:layout_marginBottom="69dp"
     tools:context=".Shopper_Chat_Fragment">
 
-        <FrameLayout
+    <FrameLayout
             android:id="@+id/sendb"
             android:layout_width="40dp"
             android:layout_height="40dp"
@@ -55,6 +55,8 @@
         android:layout_marginBottom="36dp"
         android:background="@drawable/background_content_top"
         android:divider="@null"
-        android:dividerHeight="0dp" />
+        android:dividerHeight="0dp">
+
+    </ListView>
 
 </RelativeLayout>

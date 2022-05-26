@@ -66,6 +66,22 @@
         <entry key="..\:/Users/rayha/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_home_shopper.xml" value="0.25" />
         <entry key="..\:/Users/rayha/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_home_volunteer.xml" value="0.25" />
         <entry key="..\:/Users/rayha/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/rayha/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_register.xml" value="0.25" />
+        <entry key="..\:/Users/rayha/AndroidStudioProjects/Voltero/app/src/main/res/layout/card_layout.xml" value="0.25" />
+        <entry key="..\:/Users/rayha/AndroidStudioProjects/Voltero/app/src/main/res/layout/fragment_shopper__cart_.xml" value="0.25" />
+        <entry key="..\:/Users/rayha/AndroidStudioProjects/Voltero/app/src/main/res/layout/fragment_shopper__categories_.xml" value="0.25" />
+        <entry key="..\:/Users/rayha/AndroidStudioProjects/Voltero/app/src/main/res/layout/fragment_shopper__chat_.xml" value="0.25" />
+        <entry key="..\:/Users/rayha/AndroidStudioProjects/Voltero/app/src/main/res/layout/fragment_shopper__home_.xml" value="0.25" />
+        <entry key="..\:/Users/rayha/AndroidStudioProjects/Voltero/app/src/main/res/layout/fragment_shopper__map_.xml" value="0.25" />
+        <entry key="..\:/Users/rayha/AndroidStudioProjects/Voltero/app/src/main/res/layout/fragment_shopper__profile_.xml" value="0.25" />
+        <entry key="..\:/Users/rayha/AndroidStudioProjects/Voltero/app/src/main/res/layout/fragment_shopper__search_.xml" value="0.25" />
+        <entry key="..\:/Users/rayha/AndroidStudioProjects/Voltero/app/src/main/res/layout/fragment_shopper_sorted_groceries_.xml" value="0.25" />
+        <entry key="..\:/Users/rayha/AndroidStudioProjects/Voltero/app/src/main/res/layout/fragment_volunteer__chat_.xml" value="0.25" />
+        <entry key="..\:/Users/rayha/AndroidStudioProjects/Voltero/app/src/main/res/layout/fragment_volunteer__history_.xml" value="0.25" />
+        <entry key="..\:/Users/rayha/AndroidStudioProjects/Voltero/app/src/main/res/layout/fragment_volunteer__home_.xml" value="0.25" />
+        <entry key="..\:/Users/rayha/AndroidStudioProjects/Voltero/app/src/main/res/layout/fragment_volunteer__profile_.xml" value="0.25" />
+        <entry key="..\:/Users/rayha/AndroidStudioProjects/Voltero/app/src/main/res/layout/message_list_item.xml" value="0.25" />
+        <entry key="..\:/Users/rayha/AndroidStudioProjects/Voltero/app/src/main/res/layout/my_selected_item_spinner.xml" value="0.25" />
       </map>
     </option>
   </component>
