@@ -1,5 +1,6 @@
 package com.voltero;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
@@ -87,9 +89,6 @@ public class Shopper_Chat_Fragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_shopper__chat_, container, false);
 
-        InputMethodManager imgr = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        imgr.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
-
 
         startRepeating();
 
@@ -98,6 +97,11 @@ public class Shopper_Chat_Fragment extends Fragment {
         ListView messageList = view.findViewById(R.id.messageList);
         final EditText messageBox = view.findViewById(R.id.messageBox);
         AppCompatImageView send = view.findViewById(R.id.send);
+
+        // Open keyboard
+        messageBox.requestFocus();
+        InputMethodManager imm = (InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(messageBox, InputMethodManager.SHOW_IMPLICIT);
 
 
         adapter = new Shopper_Chat_Fragment.MessageAdapter();
