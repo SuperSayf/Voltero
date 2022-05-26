@@ -1,7 +1,6 @@
 package com.voltero;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +8,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -43,10 +44,18 @@ public class LinearCardListMaker extends RecyclerView.Adapter<LinearCardListMake
                 .into(holder.courseIV);
 
         holder.cardView.setOnClickListener(v -> {
-            GroupedGroceries.category_name =  model.getCourse_name();
-            Intent intent = new Intent(context, GroupedGroceries.class);
-            context.startActivity(intent);
+            Shopper_Sorted_Groceries_Fragment.category_name =  model.getCourse_name();
+            //TODO: Make dynamically switch based on current activity.
+            AppCompatActivity activity = (AppCompatActivity) v.getContext();
+            Fragment fragment = new Shopper_Sorted_Groceries_Fragment();
+            activity.getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.nav_host_fragment_container, fragment, null)
+                    .addToBackStack(null)
+                    .commit();
+
         });
+
     }
 
     @Override

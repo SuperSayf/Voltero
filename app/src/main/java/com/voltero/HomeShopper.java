@@ -16,7 +16,7 @@ public class HomeShopper extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_volunteer);
+        setContentView(R.layout.activity_home_shopper);
 
         bottomNav = findViewById(R.id.bottomNav);
 
@@ -101,6 +101,7 @@ public class HomeShopper extends AppCompatActivity {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.nav_host_fragment_container,fragment, null)
+                .addToBackStack(null)
                 .commit();
     }
 

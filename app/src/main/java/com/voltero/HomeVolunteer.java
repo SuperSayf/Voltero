@@ -3,7 +3,6 @@ package com.voltero;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -85,6 +84,7 @@ public class HomeVolunteer extends AppCompatActivity {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.nav_host_fragment_container,fragment, null)
+                .addToBackStack(null)
                 .commit();
     }
 
