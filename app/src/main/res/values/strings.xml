@@ -2,6 +2,8 @@
     <string name="app_name">Voltero</string>
     <string name="tester"> hello world!</string>
 
+    <string name="mapbox_access_token">XXXXXXXXXXXXXXXXXXXXXXXXXXXX</string>
+
     //Spinner
     <string-array name="spinner_items">
         <item>Shopper</item>
