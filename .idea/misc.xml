@@ -3,8 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/drawable/animation_colors.xml" value="0.2085" />
         <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/drawable/chat_receiver_bubble.xml" value="0.2085" />
         <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/drawable/chat_sender_bubble.xml" value="0.2085" />
+        <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/drawable/color1.xml" value="0.2085" />
+        <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/drawable/color2.xml" value="0.2085" />
         <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/drawable/ic_cart.xml" value="0.2085" />
         <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/drawable/ic_category.xml" value="0.2085" />
         <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/drawable/ic_chat.xml" value="0.2085" />

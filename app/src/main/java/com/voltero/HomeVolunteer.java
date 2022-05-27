@@ -26,6 +26,8 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import render.animations.Bounce;
+import render.animations.Render;
 
 public class HomeVolunteer extends AppCompatActivity {
 
@@ -237,10 +239,22 @@ public class HomeVolunteer extends AppCompatActivity {
                     receivedMessage.setVisibility(View.VISIBLE);
                     receivedMessage.setText(item.getString("message"));
                     sentMessage.setVisibility(View.INVISIBLE);
+
+                    if (i == messagesList.size()-1) {
+                        Render render = new Render(HomeVolunteer.this);
+                        render.setAnimation(Bounce.InLeft(receivedMessage));
+                        render.start();
+                    }
                 } else {
                     sentMessage.setVisibility(View.VISIBLE);
                     sentMessage.setText(item.getString("message"));
                     receivedMessage.setVisibility(View.INVISIBLE);
+
+                    if (i == messagesList.size()-1) {
+                        Render render = new Render(HomeVolunteer.this);
+                        render.setAnimation(Bounce.InRight(sentMessage));
+                        render.start();
+                    }
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
