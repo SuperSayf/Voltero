@@ -1,7 +1,9 @@
 package com.voltero;
 
+import android.Manifest;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.AnimationDrawable;
@@ -11,6 +13,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,6 +39,14 @@ public class MainActivity extends AppCompatActivity {
         animation.setEnterFadeDuration(2500);
         animation.setExitFadeDuration(5000);
         animation.start();
+
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Permission is not granted
+            // Ask for permision
+            ActivityCompat.requestPermissions(this,new String[] { Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        }
     }
 
     public void goToLogin(View v) {
@@ -46,6 +58,12 @@ public class MainActivity extends AppCompatActivity {
     public void goToRegister(View v) {
         // Intent to the RegisterActivity
         Intent intent = new Intent(this, Register.class);
+        startActivity(intent);
+    }
+
+    public void openMap(View v) {
+        // Intent to the RegisterActivity
+        Intent intent = new Intent(this, MapMainKotlin.class);
         startActivity(intent);
     }
 

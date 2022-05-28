@@ -1,5 +1,7 @@
 plugins {
     id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -25,6 +27,12 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures{
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -39,7 +47,7 @@ dependencies {
     implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.3"))   // Updated networking, okhttp imports weren't working - Ak
     implementation("com.squareup.okhttp3:okhttp")
     implementation("com.squareup.okhttp3:logging-interceptor")
-    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.google.code.gson:gson:2.8.9'
     implementation 'com.google.android.material:material:1.6.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.etebarian:meow-bottom-navigation-java:1.2.0' // Bottom navigation library - Sayf
@@ -47,8 +55,11 @@ dependencies {
     implementation 'com.frlgrd:animated-edit-text:1.0.0' // Animated Edit Text - Sayf
     implementation 'com.github.gayanvoice:android-animations:1.0.2' // Animations - Sayf
 
+    implementation 'androidx.core:core-ktx:1.7.0'
+
     // Mapbox
-    implementation 'com.mapbox.maps:android:10.5.0'
-    implementation "com.mapbox.navigation:ui-dropin:2.6.0-alpha.2"
-    implementation 'com.squareup.retrofit2:retrofit:2.7.2'
+    implementation "com.mapbox.navigation:android:2.2.2"
+    implementation 'com.google.android.gms:play-services-location:19.0.1'
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-places-v9:0.12.0'
+    implementation "com.mapbox.search:mapbox-search-android-ui:1.0.0-beta.26"
 }

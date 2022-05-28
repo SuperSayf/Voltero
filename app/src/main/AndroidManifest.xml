@@ -4,6 +4,7 @@
     package="com.voltero">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
@@ -17,6 +18,16 @@
         android:theme="@style/Theme.Voltero"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:theme="@style/Theme.MaterialComponents.NoActionBar"
+            android:name=".NavigationToLocation"
+            android:exported="false" />
+        <activity
+            android:name=".MapMainKotlin"
+            android:exported="false" />
+        <activity
+            android:name=".NavigationViewActivity"
+            android:exported="true"/>
         <activity
             android:name=".GroupedGroceries"
             android:exported="false" />
