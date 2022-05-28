@@ -1,34 +1,25 @@
 package com.voltero;
 
-import static com.mapbox.mapboxsdk.Mapbox.getApplicationContext;
 
-import android.Manifest;
-import android.app.PendingIntent;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.mapbox.api.directions.v5.models.DirectionsResponse;
-import com.mapbox.api.directions.v5.models.DirectionsRoute;
+import com.mapbox.api.directions.v5.models.RouteOptions;
 import com.mapbox.geojson.Point;
-import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.maps.MapView;
+import com.mapbox.maps.Style;
+import com.mapbox.maps.plugin.Plugin;
 import com.mapbox.navigation.base.options.NavigationOptions;
 import com.mapbox.navigation.base.route.NavigationRoute;
 import com.mapbox.navigation.core.MapboxNavigation;
 import com.mapbox.navigation.core.MapboxNavigationProvider;
-
-import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,6 +31,11 @@ import retrofit2.Response;
  * create an instance of this fragment.
  */
 public class Volunteer_Map_Fragment extends Fragment {
+
+    NavigationOptions navigationOptions;
+    MapboxNavigation mapboxNavigation;
+
+
 
     // Points
     Point origin = Point.fromLngLat(28.075418, -26.1640314);
@@ -79,24 +75,46 @@ public class Volunteer_Map_Fragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Mapbox.getInstance(requireActivity(), getString(R.string.mapbox_access_token));
+//        Mapbox.getInstance(requireActivity(), getString(R.string.mapbox_access_token));
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
+    @SuppressLint("MissingPermission")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_volunteer__map_, container, false);
 
-        Intent intent = new Intent(getActivity(), Volunteer_Map_Fragment.class);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            PendingIntent.getActivity(getApplicationContext(), 0, intent,PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
-        }
+        MapView mapView = view.findViewById(R.id.mapView);
+        mapView.getMapboxMap().loadStyleUri(Style.MAPBOX_STREETS);
+
+//        navigationOptions = new NavigationOptions.Builder(requireContext())
+//                .accessToken(getString(R.string.mapbox_access_token))
+//                .build();
+//
+//        mapboxNavigation = MapboxNavigationProvider.create(navigationOptions);
+//
+//        mapboxNavigation.requestRoutes(
+//                RouteOptions.builder()
+//                        .applyDefaultNavigationOptions()
+//                        .accessToken(getString(R.string.mapbox_access_token))
+//                        .coordinatesList(origin, destination)
+//                        .build()
+//        );
+//
+//        mapboxNavigation.startTripSession();
 
         return view;
+    }
+
+    // Check of the map is destroyed
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mapboxNavigation.stopTripSession();
     }
 
 }
