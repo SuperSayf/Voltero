@@ -65,16 +65,14 @@ public class CartListMaker extends RecyclerView.Adapter<CartListMaker.Viewholder
             params.put("change_type", "add");
 
             Requests.request(activity, "cartItems", params, response -> {
-                //This shit was my last attempt at refreshing the page
-                Fragment fragment = new Shopper_Cart_Fragment();
-                activity.getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.nav_host_fragment_container, fragment, null)
-                        .commit();
+                new Handler(Looper.getMainLooper()).post(new Runnable(){
+                    @Override
+                    public void run() {
+                        Button Pasta = activity.findViewById(R.id.Pasta);
+                        Pasta.performClick();
+                    }
+                });
             });
-
-
-
         });
 
         holder.decrease.setOnClickListener(v -> {
@@ -84,15 +82,14 @@ public class CartListMaker extends RecyclerView.Adapter<CartListMaker.Viewholder
             params.put("change_type", "decrease");
 
             Requests.request(activity, "cartItems", params, response -> {
-                Fragment fragment = new Shopper_Cart_Fragment();
-                activity.getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.nav_host_fragment_container, fragment, null)
-                        .commit();
+                new Handler(Looper.getMainLooper()).post(new Runnable(){
+                    @Override
+                    public void run() {
+                        Button Pasta = activity.findViewById(R.id.Pasta);
+                        Pasta.performClick();
+                    }
+                });
             });
-
-            //This shit was my last attempt at refreshing the page
-
         });
 
         holder.remove.setOnClickListener(v -> {
@@ -102,13 +99,13 @@ public class CartListMaker extends RecyclerView.Adapter<CartListMaker.Viewholder
             params.put("change_type", "removeAll");
 
             Requests.request(activity, "cartItems", params, response -> {
-                //This shit was my last attempt at refreshing the page
-                Fragment fragment = new Shopper_Cart_Fragment();
-                activity.getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.nav_host_fragment_container, fragment, null)
-                        .commit();
-
+                new Handler(Looper.getMainLooper()).post(new Runnable(){
+                    @Override
+                    public void run() {
+                        Button Pasta = activity.findViewById(R.id.Pasta);
+                        Pasta.performClick();
+                    }
+                });
             });
         });
     }
