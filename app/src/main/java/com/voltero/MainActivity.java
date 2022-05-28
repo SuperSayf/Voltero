@@ -2,10 +2,8 @@ package com.voltero;
 
 import android.Manifest;
 import android.content.ContentValues;
+
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
