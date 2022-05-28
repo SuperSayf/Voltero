@@ -112,4 +112,5 @@ public class Shopper_Cart_Fragment extends Fragment {
 
         return view;
     }
+
 }
