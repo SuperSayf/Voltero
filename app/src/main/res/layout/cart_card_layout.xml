@@ -23,15 +23,14 @@
             android:id="@+id/decrease"
             android:layout_width="39dp"
             android:layout_height="35dp"
-            android:layout_marginBottom="20dp"
             android:contentDescription="TODO"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.666"
-            app:layout_constraintStart_toEndOf="@+id/idTVCourseName"
-            app:layout_constraintTop_toBottomOf="@+id/idCourseQuantity"
-            app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@android:drawable/ic_input_add"
+            app:layout_constraintHorizontal_bias="0.313"
+            app:layout_constraintStart_toEndOf="@+id/increase"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.857"
+            app:srcCompat="@android:drawable/presence_busy"
             tools:ignore="TouchTargetSizeCheck,ImageContrastCheck" />
 
         <ImageView
@@ -54,28 +53,30 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:gravity="center"
-            android:maxEms="6"
-            android:maxLines="4"
+            android:maxEms="7"
+            android:maxLines="3"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/increase"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.121"
+            app:layout_constraintHorizontal_bias="0.408"
             app:layout_constraintStart_toEndOf="@+id/idIVCourseImage"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.219" />
+            app:layout_constraintVertical_bias="0.319" />
 
         <TextView
             android:id="@+id/idCourseQuantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.631"
-            app:layout_constraintStart_toEndOf="@+id/idTVCourseName"
-            app:layout_constraintTop_toBottomOf="@+id/increase"
-            app:layout_constraintVertical_bias="0.168" />
+            app:layout_constraintEnd_toStartOf="@+id/decrease"
+            app:layout_constraintHorizontal_bias="0.468"
+            app:layout_constraintStart_toEndOf="@+id/increase"
+            app:layout_constraintTop_toBottomOf="@+id/idTVCourseName"
+            app:layout_constraintVertical_bias="0.509" />
 
         <ImageButton
             android:id="@+id/increase"
@@ -84,10 +85,10 @@
             android:contentDescription="TODO"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.661"
-            app:layout_constraintStart_toEndOf="@+id/idTVCourseName"
+            app:layout_constraintHorizontal_bias="0.223"
+            app:layout_constraintStart_toEndOf="@+id/idIVCourseImage"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.142"
+            app:layout_constraintVertical_bias="0.857"
             app:srcCompat="@android:drawable/ic_input_add"
             tools:ignore="TouchTargetSizeCheck,ImageContrastCheck" />
 
@@ -98,10 +99,10 @@
             android:contentDescription="TODO"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.837"
+            app:layout_constraintHorizontal_bias="0.965"
             app:layout_constraintStart_toEndOf="@+id/increase"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.05"
+            app:layout_constraintVertical_bias="0.083"
             app:srcCompat="@android:drawable/btn_dialog"
             tools:ignore="TouchTargetSizeCheck" />
 

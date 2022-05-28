@@ -1,15 +1,22 @@
 package com.voltero;
 
 import android.content.ContentValues;
+import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,6 +32,8 @@ import java.util.ArrayList;
 public class Shopper_Cart_Fragment extends Fragment {
 
     private RecyclerView courseRV;
+
+    public Button button;
 
     // Arraylist for storing data
     private ArrayList<CartItemCard> cardBuilderArrayList;
@@ -73,7 +82,30 @@ public class Shopper_Cart_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_shopper__cart_, container, false);
+
+        button = (Button) view.findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                ContentValues params = new ContentValues();
+                params.put("user_email", MainActivity.user_email);
+
+                AppCompatActivity activity = (AppCompatActivity) v.getContext();
+
+                Requests.request(activity, "postSession", params, response -> {
+                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(activity,"Order placed", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                });
+            }
+        });
 
         ContentValues params = new ContentValues();
         params.put("user_email", MainActivity.user_email);

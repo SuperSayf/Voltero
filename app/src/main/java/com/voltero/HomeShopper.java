@@ -1,6 +1,8 @@
 package com.voltero;
 
+import android.app.Activity;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
@@ -11,7 +13,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -42,6 +46,7 @@ public class HomeShopper extends AppCompatActivity {
     public static Handler mHandler = new Handler();
     public static String grocery_name = "";
     public static String grocery_image = "";
+    public static String cart_state = "";
 
     private int messageCount = 1;
 
@@ -130,7 +135,6 @@ public class HomeShopper extends AppCompatActivity {
         });
 
     }
-
 
     //define a load method to feed the screen
     private void loadFragment(Fragment fragment) {
@@ -296,7 +300,5 @@ public class HomeShopper extends AppCompatActivity {
             notifyDataSetChanged();
         }
     }
-
-
 
 }

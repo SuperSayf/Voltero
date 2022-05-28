@@ -84,7 +84,6 @@ public class Volunteer_Home_Fragment extends Fragment {
 
         Requests.request(getActivity(), "findSessions", params, response -> {
             try {
-                //TODO: change categories
                 JSONArray sessions = new JSONArray(response);
                 courseRV = view.findViewById(R.id.idRVCourse);
                 cardBuilderArrayList = new ArrayList<>();
