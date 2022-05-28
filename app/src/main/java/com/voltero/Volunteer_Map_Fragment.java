@@ -7,8 +7,6 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.mapbox.geojson.Point;
-import com.mapbox.navigation.dropin.NavigationView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,17 +58,8 @@ public class Volunteer_Map_Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_volunteer__map_, container, false);
 
-        // Points
-        Point origin = Point.fromLngLat(28.075418, -26.1640314);
-        Point destination = Point.fromLngLat(28.02479119803452, -26.1888766);
-
-        NavigationView navigationView = view.findViewById(R.id.navigationView);
-
-        // Now set the origin and destination and request a route
-
-        return view;
+        return inflater.inflate(R.layout.fragment_volunteer__map_, container, false);
     }
 
 }
