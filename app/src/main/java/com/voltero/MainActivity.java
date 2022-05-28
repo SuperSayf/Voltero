@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.ContentValues;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
