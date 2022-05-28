@@ -48,8 +48,13 @@ dependencies {
     implementation 'com.github.gayanvoice:android-animations:1.0.2' // Animations - Sayf
 
     // Mapbox
-    implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:9.5.0'
-    implementation 'com.mapbox.mapboxsdk:mapbox-sdk-services:6.5.0'
-    implementation "com.mapbox.navigation:ui-dropin:2.6.0-alpha.2"
+//    implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:9.5.0'
+//    implementation 'com.mapbox.mapboxsdk:mapbox-sdk-services:6.5.0'
+//    implementation 'com.mapbox.mapboxsdk:mapbox-android-navigation:0.42.6'
+//    implementation 'com.mapbox.mapboxsdk:mapbox-android-navigation-ui:0.42.6'
+//    implementation 'com.mapbox.navigation:android:2.5.0'
+    implementation 'com.mapbox.maps:android:10.5.0'
+    implementation("com.google.android.gms:play-services-location:18.0.0")
+    implementation 'com.mapbox.navigation:ui-dropin:2.6.0-alpha.2'
     implementation 'com.squareup.retrofit2:retrofit:2.7.2'
 }
