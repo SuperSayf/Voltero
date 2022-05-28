@@ -70,7 +70,7 @@ public class LinearCardListMaker extends RecyclerView.Adapter<LinearCardListMake
             super(itemView);
             courseIV = itemView.findViewById(R.id.idIVCourseImage);
             courseNameTV = itemView.findViewById(R.id.idTVCourseName);
-            cardView = itemView.findViewById(R.id.testView);
+            cardView = itemView.findViewById(R.id.groceryCard);
         }
     }
 }

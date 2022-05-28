@@ -1,17 +1,26 @@
 package com.voltero;
 
+import android.Manifest;
 import android.content.ContentValues;
+
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import render.animations.Attention;
+import render.animations.Bounce;
+import render.animations.Render;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,6 +32,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ConstraintLayout layout = findViewById(R.id.MainAct);
+        AnimationDrawable animation = (AnimationDrawable) layout.getBackground();
+        animation.setEnterFadeDuration(2500);
+        animation.setExitFadeDuration(5000);
+        animation.start();
+
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Permission is not granted
+            // Ask for permision
+            ActivityCompat.requestPermissions(this,new String[] { Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        }
     }
 
     public void goToLogin(View v) {
@@ -37,12 +60,33 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void openMap(View v) {
+        // Intent to the RegisterActivity
+        Intent intent = new Intent(this, MapMainKotlin.class);
+        startActivity(intent);
+    }
+
     public void doLogin(View v) {
         user_email = ((TextView) findViewById(R.id.txtLoginEmail)).getText().toString();
+        String password = ((TextView) findViewById(R.id.txtLoginPassword)).getText().toString();
+
+        if (user_email.equals("")) {
+            Render render = new Render(MainActivity.this);
+            render.setAnimation(Attention.Shake((TextView) findViewById(R.id.txtLoginEmail)));
+            render.start();
+            Requests.showMessage(this, "Please enter your email");
+            return;
+        } else if (password.equals("")) {
+            Render render = new Render(MainActivity.this);
+            render.setAnimation(Attention.Shake((TextView) findViewById(R.id.txtLoginPassword)));
+            render.start();
+            Requests.showMessage(this, "Please enter your password");
+            return;
+        }
 
         ContentValues params = new ContentValues();
         params.put("user_email", user_email);
-        params.put("user_password", ((TextView) findViewById(R.id.txtLoginPassword)).getText().toString());
+        params.put("user_password", password);
 
         Requests.request(this, "userLogin", params, response -> {
             try {
@@ -61,8 +105,14 @@ public class MainActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 Requests.showMessage(this, "Error logging in");
             }
-        });
-    }
 
+        });
+
+        ContentValues sessionParams = new ContentValues();
+        sessionParams.put("user_email", user_email);
+
+        Requests.request(this, "openSession", sessionParams, response -> {    });
+
+    }
 
 }
