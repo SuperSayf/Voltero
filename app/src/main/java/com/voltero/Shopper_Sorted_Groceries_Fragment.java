@@ -90,7 +90,6 @@ public class Shopper_Sorted_Groceries_Fragment extends Fragment {
                 courseRV = view.findViewById(R.id.idRVCourse);
                 cardBuilderArrayList = new ArrayList<>();
 
-                Log.e("thing", "somethings broken");
                 for (int i = 0; i < groceries.length(); ++i) {
                     JSONObject object = groceries.getJSONObject(i);
                     String grc_name = object.getString("grc_name");

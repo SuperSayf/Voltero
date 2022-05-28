@@ -77,7 +77,7 @@ public class Shopper_Search_Fragment extends Fragment {
 
         EditText user = (EditText) view.findViewById(R.id.editTextTextPersonName2);
         String groc_name = user.getText().toString();
-        Log.e("---------------------------name",groc_name);
+        Log.e("-----------name",groc_name);
         ContentValues params = new ContentValues();
         params.put("grc_name",groc_name);
         Requests.request(getActivity(), "searchGroceries", params, response -> {
