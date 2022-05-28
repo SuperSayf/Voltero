@@ -2,9 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/MainAct"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000113">
+    android:background="@drawable/animation_colors">
 
     <Button
         android:id="@+id/btnLogin"
@@ -24,29 +25,29 @@
         app:layout_constraintVertical_bias="0.626" />
 
 
-<!--    <frlgrd.animatededittext.AnimatedEditText-->
-<!--        android:id="@+id/txtLoginEmail"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:width="298dp"-->
-<!--        android:inputType="textPersonName"-->
-<!--        android:minHeight="48dp"-->
-<!--        android:ems="10"-->
-<!--        android:fontFamily="@font/roboto"-->
-<!--        android:foregroundTint="#CCCCCC"-->
-<!--        android:textColor="#CCCCCC"-->
-<!--        android:textColorHint="#CCCCCC"-->
-<!--        android:backgroundTint="#CCCCCC"-->
-<!--        android:textColorLink="#00BCD4"-->
-<!--        app:editTextIcon="@drawable/ic_email"-->
-<!--        app:editTextInputType="name"-->
-<!--        app:hintText="Name"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.495"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.33" />-->
+    <!--    <frlgrd.animatededittext.AnimatedEditText-->
+    <!--        android:id="@+id/txtLoginEmail"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:width="298dp"-->
+    <!--        android:inputType="textPersonName"-->
+    <!--        android:minHeight="48dp"-->
+    <!--        android:ems="10"-->
+    <!--        android:fontFamily="@font/roboto"-->
+    <!--        android:foregroundTint="#CCCCCC"-->
+    <!--        android:textColor="#CCCCCC"-->
+    <!--        android:textColorHint="#CCCCCC"-->
+    <!--        android:backgroundTint="#CCCCCC"-->
+    <!--        android:textColorLink="#00BCD4"-->
+    <!--        app:editTextIcon="@drawable/ic_email"-->
+    <!--        app:editTextInputType="name"-->
+    <!--        app:hintText="Name"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.495"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:layout_constraintVertical_bias="0.33" />-->
 
     <EditText
         android:id="@+id/txtLoginEmail"
@@ -159,5 +160,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgLogo" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="openMap"
+        android:text="Open Map"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

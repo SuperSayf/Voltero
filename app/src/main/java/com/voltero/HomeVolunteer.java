@@ -1,7 +1,9 @@
 package com.voltero;
 
+import android.Manifest;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -11,6 +13,8 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
@@ -26,6 +30,8 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import render.animations.Bounce;
+import render.animations.Render;
 
 public class HomeVolunteer extends AppCompatActivity {
 
@@ -55,8 +61,9 @@ public class HomeVolunteer extends AppCompatActivity {
         //add menu items to bottom nav
         bottomNav.add(new MeowBottomNavigation.Model(1, R.drawable.ic_home));
         bottomNav.add(new MeowBottomNavigation.Model(2, R.drawable.ic_history));
-        bottomNav.add(new MeowBottomNavigation.Model(3, R.drawable.ic_chat));
-        bottomNav.add(new MeowBottomNavigation.Model(4, R.drawable.ic_profile));
+        bottomNav.add(new MeowBottomNavigation.Model(3, R.drawable.ic_map));
+        bottomNav.add(new MeowBottomNavigation.Model(4, R.drawable.ic_chat));
+        bottomNav.add(new MeowBottomNavigation.Model(5, R.drawable.ic_profile));
 
         //set bottom nav on show listener
         bottomNav.setOnShowListener(new MeowBottomNavigation.ShowListener() {
@@ -66,10 +73,12 @@ public class HomeVolunteer extends AppCompatActivity {
                 Fragment fragment;
 
                 //initialize fragment according to its id
-                if (item.getId() ==4){
+                if (item.getId() ==5){
                     fragment = new Volunteer_Profile_Fragment();
-                }else  if (item.getId() ==3){
+                } else if (item.getId() == 4){
                     fragment = new Volunteer_Chat_Fragment();
+                }else  if (item.getId() ==3){
+                    fragment = new Volunteer_Map_Fragment();
                 }
                 else  if (item.getId() ==2){
                     fragment = new Volunteer_History_Fragment();
@@ -118,9 +127,9 @@ public class HomeVolunteer extends AppCompatActivity {
         // If the fragment is the Volunteer_Chat_Fragment, then set the message count to 0
         if (fragment instanceof Volunteer_Chat_Fragment) {
             // Remove the badge
-            bottomNav.setCount(3, "0");
+            bottomNav.setCount(4, "0");
             messageCount = 1;
-            bottomNav.clearCount(3);
+            bottomNav.clearCount(4);
         }
     }
 
@@ -183,7 +192,7 @@ public class HomeVolunteer extends AppCompatActivity {
                                                           Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_container);
                                                           // Check if the current fragment is the chat fragment
                                                           if (!(currentFragment instanceof Volunteer_Chat_Fragment)) {
-                                                              bottomNav.setCount(3, String.valueOf(messageCount++));
+                                                              bottomNav.setCount(4, String.valueOf(messageCount++));
                                                           }
                                                           adapter.addItem(json);
                                                       } catch (JSONException e) {
@@ -237,10 +246,22 @@ public class HomeVolunteer extends AppCompatActivity {
                     receivedMessage.setVisibility(View.VISIBLE);
                     receivedMessage.setText(item.getString("message"));
                     sentMessage.setVisibility(View.INVISIBLE);
+
+                    if (i == messagesList.size()-1) {
+                        Render render = new Render(HomeVolunteer.this);
+                        render.setAnimation(Bounce.InLeft(receivedMessage));
+                        render.start();
+                    }
                 } else {
                     sentMessage.setVisibility(View.VISIBLE);
                     sentMessage.setText(item.getString("message"));
                     receivedMessage.setVisibility(View.INVISIBLE);
+
+                    if (i == messagesList.size()-1) {
+                        Render render = new Render(HomeVolunteer.this);
+                        render.setAnimation(Bounce.InRight(sentMessage));
+                        render.start();
+                    }
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -254,4 +275,6 @@ public class HomeVolunteer extends AppCompatActivity {
             notifyDataSetChanged();
         }
     }
+
+
 }

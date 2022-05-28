@@ -1,17 +1,24 @@
 package com.voltero;
 
+import android.app.Activity;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 
@@ -26,6 +33,9 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import render.animations.Attention;
+import render.animations.Bounce;
+import render.animations.Render;
 
 public class HomeShopper extends AppCompatActivity {
 
@@ -34,6 +44,9 @@ public class HomeShopper extends AppCompatActivity {
     public static String session_email = "";
     public static HomeShopper.MessageAdapter adapter;
     public static Handler mHandler = new Handler();
+    public static String grocery_name = "";
+    public static String grocery_image = "";
+    public static String cart_state = "";
 
     private int messageCount = 1;
 
@@ -123,7 +136,6 @@ public class HomeShopper extends AppCompatActivity {
 
     }
 
-
     //define a load method to feed the screen
     private void loadFragment(Fragment fragment) {
         //replace the fragment
@@ -139,6 +151,7 @@ public class HomeShopper extends AppCompatActivity {
             bottomNav.setCount(6, "0");
             messageCount = 1;
             bottomNav.clearCount(6);
+
         }
     }
 
@@ -258,10 +271,22 @@ public class HomeShopper extends AppCompatActivity {
                     receivedMessage.setVisibility(View.VISIBLE);
                     receivedMessage.setText(item.getString("message"));
                     sentMessage.setVisibility(View.INVISIBLE);
+
+                    if (i == messagesList.size()-1) {
+                        Render render = new Render(HomeShopper.this);
+                        render.setAnimation(Bounce.InLeft(receivedMessage));
+                        render.start();
+                    }
                 } else {
                     sentMessage.setVisibility(View.VISIBLE);
                     sentMessage.setText(item.getString("message"));
                     receivedMessage.setVisibility(View.INVISIBLE);
+
+                    if (i == messagesList.size()-1) {
+                        Render render = new Render(HomeShopper.this);
+                        render.setAnimation(Bounce.InRight(sentMessage));
+                        render.start();
+                    }
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

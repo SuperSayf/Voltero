@@ -1,12 +1,23 @@
 package com.voltero;
 
+import android.content.ContentValues;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,7 +25,10 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class Shopper_Search_Fragment extends Fragment {
+    private RecyclerView courseRV;
 
+    // Arraylist for storing data
+    private ArrayList<CardBuilder> cardBuilderArrayList;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -59,6 +73,44 @@ public class Shopper_Search_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shopper__search_, container, false);
+        View view = inflater.inflate(R.layout.fragment_shopper__search_, container, false);
+
+        EditText user = (EditText) view.findViewById(R.id.editTextTextPersonName2);
+        String groc_name = user.getText().toString();
+        Log.e("-----------name",groc_name);
+        ContentValues params = new ContentValues();
+        params.put("grc_name",groc_name);
+        Requests.request(getActivity(), "searchGroceries", params, response -> {
+            try {
+                //TODO: change categories
+                JSONArray categories = new JSONArray(response);
+                courseRV = view.findViewById(R.id.idRVCourse);
+                cardBuilderArrayList = new ArrayList<>();
+                for (int i = 0; i < categories.length(); ++i) {
+                    JSONObject object = categories.getJSONObject(i);
+                    String grc_name = object.getString("grc_name");
+                    String grc_image = object.getString("grc_image");
+                    cardBuilderArrayList.add(new CardBuilder(grc_name, grc_image));
+                }
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+//                            courseRV.setHasFixedSize(true);
+                            GridCardListMaker cardListMaker = new GridCardListMaker(getActivity(), cardBuilderArrayList);
+                            courseRV.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+                            courseRV.setAdapter(cardListMaker);
+                            // Stop the progressBar
+                            view.findViewById(R.id.progressBar).setVisibility(View.GONE);
+                        }
+                    });
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        });
+
+        return view;
     }
 }
