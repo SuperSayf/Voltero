@@ -88,8 +88,14 @@ public class MainActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 Requests.showMessage(this, "Error logging in");
             }
-        });
-    }
 
+        });
+
+        ContentValues sessionParams = new ContentValues();
+        sessionParams.put("user_email", user_email);
+
+        Requests.request(this, "openSession", sessionParams, response -> {    });
+
+    }
 
 }

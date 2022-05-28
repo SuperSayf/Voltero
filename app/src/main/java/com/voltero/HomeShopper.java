@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 
@@ -39,6 +40,8 @@ public class HomeShopper extends AppCompatActivity {
     public static String session_email = "";
     public static HomeShopper.MessageAdapter adapter;
     public static Handler mHandler = new Handler();
+    public static String grocery_name = "";
+    public static String grocery_image = "";
 
     private int messageCount = 1;
 
@@ -293,5 +296,7 @@ public class HomeShopper extends AppCompatActivity {
             notifyDataSetChanged();
         }
     }
+
+
 
 }

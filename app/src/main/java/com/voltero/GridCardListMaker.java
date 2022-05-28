@@ -1,13 +1,20 @@
 package com.voltero;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -39,6 +46,27 @@ public class GridCardListMaker extends RecyclerView.Adapter<GridCardListMaker.Vi
                 .placeholder(android.R.drawable.screen_background_light_transparent)
                 .resize(500, 500).centerCrop()
                 .into(holder.courseIV);
+
+        holder.cardView.setOnClickListener(v -> {
+            HomeShopper.grocery_name = model.getCourse_name();
+            HomeShopper.grocery_image = model.getCourse_image();
+            AppCompatActivity activity = (AppCompatActivity) v.getContext();
+
+            ContentValues params = new ContentValues();
+            params.put("user_email", MainActivity.user_email);
+            params.put("grc_name", HomeShopper.grocery_name);
+            params.put("grc_image", HomeShopper.grocery_image);
+            params.put("change_type", "add");
+
+            Requests.request(activity, "cartItems", params, response -> {
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(activity,HomeShopper.grocery_name+" added to cart", Toast.LENGTH_LONG).show();
+                    }
+                });
+            });
+        });
     }
 
     @Override
@@ -47,11 +75,15 @@ public class GridCardListMaker extends RecyclerView.Adapter<GridCardListMaker.Vi
     public class Viewholder extends RecyclerView.ViewHolder {
         private ImageView courseIV;
         private TextView courseNameTV;
+        private CardView cardView;
+
 
         public Viewholder(@NonNull View itemView) {
             super(itemView);
             courseIV = itemView.findViewById(R.id.idIVCourseImage);
             courseNameTV = itemView.findViewById(R.id.idTVCourseName);
+            cardView = itemView.findViewById(R.id.groceryCard);
+
         }
     }
 }

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="69dp"
-    android:id="@+id/testcategories"
+    android:id="@+id/categories"
     tools:context=".Shopper_Categories_Fragment">
 
     <androidx.recyclerview.widget.RecyclerView
