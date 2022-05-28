@@ -39,6 +39,8 @@ public class HomeShopper extends AppCompatActivity {
     public static String session_email = "";
     public static HomeShopper.MessageAdapter adapter;
     public static Handler mHandler = new Handler();
+    public static String grocery_name = "";
+    public static String grocery_image = "";
 
     private int messageCount = 1;
 
