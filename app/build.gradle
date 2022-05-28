@@ -41,9 +41,15 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor")
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.google.android.material:material:1.6.0'
-    implementation 'com.squareup.picasso:picasso:2.8'
+    implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.etebarian:meow-bottom-navigation-java:1.2.0' // Bottom navigation library - Sayf
     implementation 'androidx.navigation:navigation-fragment:2.4.2' // Navigation library - Sayf
     implementation 'com.frlgrd:animated-edit-text:1.0.0' // Animated Edit Text - Sayf
     implementation 'com.github.gayanvoice:android-animations:1.0.2' // Animations - Sayf
+
+    // Mapbox
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:9.5.0'
+    implementation 'com.mapbox.mapboxsdk:mapbox-sdk-services:6.5.0'
+    implementation "com.mapbox.navigation:ui-dropin:2.6.0-alpha.2"
+    implementation 'com.squareup.retrofit2:retrofit:2.7.2'
 }
