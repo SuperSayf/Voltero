@@ -1,29 +1,14 @@
 package com.voltero;
 
-
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.mapbox.api.directions.v5.models.RouteOptions;
 import com.mapbox.geojson.Point;
-import com.mapbox.maps.MapView;
-import com.mapbox.maps.Style;
-import com.mapbox.maps.plugin.Plugin;
-import com.mapbox.navigation.base.options.NavigationOptions;
-import com.mapbox.navigation.base.route.NavigationRoute;
-import com.mapbox.navigation.core.MapboxNavigation;
-import com.mapbox.navigation.core.MapboxNavigationProvider;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import com.mapbox.navigation.dropin.NavigationView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,15 +16,6 @@ import retrofit2.Response;
  * create an instance of this fragment.
  */
 public class Volunteer_Map_Fragment extends Fragment {
-
-    NavigationOptions navigationOptions;
-    MapboxNavigation mapboxNavigation;
-
-
-
-    // Points
-    Point origin = Point.fromLngLat(28.075418, -26.1640314);
-    Point destination = Point.fromLngLat(28.02479119803452, -26.1888766);
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -75,46 +51,26 @@ public class Volunteer_Map_Fragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        Mapbox.getInstance(requireActivity(), getString(R.string.mapbox_access_token));
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
-    @SuppressLint("MissingPermission")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_volunteer__map_, container, false);
 
-        MapView mapView = view.findViewById(R.id.mapView);
-        mapView.getMapboxMap().loadStyleUri(Style.MAPBOX_STREETS);
+        // Points
+        Point origin = Point.fromLngLat(28.075418, -26.1640314);
+        Point destination = Point.fromLngLat(28.02479119803452, -26.1888766);
 
-//        navigationOptions = new NavigationOptions.Builder(requireContext())
-//                .accessToken(getString(R.string.mapbox_access_token))
-//                .build();
-//
-//        mapboxNavigation = MapboxNavigationProvider.create(navigationOptions);
-//
-//        mapboxNavigation.requestRoutes(
-//                RouteOptions.builder()
-//                        .applyDefaultNavigationOptions()
-//                        .accessToken(getString(R.string.mapbox_access_token))
-//                        .coordinatesList(origin, destination)
-//                        .build()
-//        );
-//
-//        mapboxNavigation.startTripSession();
+        NavigationView navigationView = view.findViewById(R.id.navigationView);
+
+        // Now set the origin and destination and request a route
 
         return view;
-    }
-
-    // Check of the map is destroyed
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mapboxNavigation.stopTripSession();
     }
 
 }
