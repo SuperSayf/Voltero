@@ -23,6 +23,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,6 +37,9 @@ public class Shopper_Cart_Fragment extends Fragment {
     private RecyclerView courseRV;
 
     public Button button;
+
+    JSONArray cartItems;
+    CartListMaker linearCartListMaker;
 
     // Arraylist for storing data
     private ArrayList<CartItemCard> cardBuilderArrayList;
@@ -78,6 +84,47 @@ public class Shopper_Cart_Fragment extends Fragment {
         }
     }
 
+// OnClick for the courseRV
+    public void onClick(View view) {
+        // Do something in response to button
+        Toast.makeText(getContext(), "Clicked", Toast.LENGTH_SHORT).show();
+    }
+
+    public void refresh() {
+        ContentValues params = new ContentValues();
+        params.put("user_email", MainActivity.user_email);
+
+        Requests.request(getActivity(), "getCartItems", params, response -> {
+            try {
+                //TODO: change categories
+                cartItems = new JSONArray(response);
+                cardBuilderArrayList = new ArrayList<>();
+                for (int i = 0; i < cartItems.length(); ++i) {
+                    JSONObject object = cartItems.getJSONObject(i);
+                    String grc_name = object.getString("grc_name");
+                    String grc_image = object.getString("grc_image");
+                    String grc_quantity = object.getString("grc_quantity");
+                    cardBuilderArrayList.add(new CartItemCard(grc_name, grc_image, grc_quantity));
+                }
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            courseRV.setHasFixedSize(true);
+                            linearCartListMaker = new CartListMaker(getActivity(), cardBuilderArrayList);
+                            courseRV.setLayoutManager(new LinearLayoutManager(getActivity()));
+                            courseRV.setAdapter(linearCartListMaker);
+                        }
+                    });
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        });
+    }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -107,13 +154,23 @@ public class Shopper_Cart_Fragment extends Fragment {
             }
         });
 
+        Button Pasta = (Button) view.findViewById(R.id.Pasta);
+        Pasta.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                refresh();
+            }
+        });
+
         ContentValues params = new ContentValues();
         params.put("user_email", MainActivity.user_email);
 
         Requests.request(getActivity(), "getCartItems", params, response -> {
             try {
                 //TODO: change categories
-                JSONArray cartItems = new JSONArray(response);
+                cartItems = new JSONArray(response);
                 courseRV = view.findViewById(R.id.idRVCourse);
                 cardBuilderArrayList = new ArrayList<>();
                 for (int i = 0; i < cartItems.length(); ++i) {
@@ -128,7 +185,7 @@ public class Shopper_Cart_Fragment extends Fragment {
                         @Override
                         public void run() {
                             courseRV.setHasFixedSize(true);
-                            CartListMaker linearCartListMaker = new CartListMaker(getActivity(), cardBuilderArrayList);
+                            linearCartListMaker = new CartListMaker(getActivity(), cardBuilderArrayList);
                             courseRV.setLayoutManager(new LinearLayoutManager(getActivity()));
                             courseRV.setAdapter(linearCartListMaker);
                             // Stop the progressBar
@@ -144,5 +201,4 @@ public class Shopper_Cart_Fragment extends Fragment {
 
         return view;
     }
-
 }
