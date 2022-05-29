@@ -8,11 +8,13 @@
         <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/drawable/chat_sender_bubble.xml" value="0.2085" />
         <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/drawable/color1.xml" value="0.2085" />
         <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/drawable/color2.xml" value="0.2085" />
+        <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/drawable/ic_car_black.xml" value="0.2085" />
         <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/drawable/ic_cart.xml" value="0.2085" />
         <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/drawable/ic_category.xml" value="0.2085" />
         <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/drawable/ic_chat.xml" value="0.2085" />
         <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/drawable/ic_directions.xml" value="0.2085" />
         <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/drawable/ic_email.xml" value="0.2085" />
+        <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/drawable/ic_glibersat_sapuar.xml" value="0.2085" />
         <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/drawable/ic_history.xml" value="0.2085" />
         <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/drawable/ic_home.xml" value="0.2085" />
         <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/drawable/ic_map.xml" value="0.2085" />
@@ -26,7 +28,7 @@
         <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_home_volunteer.xml" value="0.358695652173913" />
         <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
         <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_main2.xml" value="0.358695652173913" />
-        <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_map_main_kotlin.xml" value="0.358695652173913" />
+        <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_map_main_kotlin.xml" value="0.25" />
         <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_map_navigation.xml" value="0.358695652173913" />
         <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_navigation_location.xml" value="0.358695652173913" />
         <entry key="..\:/AndroidStudioProjects/Voltero/app/src/main/res/layout/activity_navigation_view.xml" value="0.358695652173913" />

@@ -33,6 +33,7 @@ import com.mapbox.maps.extension.style.sources.generated.GeoJsonSource
 import com.mapbox.maps.extension.style.sources.generated.geoJsonSource
 import com.mapbox.maps.extension.style.sources.getSourceAs
 import com.mapbox.maps.extension.style.style
+import com.mapbox.maps.plugin.LocationPuck2D
 import com.mapbox.maps.plugin.animation.MapAnimationOptions
 import com.mapbox.maps.plugin.animation.camera
 import com.mapbox.maps.plugin.locationcomponent.location
@@ -154,12 +155,13 @@ class NavigationViewActivity : AppCompatActivity() {
         mapboxMap = binding.mapView.getMapboxMap()
         binding.mapView.location.apply {
             setLocationProvider(navigationLocationProvider)
-            /* locationPuck = LocationPuck2D(
+            locationPuck = LocationPuck2D(
                  bearingImage = ContextCompat.getDrawable(
                      this@NavigationViewActivity,
-                     R.drawable.green_dot
+                     // TODO: Replace with car icon
+                     R.drawable.ic_car_black
                  )
-             )*/
+             )
             enabled = true
         }
 
@@ -464,7 +466,7 @@ class NavigationViewActivity : AppCompatActivity() {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 requestForLocation()
             } else {
-                Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
             }
         }
     }
