@@ -37,16 +37,7 @@ public class MainActivity extends AppCompatActivity {
         AnimationDrawable animation = (AnimationDrawable) layout.getBackground();
         animation.setEnterFadeDuration(2500);
         animation.setExitFadeDuration(5000);
-        animation.start();
-
-
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            // Permission is not granted
-            // Ask for permision
-            ActivityCompat.requestPermissions(this,new String[] { Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-        }
-    }
+        animation.start();    }
 
     public void goToLogin(View v) {
         // Intent to the LoginActivity
@@ -62,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void openMap(View v) {
         // Intent to the RegisterActivity
-        Intent intent = new Intent(this, MapMainKotlin.class);
+        Intent intent = new Intent(this, NavigationViewActivity.class);
         startActivity(intent);
     }
 

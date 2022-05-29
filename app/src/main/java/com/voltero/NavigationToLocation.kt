@@ -177,13 +177,7 @@ class NavigationToLocation : AppCompatActivity() {
         var firstLocationUpdateReceived = false
 
         override fun onNewRawLocation(rawLocation: Location) {
-//                val point = Point.fromLngLat(rawLocation.longitude, rawLocation.latitude)
-//                val cameraOptions = CameraOptions.Builder()
-//                    .center(point)
-//                    .zoom(13.0)
-//                    .build()
-//                mapboxMap.setCamera(cameraOptions)
-//                NavigationViewActivity.mapboxNavigation!!.unregisterLocationObserver(this)
+            // Do nothing
         }
 
         override fun onNewLocationMatcherResult(locationMatcherResult: LocationMatcherResult) {
@@ -323,7 +317,7 @@ class NavigationToLocation : AppCompatActivity() {
             this.locationPuck = LocationPuck2D(
                 bearingImage = ContextCompat.getDrawable(
                     this@NavigationToLocation,
-                    R.drawable.navigation1
+                    R.drawable.ic_car_black
                 )
             )
             setLocationProvider(navigationLocationProvider)
@@ -459,7 +453,6 @@ class NavigationToLocation : AppCompatActivity() {
             binding.routeOverview.visibility = View.VISIBLE
             binding.tripProgressCard.visibility = View.VISIBLE
             binding.speedcard.visibility = View.VISIBLE
-            /*  binding.speedview?.visibility = View.VISIBLE*/
 
 
             navigationCamera.requestNavigationCameraToFollowing()
@@ -568,23 +561,10 @@ class NavigationToLocation : AppCompatActivity() {
         NavigationViewActivity.mapboxNavigation!!.setRoutes(routes)
 
         startSimulation(routes.first())
-
-        /*binding.soundButton.visibility = View.VISIBLE
-        binding.routeOverview.visibility = View.VISIBLE
-        binding.tripProgressCard.visibility = View.VISIBLE
-
-        navigationCamera.requestNavigationCameraToOverview()*/
     }
-
-    /*override fun onTripSessionStopped() {
-        finish()
-        clearRouteAndStopNavigation()
-
-     }*/
 
     private fun clearRouteAndStopNavigation() {
         NavigationViewActivity.mapboxNavigation!!.setRoutes(listOf())
-//        mapboxReplayer.stop()
         binding.soundButton.visibility = View.INVISIBLE
         binding.maneuverView.visibility = View.INVISIBLE
         binding.routeOverview.visibility = View.INVISIBLE

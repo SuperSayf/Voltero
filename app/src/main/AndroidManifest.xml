@@ -9,6 +9,7 @@
 
     <application
         android:allowBackup="true"
+        android:name=".SearchDialogView"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -21,9 +22,6 @@
         <activity
             android:theme="@style/Theme.MaterialComponents.NoActionBar"
             android:name=".NavigationToLocation"
-            android:exported="false" />
-        <activity
-            android:name=".MapMainKotlin"
             android:exported="false" />
         <activity
             android:name=".NavigationViewActivity"
