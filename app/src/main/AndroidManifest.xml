@@ -27,9 +27,6 @@
             android:name=".NavigationViewActivity"
             android:exported="true"/>
         <activity
-            android:name=".GroupedGroceries"
-            android:exported="false" />
-        <activity
             android:name=".Register"
             android:exported="false" />
         <activity
