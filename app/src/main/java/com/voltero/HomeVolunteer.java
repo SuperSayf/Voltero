@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -42,6 +43,8 @@ public class HomeVolunteer extends AppCompatActivity {
     public static Handler mHandler = new Handler();
 
     private int messageCount = 1;
+
+    public static int currentTab = 1;
 
     MeowBottomNavigation bottomNav;
 
@@ -75,16 +78,24 @@ public class HomeVolunteer extends AppCompatActivity {
                 //initialize fragment according to its id
                 if (item.getId() ==5){
                     fragment = new Volunteer_Profile_Fragment();
+                    currentTab = 5;
                 } else if (item.getId() == 4){
                     fragment = new Volunteer_Chat_Fragment();
+                    currentTab = 4;
                 }else  if (item.getId() ==3){
-                    fragment = new Volunteer_Map_Fragment();
+                    // Launch the navigation activity
+                    currentTab = 3;
+                    Intent intent = new Intent(HomeVolunteer.this, NavigationViewActivity.class);
+                    startActivity(intent);
+                    return;
                 }
                 else  if (item.getId() ==2){
                     fragment = new Volunteer_History_Fragment();
+                    currentTab = 2;
                 }
                 else {
                     fragment = new Volunteer_Home_Fragment();
+                    currentTab = 1;
                 }
 
                 //use load fragment method to show the current fragment
@@ -93,7 +104,7 @@ public class HomeVolunteer extends AppCompatActivity {
         });
 
         //set the initial fragment to show
-        bottomNav.show(1, true);
+        bottomNav.show(currentTab, true);
 
         //set menu item on click listener
         bottomNav.setOnClickMenuListener(new MeowBottomNavigation.ClickListener() {
