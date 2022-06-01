@@ -30,7 +30,6 @@ class SearchMediator(
     private val serviceProvider = MapboxSearchSdk.serviceProvider
     private val context = searchBottomSheetView.context
 
-    // Stack top points to currently open screen, if empty -> SearchBottomSheetView is open
     private val screensStack = LinkedList<Transaction>()
 
     private val eventsListeners = CopyOnWriteArrayList<SearchBottomSheetsEventsListener>()
@@ -58,9 +57,7 @@ class SearchMediator(
                 if (coordinate != null) {
                     openPlaceCard(SearchPlace.createFromIndexableRecord(historyRecord, coordinate, distanceMeters = null))
                 } else {
-                    // TODO: For now we don't support handling HistoryRecord without coordinates,
-                    // because SDK adds records only that have coordinates. However, customers still can
-                    // add HistoryRecord w/o coordinates.
+                    // Not implemented yet
                 }
             }
         }
@@ -149,8 +146,6 @@ class SearchMediator(
         fromBackStack: Boolean = false
     ) {
         if (!fromBackStack) {
-            // Put place without distance into screen stack, so during
-            // reconfiguration we will recalculate distance.
             screensStack.push(Transaction(Screen.PLACE, place.copy(distanceMeters = null)))
         }
 
@@ -255,8 +250,6 @@ class SearchMediator(
         })
     }
 
-    // Should work quit fast as we get last known location.
-    // If default Android Location Manager is used, callback will be triggered immediately.
     private fun userDistanceTo(destination: Point, callback: (Double?) -> Unit) {
         lastKnownLocation { location ->
             if (location == null) {
@@ -272,10 +265,6 @@ class SearchMediator(
 
     fun addSearchBottomSheetsEventsListener(listener: SearchBottomSheetsEventsListener) {
         eventsListeners.add(listener)
-    }
-
-    fun removeSearchBottomSheetsEventsListener(listener: SearchBottomSheetsEventsListener) {
-        eventsListeners.remove(listener)
     }
 
     interface SearchBottomSheetsEventsListener {

@@ -16,6 +16,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.etebarian.meowbottomnavigation.MeowBottomNavigation
+import com.etebarian.meowbottomnavigation.MeowBottomNavigation.ReselectListener
+import com.etebarian.meowbottomnavigation.MeowBottomNavigation.ShowListener
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
@@ -33,6 +36,7 @@ import com.mapbox.maps.extension.style.sources.generated.GeoJsonSource
 import com.mapbox.maps.extension.style.sources.generated.geoJsonSource
 import com.mapbox.maps.extension.style.sources.getSourceAs
 import com.mapbox.maps.extension.style.style
+import com.mapbox.maps.plugin.LocationPuck2D
 import com.mapbox.maps.plugin.animation.MapAnimationOptions
 import com.mapbox.maps.plugin.animation.camera
 import com.mapbox.maps.plugin.locationcomponent.location
@@ -64,6 +68,8 @@ class NavigationViewActivity : AppCompatActivity() {
     private val navigationLocationProvider = NavigationLocationProvider()
     private val locationRequest = LocationRequest.create()
     private lateinit var destinationCoordinates: Point
+
+    var bottomNav: MeowBottomNavigation? = null
 
     companion object {
         var mapboxNavigation: MapboxNavigation? = null
@@ -104,6 +110,76 @@ class NavigationViewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityNavigationViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        bottomNav = findViewById(R.id.bottomNav)
+
+        //add menu items to bottom nav
+//        bottomNav?.add(MeowBottomNavigation.Model(1, R.drawable.ic_home))
+//        bottomNav?.add(MeowBottomNavigation.Model(2, R.drawable.ic_category))
+//        bottomNav?.add(MeowBottomNavigation.Model(3, R.drawable.ic_search))
+//        bottomNav?.add(MeowBottomNavigation.Model(4, R.drawable.ic_cart))
+//        bottomNav?.add(MeowBottomNavigation.Model(5, R.drawable.ic_map))
+//        bottomNav?.add(MeowBottomNavigation.Model(6, R.drawable.ic_chat))
+//        bottomNav?.add(MeowBottomNavigation.Model(7, R.drawable.ic_profile))
+
+        //add menu items to bottom nav
+        bottomNav?.add(MeowBottomNavigation.Model(1, R.drawable.ic_home))
+        bottomNav?.add(MeowBottomNavigation.Model(2, R.drawable.ic_history))
+        bottomNav?.add(MeowBottomNavigation.Model(3, R.drawable.ic_map))
+        bottomNav?.add(MeowBottomNavigation.Model(4, R.drawable.ic_chat))
+        bottomNav?.add(MeowBottomNavigation.Model(5, R.drawable.ic_profile))
+
+        //set bottom nav on show listener
+        bottomNav?.setOnShowListener(ShowListener { item -> //define a fragment
+            // Show toast message when item is selected
+        })
+
+
+        //set the initial fragment to show
+        bottomNav?.show(3, true)
+
+        //set menu item on click listener
+
+        //set menu item on click listener
+        bottomNav?.setOnClickMenuListener(MeowBottomNavigation.ClickListener {
+            when (it.id) {
+                1 -> {
+                    HomeVolunteer.currentTab = 1;
+                    val intent = Intent(this, HomeVolunteer::class.java)
+                    startActivity(intent)
+                }
+                2 -> {
+                    HomeVolunteer.currentTab = 2;
+                    val intent = Intent(this, HomeVolunteer::class.java)
+                    startActivity(intent)
+                }
+                3 -> {
+                    HomeVolunteer.currentTab = 3;
+                    val intent = Intent(this, HomeVolunteer::class.java)
+                    startActivity(intent)
+                }
+                4 -> {
+                    HomeVolunteer.currentTab = 4;
+                    val intent = Intent(this, HomeVolunteer::class.java)
+                    startActivity(intent)
+                }
+                5 -> {
+                    HomeVolunteer.currentTab = 5;
+                    val intent = Intent(this, HomeVolunteer::class.java)
+                    startActivity(intent)
+                }
+            }
+        })
+
+        //set on reselect listener
+
+        //set on reselect listener
+        bottomNav?.setOnReselectListener(ReselectListener {
+            //display a toast
+            //Toast.makeText(getApplicationContext()," You reselected "+ item.getId(), Toast.LENGTH_SHORT).show();
+        })
+
+
         loadMap(savedInstanceState)
         setLitioners()
         requestForLocation()
@@ -111,6 +187,7 @@ class NavigationViewActivity : AppCompatActivity() {
 
     @SuppressLint("LogNotTimber")
     private fun setLitioners() {
+        
         binding.currentLocation.setOnClickListener {
             getUserCurrentLocation()
         }
@@ -154,12 +231,13 @@ class NavigationViewActivity : AppCompatActivity() {
         mapboxMap = binding.mapView.getMapboxMap()
         binding.mapView.location.apply {
             setLocationProvider(navigationLocationProvider)
-            /* locationPuck = LocationPuck2D(
+            locationPuck = LocationPuck2D(
                  bearingImage = ContextCompat.getDrawable(
                      this@NavigationViewActivity,
-                     R.drawable.green_dot
+                     // TODO: Replace with car icon
+                     R.drawable.ic_car_black
                  )
-             )*/
+             )
             enabled = true
         }
 
@@ -464,7 +542,7 @@ class NavigationViewActivity : AppCompatActivity() {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 requestForLocation()
             } else {
-                Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
             }
         }
     }
