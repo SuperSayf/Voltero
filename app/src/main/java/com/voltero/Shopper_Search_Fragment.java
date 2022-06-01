@@ -7,11 +7,15 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,10 +29,11 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class Shopper_Search_Fragment extends Fragment {
-    private RecyclerView courseRV;
 
-    // Arraylist for storing data
-    private ArrayList<CardBuilder> cardBuilderArrayList;
+    public EditText itemName;
+    public EditText itemBrand;
+    public EditText itemSize;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -75,40 +80,35 @@ public class Shopper_Search_Fragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_shopper__search_, container, false);
 
-        EditText user = (EditText) view.findViewById(R.id.editTextTextPersonName2);
-        String groc_name = user.getText().toString();
-        Log.e("-----------name",groc_name);
-        ContentValues params = new ContentValues();
-        params.put("grc_name",groc_name);
-        Requests.request(getActivity(), "searchGroceries", params, response -> {
-            try {
-                //TODO: change categories
-                JSONArray categories = new JSONArray(response);
-                courseRV = view.findViewById(R.id.idRVCourse);
-                cardBuilderArrayList = new ArrayList<>();
-                for (int i = 0; i < categories.length(); ++i) {
-                    JSONObject object = categories.getJSONObject(i);
-                    String grc_name = object.getString("grc_name");
-                    String grc_image = object.getString("grc_image");
-                    cardBuilderArrayList.add(new CardBuilder(grc_name, grc_image));
-                }
-                if (isAdded()) {
-                    requireActivity().runOnUiThread(new Runnable() {
+        Button addToCart = (Button) view.findViewById(R.id.addButton);
+        addToCart.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                itemName = (EditText)view.findViewById(R.id.itemName);
+                itemBrand = (EditText)view.findViewById(R.id.itemBrand);
+                itemSize = (EditText)view.findViewById(R.id.itemSize);
+
+                String name = itemName.getText().toString();
+                String brand = itemBrand.getText().toString();
+                String size = itemSize.getText().toString();
+                String grocName = name + " " + brand + " " + size;
+
+                ContentValues params = new ContentValues();
+                params.put("user_email", MainActivity.user_email);
+                params.put("grc_name", grocName);
+                params.put("grc_image", "https://bit.ly/3GDLiIQ");
+                params.put("change_type", "add");
+
+                Requests.request(getActivity(), "cartItems", params, response -> {
+                    new Handler(Looper.getMainLooper()).post(new Runnable() {
                         @Override
                         public void run() {
-//                            courseRV.setHasFixedSize(true);
-                            GridCardListMaker cardListMaker = new GridCardListMaker(getActivity(), cardBuilderArrayList);
-                            courseRV.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-                            courseRV.setAdapter(cardListMaker);
-                            // Stop the progressBar
-                            view.findViewById(R.id.progressBar).setVisibility(View.GONE);
+                            Toast.makeText(getActivity(), grocName + " added to cart", Toast.LENGTH_LONG).show();
                         }
                     });
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
+                });
             }
-
         });
 
         return view;
