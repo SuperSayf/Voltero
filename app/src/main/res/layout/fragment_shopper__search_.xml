@@ -56,7 +56,7 @@
         android:backgroundTint="#CCCCCC"
         android:ems="10"
         android:fontFamily="@font/roboto"
-        android:hint="Item size (e.g. ml, mg)"
+        android:hint="Item size (e.g. l, ml, kg, g)"
         android:inputType="textShortMessage"
         android:minHeight="48dp"
         android:textColor="#CCCCCC"
