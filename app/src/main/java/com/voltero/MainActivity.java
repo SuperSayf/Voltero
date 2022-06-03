@@ -62,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
         params.put("user_email", user_email);
         params.put("user_password", password);
 
+        ContentValues sessionParams = new ContentValues();
+        sessionParams.put("user_email", user_email);
+
         Requests.request(this, "userLogin", params, response -> {
             try {
                 // Get the response
@@ -71,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
                     // Open the shopper activity
                     Intent intent = new Intent(this, HomeShopper.class);
                     startActivity(intent);
+
                 } else if (user_type.equals("0")) {
                     // Open the volunteer activity
                     Intent intent = new Intent(this, HomeVolunteer.class);
@@ -82,10 +86,10 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        ContentValues sessionParams = new ContentValues();
-        sessionParams.put("user_email", user_email);
+        if(user_type.equals("1"))
+            Requests.request(this, "openSession", sessionParams, response2 -> {    });
 
-        Requests.request(this, "openSession", sessionParams, response -> {    });
+
 
     }
 

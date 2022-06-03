@@ -77,7 +77,6 @@ public class Shopper_Categories_Fragment extends Fragment {
 
         Requests.request(getActivity(), "getCategories", params, response -> {
             try {
-                //TODO: change categories
                 JSONArray categories = new JSONArray(response);
                 courseRV = view.findViewById(R.id.idRVCourse);
                 groceryCardArrayList = new ArrayList<>();
