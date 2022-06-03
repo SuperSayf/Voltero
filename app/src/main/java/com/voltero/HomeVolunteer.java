@@ -39,6 +39,7 @@ public class HomeVolunteer extends AppCompatActivity {
     // Global variables
     public static List<JSONObject> messagesList = new ArrayList<>();
     public static String session_email = "";
+    public static String shopper_email;
     public static HomeVolunteer.MessageAdapter adapter;
     public static Handler mHandler = new Handler();
 

@@ -26,7 +26,7 @@ public class Shopper_Categories_Fragment extends Fragment {
     private RecyclerView courseRV;
 
     // Arraylist for storing data
-    private ArrayList<CardBuilder> cardBuilderArrayList;
+    private ArrayList<GroceryCard> groceryCardArrayList;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -80,21 +80,21 @@ public class Shopper_Categories_Fragment extends Fragment {
                 //TODO: change categories
                 JSONArray categories = new JSONArray(response);
                 courseRV = view.findViewById(R.id.idRVCourse);
-                cardBuilderArrayList = new ArrayList<>();
+                groceryCardArrayList = new ArrayList<>();
                 for (int i = 0; i < categories.length(); ++i) {
                     JSONObject object = categories.getJSONObject(i);
                     String cat_name = object.getString("cat_name");
                     String cat_image = object.getString("cat_image");
-                    cardBuilderArrayList.add(new CardBuilder(cat_name, cat_image));
+                    groceryCardArrayList.add(new GroceryCard(cat_name, cat_image));
                 }
                 if (isAdded()) {
                     requireActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             courseRV.setHasFixedSize(true);
-                            LinearCardListMaker linearCardListMaker = new LinearCardListMaker(getActivity(), cardBuilderArrayList);
+                            CategoriesCardListMaker categoriesCardListMaker = new CategoriesCardListMaker(getActivity(), groceryCardArrayList);
                             courseRV.setLayoutManager(new LinearLayoutManager(getActivity()));
-                            courseRV.setAdapter(linearCardListMaker);
+                            courseRV.setAdapter(categoriesCardListMaker);
                             // Stop the progressBar
                             view.findViewById(R.id.progressBar).setVisibility(View.GONE);
                         }
