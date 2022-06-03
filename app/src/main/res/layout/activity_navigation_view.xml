@@ -15,11 +15,13 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
+        android:layout_marginBottom="69dp"
         android:layout_height="match_parent">
 
         <com.mapbox.search.ui.view.SearchBottomSheetView
             android:id="@+id/search_view"
             android:layout_width="match_parent"
+            android:layout_marginBottom="69dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
             />
@@ -27,6 +29,7 @@
         <com.mapbox.search.ui.view.place.SearchPlaceBottomSheetView
             android:id="@+id/search_place_view"
             android:layout_width="match_parent"
+            android:layout_marginBottom="69dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             />
@@ -35,12 +38,14 @@
             android:id="@+id/search_categories_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginBottom="69dp"
             android:layout_gravity="center_horizontal"
             />
 
         <com.mapbox.search.ui.view.feedback.SearchFeedbackBottomSheetView
             android:id="@+id/search_feedback_view"
             android:layout_width="match_parent"
+            android:layout_marginBottom="69dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
             />
@@ -48,23 +53,15 @@
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/currentLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="79dp"
-        android:layout_marginEnd="10dp"
-        android:src="@drawable/ic_baseline_location_searching_24"
-        app:layout_constraintBottom_toTopOf="@+id/navigationLocation"
-        app:layout_constraintRight_toRightOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/navigationLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="79dp"
         android:layout_marginEnd="10dp"
         android:src="@drawable/ic_directions"
+        android:background="#FF081220"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
@@ -83,3 +80,5 @@
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
