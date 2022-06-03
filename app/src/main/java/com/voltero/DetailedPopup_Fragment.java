@@ -3,15 +3,21 @@ package com.voltero;
 import android.content.ContentValues;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,7 +34,7 @@ public class DetailedPopup_Fragment extends Fragment {
 
     private RecyclerView courseRV;
 
-    public Button button;
+    public Button acceptSession;
 
     JSONArray orderItems;
     DetailedOrderListMaker linearCartListMaker;
@@ -84,6 +90,10 @@ public class DetailedPopup_Fragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_detailed_popup, container, false);
 
+        TextView shopper_email = (TextView)view.findViewById(R.id.shopperName);
+
+        shopper_email.setText(HomeVolunteer.shopper_email);
+
         ContentValues params = new ContentValues();
         params.put("user_email", HomeVolunteer.shopper_email);
 
@@ -119,6 +129,44 @@ public class DetailedPopup_Fragment extends Fragment {
 
         });
 
+        AppCompatActivity activity = (AppCompatActivity) view.getContext();
+
+        ContentValues params2 = new ContentValues();
+        params2.put("user_email", HomeVolunteer.shopper_email);
+        params2.put("session_with", MainActivity.user_email);
+
+        acceptSession = (Button)view.findViewById(R.id.accept);
+
+        acceptSession.setOnClickListener(v -> {
+            Requests.request(activity, "acceptSession", params2, response -> {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String message = jsonObject.getString("message");
+                    if (message.equals("success")) {
+                        new Handler(Looper.getMainLooper()).post(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(activity, HomeVolunteer.shopper_email + "'s order accepted", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    } else {
+                        new Handler(Looper.getMainLooper()).post(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(activity, "Error", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                } catch (JSONException e){
+                    Requests.showMessage(activity, "Error with request");
+                }
+            });
+        });
+
+
         return view;
     }
+
+
+
 }
