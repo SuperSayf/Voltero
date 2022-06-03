@@ -38,7 +38,7 @@
             android:id="@+id/idTVCourseName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="24dp"
             android:ellipsize="end"
             android:fontFamily="@font/roboto_bold"
             android:gravity="center"
@@ -64,10 +64,10 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.698"
-            app:layout_constraintStart_toEndOf="@+id/idTVCourseName"
+            app:layout_constraintHorizontal_bias="0.816"
+            app:layout_constraintStart_toEndOf="@+id/idIVCourseImage"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.523" />
+            app:layout_constraintVertical_bias="0.517" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
