@@ -7,9 +7,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,18 +21,22 @@ import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Volunteer_Home_Fragment#newInstance} factory method to
+ * Use the {@link DetailedPopup_Fragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Volunteer_Home_Fragment extends Fragment {
-
-    public static String session_id;
-    public static String shopper_email;
+public class DetailedPopup_Fragment extends Fragment {
 
     private RecyclerView courseRV;
 
+    public Button button;
+
+    JSONArray orderItems;
+    DetailedOrderListMaker linearCartListMaker;
+
     // Arraylist for storing data
-    private ArrayList<GroceryCard> orderArrayList;
+    private ArrayList<CartItemCard> cardBuilderArrayList;
+
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -41,7 +47,7 @@ public class Volunteer_Home_Fragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Volunteer_Home_Fragment() {
+    public DetailedPopup_Fragment() {
         // Required empty public constructor
     }
 
@@ -51,11 +57,11 @@ public class Volunteer_Home_Fragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Volunteer_Home_Fragment.
+     * @return A new instance of fragment DetailedPopup_Fragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static Volunteer_Home_Fragment newInstance(String param1, String param2) {
-        Volunteer_Home_Fragment fragment = new Volunteer_Home_Fragment();
+    public static DetailedPopup_Fragment newInstance(String param1, String param2) {
+        DetailedPopup_Fragment fragment = new DetailedPopup_Fragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -75,36 +81,33 @@ public class Volunteer_Home_Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        View view = inflater.inflate(R.layout.fragment_volunteer__home_, container, false);
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_detailed_popup, container, false);
 
         ContentValues params = new ContentValues();
+        params.put("user_email", HomeVolunteer.shopper_email);
 
-        Requests.request(getActivity(), "findSessions", params, response -> {
+        Requests.request(getActivity(), "getCartItems", params, response -> {
             try {
-                JSONArray sessions = new JSONArray(response);
+                //TODO: change categories
+                orderItems = new JSONArray(response);
                 courseRV = view.findViewById(R.id.idRVCourse);
-                orderArrayList = new ArrayList<>();
-
-                if (sessions.getJSONObject(0).getString("message").equals("Found")) {
-                    for (int i = 0; i < sessions.length(); ++i) {
-                        JSONObject session = sessions.getJSONObject(i);
-                        session_id = session.getString("session_id");
-                        shopper_email = session.getString("user_email");
-                        // TODO: Update the session_with to the volunteer email
-                        orderArrayList.add(new GroceryCard(shopper_email, "https://bit.ly/3wGTdRm"));
-                    }
-                } else {
-                    orderArrayList.add(new GroceryCard("No sessions available", "https://bit.ly/3MHPwS8"));
+                cardBuilderArrayList = new ArrayList<>();
+                for (int i = 0; i < orderItems.length(); ++i) {
+                    JSONObject object = orderItems.getJSONObject(i);
+                    String grc_name = object.getString("grc_name");
+                    String grc_image = object.getString("grc_image");
+                    String grc_quantity = object.getString("grc_quantity");
+                    cardBuilderArrayList.add(new CartItemCard(grc_name, grc_image, grc_quantity));
                 }
                 if (isAdded()) {
                     requireActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             courseRV.setHasFixedSize(true);
-                            OrderListMaker orderListMaker = new OrderListMaker(getActivity(), orderArrayList);
+                            linearCartListMaker = new DetailedOrderListMaker(getActivity(), cardBuilderArrayList);
                             courseRV.setLayoutManager(new LinearLayoutManager(getActivity()));
-                            courseRV.setAdapter(orderListMaker);
+                            courseRV.setAdapter(linearCartListMaker);
                             // Stop the progressBar
                             view.findViewById(R.id.progressBar).setVisibility(View.GONE);
                         }
@@ -118,5 +121,4 @@ public class Volunteer_Home_Fragment extends Fragment {
 
         return view;
     }
-
 }
