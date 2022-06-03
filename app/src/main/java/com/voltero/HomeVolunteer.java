@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -251,28 +252,42 @@ public class HomeVolunteer extends AppCompatActivity {
                 view = getLayoutInflater().inflate(R.layout.message_list_item, viewGroup, false);
 
             TextView sentMessage = view.findViewById(R.id.sentMessage);
+            CircleImageView userImage = view.findViewById(R.id.user);
+            CircleImageView serverImage = view.findViewById(R.id.server);
             TextView receivedMessage = view.findViewById(R.id.receivedMessage);
             JSONObject item = messagesList.get(i);
             try {
                 if (item.getBoolean("byServer")) {
                     receivedMessage.setVisibility(View.VISIBLE);
+                    serverImage.setVisibility(View.VISIBLE);
                     receivedMessage.setText(item.getString("message"));
                     sentMessage.setVisibility(View.INVISIBLE);
+                    userImage.setVisibility(View.INVISIBLE);
 
                     if (i == messagesList.size()-1) {
                         Render render = new Render(HomeVolunteer.this);
                         render.setAnimation(Bounce.InLeft(receivedMessage));
                         render.start();
+
+                        Render render2 = new Render(HomeVolunteer.this);
+                        render2.setAnimation(Bounce.InRight(serverImage));
+                        render2.start();
                     }
                 } else {
                     sentMessage.setVisibility(View.VISIBLE);
+                    userImage.setVisibility(View.VISIBLE);
                     sentMessage.setText(item.getString("message"));
                     receivedMessage.setVisibility(View.INVISIBLE);
+                    serverImage.setVisibility(View.INVISIBLE);
 
                     if (i == messagesList.size()-1) {
                         Render render = new Render(HomeVolunteer.this);
                         render.setAnimation(Bounce.InRight(sentMessage));
                         render.start();
+
+                        Render render2 = new Render(HomeVolunteer.this);
+                        render2.setAnimation(Bounce.InRight(userImage));
+                        render2.start();
                     }
                 }
             } catch (JSONException e) {
