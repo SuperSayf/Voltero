@@ -7,47 +7,40 @@
     android:layout_height="match_parent"
     android:background="@drawable/animation_colors">
 
-    <Button
+    <com.royrodriguez.transitionbutton.TransitionButton
         android:id="@+id/btnLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:width="298dp"
-        android:background="@drawable/bg_btn"
+        android:layout_width="270dp"
+        android:layout_height="43dp"
         android:fontFamily="@font/roboto_medium"
         android:onClick="doLogin"
         android:text="Login"
         android:textColor="#FFFFFF"
+        app:defaultColor="#324055"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.626" />
+        app:layout_constraintVertical_bias="0.626"
+        app:loaderColor="@android:color/white" />
 
+<!--    <Button-->
+<!--        android:id="@+id/btnLogin"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:width="298dp"-->
+<!--        android:background="@drawable/bg_btn"-->
+<!--        android:fontFamily="@font/roboto_medium"-->
+<!--        android:onClick="doLogin"-->
+<!--        android:text="Login"-->
+<!--        android:textColor="#FFFFFF"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.495"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.626" />-->
 
-    <!--    <frlgrd.animatededittext.AnimatedEditText-->
-    <!--        android:id="@+id/txtLoginEmail"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:width="298dp"-->
-    <!--        android:inputType="textPersonName"-->
-    <!--        android:minHeight="48dp"-->
-    <!--        android:ems="10"-->
-    <!--        android:fontFamily="@font/roboto"-->
-    <!--        android:foregroundTint="#CCCCCC"-->
-    <!--        android:textColor="#CCCCCC"-->
-    <!--        android:textColorHint="#CCCCCC"-->
-    <!--        android:backgroundTint="#CCCCCC"-->
-    <!--        android:textColorLink="#00BCD4"-->
-    <!--        app:editTextIcon="@drawable/ic_email"-->
-    <!--        app:editTextInputType="name"-->
-    <!--        app:hintText="Name"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.495"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        app:layout_constraintVertical_bias="0.33" />-->
 
     <EditText
         android:id="@+id/txtLoginEmail"
