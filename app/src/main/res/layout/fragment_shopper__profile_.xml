@@ -51,7 +51,7 @@
         android:width="298dp"
         android:background="@drawable/bg_btn"
         android:fontFamily="@font/roboto_medium"
-        android:onClick="doRegistration"
+        android:onClick="doUpdate"
         android:text="Update Info"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
