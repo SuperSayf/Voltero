@@ -4,10 +4,21 @@
         <shape>
             <gradient
                 android:angle="225"
-                android:startColor="#ffffff"
-                android:endColor="#191654"
+                android:startColor="#03071e"
+                android:endColor="#004e89"
                 />
         </shape>
     </item>
 </selector>
+
+<!--Teal Colour:-->
+<!--    android:startColor="#03071e"-->
+<!--    android:endColor="#0096ab"-->
+
+<!--Other Dark Colour-->
+<!--    android:startColor="#03071e"-->
+<!--    android:endColor="#407ba7"-->
+
+
+<!--    android:endColor="#191654"-->
 
