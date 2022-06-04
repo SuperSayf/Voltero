@@ -123,7 +123,7 @@ public class Volunteer_Chat_Fragment extends Fragment {
                             try {
                                 OkHttpClient client = new OkHttpClient();
                                 HttpUrl.Builder urlBuilder = Objects.requireNonNull(HttpUrl.parse("https://lamp.ms.wits.ac.za/~s2430888/sendMessage.php")).newBuilder();
-                                urlBuilder.addQueryParameter("session_id", "33");
+                                urlBuilder.addQueryParameter("session_id", HomeVolunteer.session_ID);
                                 urlBuilder.addQueryParameter("user_email", HomeVolunteer.session_email);
                                 urlBuilder.addQueryParameter("msg_content", message);
                                 urlBuilder.addQueryParameter("msg_seen", "false");

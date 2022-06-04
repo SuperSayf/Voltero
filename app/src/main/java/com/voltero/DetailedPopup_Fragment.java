@@ -93,10 +93,28 @@ public class DetailedPopup_Fragment extends Fragment {
         TextView shopper_email = (TextView)view.findViewById(R.id.shopperName);
         TextView shopper_address = (TextView)view.findViewById(R.id.shopperAddress);
 
-        Log.e("address", HomeVolunteer.shopper_address);
+        ContentValues params3 = new ContentValues();
+        params3.put("user_email", HomeVolunteer.session_email);
+
+        Requests.request(getActivity(), "getAddress", params3, response -> {
+            try {
+                JSONObject jsonObject = new JSONObject(response);
+                HomeVolunteer.shopper_address = jsonObject.getString("user_address");
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            shopper_address.setText(HomeVolunteer.shopper_address);
+                        }
+                    });
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        });
 
         shopper_email.setText(HomeVolunteer.shopper_email);
-        shopper_address.setText(HomeVolunteer.shopper_address);
 
         ContentValues params = new ContentValues();
         params.put("user_email", HomeVolunteer.shopper_email);
@@ -151,6 +169,9 @@ public class DetailedPopup_Fragment extends Fragment {
                             @Override
                             public void run() {
                                 Toast.makeText(activity, HomeVolunteer.shopper_email + "'s order accepted", Toast.LENGTH_LONG).show();
+                                HomeVolunteer.session_started = true;
+                                HomeVolunteer.session_initialized = false;
+                                HomeVolunteer.isInSession = "true";
                             }
                         });
                     } else {

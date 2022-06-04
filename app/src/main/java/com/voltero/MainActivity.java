@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     public static String user_email = "";
     public static String user_type = "";
 
+
+
     private TransitionButton transitionButton;
 
     @Override
@@ -50,8 +52,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, Register.class);
         startActivity(intent);
     }
-
-
 
     public void doLogin(View v) {
         InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
