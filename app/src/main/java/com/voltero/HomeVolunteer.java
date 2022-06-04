@@ -37,7 +37,6 @@ public class HomeVolunteer extends AppCompatActivity {
     public static String session_email = "";
     public static String session_ID = "";
     public static String shopper_email = "";
-    public static String shopper_address = "";
     public static String isInSession = "false";
     public static HomeVolunteer.MessageAdapter adapter;
     public static Handler mHandler = new Handler();

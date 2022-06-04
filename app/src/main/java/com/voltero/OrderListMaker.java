@@ -54,8 +54,6 @@ public class OrderListMaker extends RecyclerView.Adapter<OrderListMaker.Viewhold
         holder.cardView.setOnClickListener(v -> {
             HomeVolunteer.shopper_email =  model.getCourse_name();
 
-            Log.e("shopper_email", HomeVolunteer.shopper_email);
-
             AppCompatActivity activity = (AppCompatActivity) v.getContext();
             Fragment fragment = new DetailedPopup_Fragment();
             activity.getSupportFragmentManager()
@@ -63,19 +61,6 @@ public class OrderListMaker extends RecyclerView.Adapter<OrderListMaker.Viewhold
                     .replace(R.id.nav_host_fragment_container, fragment, null)
                     .addToBackStack(null)
                     .commit();
-
-//            ContentValues params = new ContentValues();
-//            params.put("user_email", HomeVolunteer.shopper_email);
-//
-//            Requests.request(activity, "getAddress", params, response -> {
-//                try {
-//                    JSONObject jsonObject = new JSONObject(response);
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//
-//            });
         });
 
     }

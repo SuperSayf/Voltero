@@ -47,7 +47,6 @@ public class HomeShopper extends AppCompatActivity {
     public static Handler mHandler = new Handler();
     public static String grocery_name = "";
     public static String grocery_image = "";
-    public static String cart_state = "";
 
     private int messageCount = 1;
 
