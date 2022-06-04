@@ -91,11 +91,10 @@ public class Volunteer_Home_Fragment extends Fragment {
                         JSONObject session = sessions.getJSONObject(i);
                         session_id = session.getString("session_id");
                         shopper_email = session.getString("user_email");
-                        // TODO: Update the session_with to the volunteer email
                         orderArrayList.add(new GroceryCard(shopper_email, "https://bit.ly/3wGTdRm"));
                     }
                 } else {
-                    orderArrayList.add(new GroceryCard("No sessions available", "https://bit.ly/3MHPwS8"));
+                    orderArrayList.add(new GroceryCard("No available sessions", "https://bit.ly/3MHPwS8"));
                 }
                 if (isAdded()) {
                     requireActivity().runOnUiThread(new Runnable() {

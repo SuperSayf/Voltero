@@ -61,7 +61,7 @@ public class GridCardListMaker extends RecyclerView.Adapter<GridCardListMaker.Vi
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(activity,HomeShopper.grocery_name+" added to cart", Toast.LENGTH_LONG).show();
+                        Toast.makeText(activity,HomeShopper.grocery_name+" added to cart", Toast.LENGTH_SHORT).show();
                     }
                 });
             });

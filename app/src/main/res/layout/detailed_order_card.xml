@@ -38,7 +38,6 @@
             android:id="@+id/idTVCourseName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
             android:ellipsize="end"
             android:fontFamily="@font/roboto_bold"
             android:gravity="center"
@@ -47,9 +46,9 @@
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/increase"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.354"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/idCourseQuantity"
             app:layout_constraintStart_toEndOf="@+id/idIVCourseImage"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.416" />

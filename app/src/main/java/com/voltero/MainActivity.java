@@ -51,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
+
     public void doLogin(View v) {
         InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
@@ -112,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
                                     startActivity(intent);
                                 }
                             });
+
                         }
                     } catch (JSONException e) {
                         runOnUiThread(new Runnable() {
@@ -129,5 +132,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }, 2000);
     }
+
+
 
 }

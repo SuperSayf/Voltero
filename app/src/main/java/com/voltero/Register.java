@@ -93,7 +93,7 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
         params.put("user_surname", txtSurname.getText().toString());
         params.put("user_email", txtEmail.getText().toString());
         params.put("user_password", bPassword);
-        params.put("user_address", txtAddress.getText().toString());
+        params.put("shopper_address", txtAddress.getText().toString());
         params.put("user_type", SelectedItem);
         params.put("user_cell", txtCell.getText().toString());
 

@@ -1,9 +1,7 @@
 package com.voltero;
 
-import android.Manifest;
 import android.content.ContentValues;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -13,13 +11,10 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 
-import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -41,6 +36,7 @@ public class HomeVolunteer extends AppCompatActivity {
     public static List<JSONObject> messagesList = new ArrayList<>();
     public static String session_email = "";
     public static String shopper_email = "";
+    public static String shopper_address = "";
     public static HomeVolunteer.MessageAdapter adapter;
     public static Handler mHandler = new Handler();
 
@@ -58,6 +54,8 @@ public class HomeVolunteer extends AppCompatActivity {
         startRepeating();
 
         getSessionEmail();
+
+        getAddress();
 
         adapter = new HomeVolunteer.MessageAdapter();
 
@@ -92,7 +90,7 @@ public class HomeVolunteer extends AppCompatActivity {
                     return;
                 }
                 else  if (item.getId() ==2){
-                    fragment = new Volunteer_History_Fragment();
+                    fragment = new Volunteer_DetailedOrder_Fragment();
                     currentTab = 2;
                 }
                 else {
@@ -301,6 +299,22 @@ public class HomeVolunteer extends AppCompatActivity {
             messagesList.add(item);
             notifyDataSetChanged();
         }
+    }
+
+    public void getAddress() {
+        ContentValues params = new ContentValues();
+        params.put("user_email", HomeVolunteer.session_email);
+
+        Requests.request(this, "getAddress", params, response -> {
+            try {
+                JSONObject jsonObject = new JSONObject(response);
+                HomeVolunteer.shopper_address = jsonObject.getString("user_address");
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        });
     }
 
 
