@@ -42,7 +42,7 @@
         android:backgroundTint="#081220"
         android:onClick="postSession"
         android:text="Post order"
-        app:backgroundTint="#FF081220"
+        app:backgroundTint="#004e89"
         app:iconTint="#FF081220"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
