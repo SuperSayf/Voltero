@@ -2,33 +2,44 @@ package com.voltero;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 
+import org.jetbrains.annotations.Nullable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.HttpUrl;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import render.animations.Bounce;
 import render.animations.Render;
+import timber.log.Timber;
 
 public class HomeVolunteer extends AppCompatActivity {
 
@@ -282,9 +293,58 @@ public class HomeVolunteer extends AppCompatActivity {
             if (view == null)
                 view = getLayoutInflater().inflate(R.layout.message_list_item, viewGroup, false);
 
-            TextView sentMessage = view.findViewById(R.id.sentMessage);
             CircleImageView userImage = view.findViewById(R.id.user);
             CircleImageView serverImage = view.findViewById(R.id.server);
+
+            ContentValues params = new ContentValues();
+            params.put("user_email", MainActivity.user_email);
+
+            Requests.request(HomeVolunteer.this, "getImage", params, response -> {
+                try {
+                    // Get the response
+                    JSONObject jsonObject = new JSONObject(response);
+                    if (jsonObject.getString("success").equals("true")) {
+                        String encodedImage = jsonObject.getString("user_image");
+                        // Convert encoded image to bitmap
+                        byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
+                        // convert byte array back to original image
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                userImage.setImageBitmap(BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length));
+                            }
+                        });
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            });
+
+            ContentValues params2 = new ContentValues();
+            params2.put("user_email", session_email);
+
+            Requests.request(HomeVolunteer.this, "getImage", params2, response -> {
+                try {
+                    // Get the response
+                    JSONObject jsonObject = new JSONObject(response);
+                    if (jsonObject.getString("success").equals("true")) {
+                        String encodedImage = jsonObject.getString("user_image");
+                        // Convert encoded image to bitmap
+                        byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
+                        // convert byte array back to original image
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                serverImage.setImageBitmap(BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length));
+                            }
+                        });
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            });
+
+            TextView sentMessage = view.findViewById(R.id.sentMessage);
             TextView receivedMessage = view.findViewById(R.id.receivedMessage);
             JSONObject item = messagesList.get(i);
             try {
@@ -331,6 +391,54 @@ public class HomeVolunteer extends AppCompatActivity {
         void addItem(JSONObject item) {
             messagesList.add(item);
             notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Uri uri = Objects.requireNonNull(data).getData();
+        Volunteer_Profile_Fragment.pfp.setImageURI(uri);
+        try {
+            Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
+
+            // Convert Bitmap image into byte array
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            byte[] byteImage = stream.toByteArray();
+            String encodedImage = Base64.encodeToString(byteImage, Base64.DEFAULT);
+
+            OkHttpClient client = new OkHttpClient().newBuilder()
+                    .build();
+
+            okhttp3.RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
+                    .addFormDataPart("user_email", MainActivity.user_email)
+                    .addFormDataPart("user_image", encodedImage)
+                    .build();
+            okhttp3.Request request = new okhttp3.Request.Builder()
+                    .url("https://lamp.ms.wits.ac.za/~s2430888/uploadImage.php")
+                    .method("POST", body)
+                    .build();
+
+            client.newCall(request).enqueue(new okhttp3.Callback() {
+
+                @Override
+                public void onFailure(okhttp3.Call call, IOException e) {
+                    Timber.tag("ERROR").d(e.getMessage());
+                }
+
+                @Override
+                public void onResponse(okhttp3.Call call, okhttp3.Response response) throws IOException {
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(HomeVolunteer.this, "Image uploaded successfully", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            });
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
