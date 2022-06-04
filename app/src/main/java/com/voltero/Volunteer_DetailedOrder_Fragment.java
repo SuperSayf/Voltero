@@ -36,6 +36,12 @@ public class Volunteer_DetailedOrder_Fragment extends Fragment {
     JSONArray orderItems;
     public Button closeSession;
 
+    public String user_fname;
+    public String user_lname;
+    public String user_address;
+    public String user_cell;
+    public String user_image;
+
     DetailedOrderListMaker linearCartListMaker;
     private ArrayList<CartItemCard> cardBuilderArrayList;
 
@@ -79,21 +85,6 @@ public class Volunteer_DetailedOrder_Fragment extends Fragment {
         }
     }
 
-    public void getAddress() {
-        ContentValues params = new ContentValues();
-        params.put("user_email", HomeVolunteer.session_email);
-
-        Requests.request(getActivity(), "getAddress", params, response -> {
-            try {
-                JSONObject jsonObject = new JSONObject(response);
-                HomeVolunteer.shopper_address = jsonObject.getString("user_address");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-        });
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -121,23 +112,32 @@ public class Volunteer_DetailedOrder_Fragment extends Fragment {
         } else {
             view = inflater.inflate(R.layout.fragment_detailed_order_active_, container, false);
 
-
-
-            TextView shopper_email = (TextView)view.findViewById(R.id.shopperName);
+            TextView shopper_name = (TextView)view.findViewById(R.id.shopperName);
             TextView shopper_address = (TextView)view.findViewById(R.id.shopperAddress);
+            TextView shopper_cell = (TextView)view.findViewById(R.id.shopperCell);
 
             ContentValues params3 = new ContentValues();
             params3.put("user_email", HomeVolunteer.session_email);
 
-            Requests.request(getActivity(), "getAddress", params3, response -> {
+            Requests.request(getActivity(), "getDetails", params3, response -> {
                 try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    HomeVolunteer.shopper_address = jsonObject.getString("user_address");
+                    JSONArray user_details = new JSONArray(response);
+                    for (int i = 0; i < user_details.length(); ++i) {
+                        JSONObject object = user_details.getJSONObject(i);
+                        user_fname = object.getString("user_firstname");
+                        user_lname = object.getString("user_surname");
+                        user_address = object.getString("user_address");
+                        user_cell = object.getString("user_cell");
+                        user_image = object.getString("user_image");
+                    }
                     if (isAdded()) {
                         requireActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                shopper_address.setText(HomeVolunteer.shopper_address);
+                                String name = user_fname + ' ' + user_lname;
+                                shopper_name.setText("Name: " + name);
+                                shopper_address.setText("Address: " + user_address);
+                                shopper_cell.setText("Cell: " + user_cell);
                             }
                         });
                     }
@@ -146,8 +146,6 @@ public class Volunteer_DetailedOrder_Fragment extends Fragment {
                 }
 
             });
-
-            shopper_email.setText(HomeVolunteer.session_email);
 
 
             ContentValues params = new ContentValues();
