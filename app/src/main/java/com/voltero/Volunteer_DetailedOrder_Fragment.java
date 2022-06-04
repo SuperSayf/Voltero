@@ -79,6 +79,21 @@ public class Volunteer_DetailedOrder_Fragment extends Fragment {
         }
     }
 
+    public void getAddress() {
+        ContentValues params = new ContentValues();
+        params.put("user_email", HomeVolunteer.session_email);
+
+        Requests.request(getActivity(), "getAddress", params, response -> {
+            try {
+                JSONObject jsonObject = new JSONObject(response);
+                HomeVolunteer.shopper_address = jsonObject.getString("user_address");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        });
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -111,10 +126,28 @@ public class Volunteer_DetailedOrder_Fragment extends Fragment {
             TextView shopper_email = (TextView)view.findViewById(R.id.shopperName);
             TextView shopper_address = (TextView)view.findViewById(R.id.shopperAddress);
 
-            Log.e("Mainaddress", HomeVolunteer.shopper_address);
+            ContentValues params3 = new ContentValues();
+            params3.put("user_email", HomeVolunteer.session_email);
+
+            Requests.request(getActivity(), "getAddress", params3, response -> {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    HomeVolunteer.shopper_address = jsonObject.getString("user_address");
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                shopper_address.setText(HomeVolunteer.shopper_address);
+                            }
+                        });
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            });
 
             shopper_email.setText(HomeVolunteer.session_email);
-            shopper_address.setText(HomeVolunteer.shopper_address);
 
 
             ContentValues params = new ContentValues();

@@ -35,10 +35,15 @@ public class HomeVolunteer extends AppCompatActivity {
     // Global variables
     public static List<JSONObject> messagesList = new ArrayList<>();
     public static String session_email = "";
+    public static String session_ID = "";
     public static String shopper_email = "";
     public static String shopper_address = "";
+    public static String isInSession = "false";
     public static HomeVolunteer.MessageAdapter adapter;
     public static Handler mHandler = new Handler();
+
+    public static boolean session_started = false;
+    public static boolean session_initialized = true;
 
     private int messageCount = 1;
 
@@ -51,13 +56,26 @@ public class HomeVolunteer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_volunteer);
 
-        startRepeating();
-
-        getSessionEmail();
-
-        getAddress();
-
         adapter = new HomeVolunteer.MessageAdapter();
+
+        ContentValues params = new ContentValues();
+        params.put("user_email", MainActivity.user_email);
+
+        Requests.request(this, "isInSession", params, response -> {
+            try {
+                // Get the response
+                JSONObject jsonObject = new JSONObject(response);
+                isInSession = jsonObject.getString("inSession");
+
+                if (isInSession.equals("true")) {
+                    getSessionEmail();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        });
+
+        startRepeating();
 
         bottomNav = findViewById(R.id.bottomNav);
 
@@ -80,14 +98,22 @@ public class HomeVolunteer extends AppCompatActivity {
                     fragment = new Volunteer_Profile_Fragment();
                     currentTab = 5;
                 } else if (item.getId() == 4){
-                    fragment = new Volunteer_Chat_Fragment();
+                    if (isInSession.equals("true")) {
+                        fragment = new Volunteer_Chat_Fragment();
+                    } else {
+                        fragment = new StartASession();
+                    }
                     currentTab = 4;
                 }else  if (item.getId() ==3){
-                    // Launch the navigation activity
+                    if (isInSession.equals("true")) {
+                        currentTab = 3;
+                        Intent intent = new Intent(HomeVolunteer.this, NavigationViewActivity.class);
+                        startActivity(intent);
+                        return;
+                    } else {
+                        fragment = new StartASession();
+                    }
                     currentTab = 3;
-                    Intent intent = new Intent(HomeVolunteer.this, NavigationViewActivity.class);
-                    startActivity(intent);
-                    return;
                 }
                 else  if (item.getId() ==2){
                     fragment = new Volunteer_DetailedOrder_Fragment();
@@ -153,7 +179,8 @@ public class HomeVolunteer extends AppCompatActivity {
             try {
                 // Get the response
                 JSONObject jsonObject = new JSONObject(response);
-                session_email = jsonObject.getString("session_with");
+                HomeVolunteer.session_email = jsonObject.getString("user_email");
+                HomeVolunteer.session_ID = jsonObject.getString("session_ID");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -171,56 +198,62 @@ public class HomeVolunteer extends AppCompatActivity {
     private Runnable mHandlerTask = new Runnable() {
         @Override
         public void run() {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        OkHttpClient client = new OkHttpClient();
-                        HttpUrl.Builder urlBuilder = Objects.requireNonNull(HttpUrl.parse("https://lamp.ms.wits.ac.za/~s2430888/checkForMessages.php")).newBuilder();
-                        urlBuilder.addQueryParameter("session_id", "33");
-                        urlBuilder.addQueryParameter("user_email", MainActivity.user_email);
+            if (session_started && !session_initialized) {
+                getSessionEmail();
+                session_initialized = true;
+            }
+            if (session_started) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            OkHttpClient client = new OkHttpClient();
+                            HttpUrl.Builder urlBuilder = Objects.requireNonNull(HttpUrl.parse("https://lamp.ms.wits.ac.za/~s2430888/checkForMessages.php")).newBuilder();
+                            urlBuilder.addQueryParameter("session_id", HomeVolunteer.session_ID);
+                            urlBuilder.addQueryParameter("user_email", MainActivity.user_email);
 
-                        String url = urlBuilder.build().toString();
+                            String url = urlBuilder.build().toString();
 
-                        Request request = new Request.Builder()
-                                .url(url)
-                                .build();
-                        Response response = client.newCall(request).execute();
-                        final String result = Objects.requireNonNull(response.body()).string();
-                        // Create json object from the response
-                        JSONObject jsonObject = new JSONObject(result);
-                        runOnUiThread(new Runnable() {
-                                          @Override
-                                          public void run() {
-                                              try {
-                                                  if (jsonObject.getString("found").equals("true")) {
-                                                      String message = jsonObject.getString("msg_content");
-                                                      JSONObject json = new JSONObject();
-                                                      try {
-                                                          json.put("message", message);
-                                                          json.put("byServer", "true");
-                                                          // Get the current fragment
-                                                          Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_container);
-                                                          // Check if the current fragment is the chat fragment
-                                                          if (!(currentFragment instanceof Volunteer_Chat_Fragment)) {
-                                                              bottomNav.setCount(4, String.valueOf(messageCount++));
+                            Request request = new Request.Builder()
+                                    .url(url)
+                                    .build();
+                            Response response = client.newCall(request).execute();
+                            final String result = Objects.requireNonNull(response.body()).string();
+                            // Create json object from the response
+                            JSONObject jsonObject = new JSONObject(result);
+                            runOnUiThread(new Runnable() {
+                                              @Override
+                                              public void run() {
+                                                  try {
+                                                      if (jsonObject.getString("found").equals("true")) {
+                                                          String message = jsonObject.getString("msg_content");
+                                                          JSONObject json = new JSONObject();
+                                                          try {
+                                                              json.put("message", message);
+                                                              json.put("byServer", "true");
+                                                              // Get the current fragment
+                                                              Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_container);
+                                                              // Check if the current fragment is the chat fragment
+                                                              if (!(currentFragment instanceof Volunteer_Chat_Fragment)) {
+                                                                  bottomNav.setCount(4, String.valueOf(messageCount++));
+                                                              }
+                                                              adapter.addItem(json);
+                                                          } catch (JSONException e) {
+                                                              e.printStackTrace();
                                                           }
-                                                          adapter.addItem(json);
-                                                      } catch (JSONException e) {
-                                                          e.printStackTrace();
                                                       }
+                                                  } catch (JSONException e) {
+                                                      e.printStackTrace();
                                                   }
-                                              } catch (JSONException e) {
-                                                  e.printStackTrace();
                                               }
                                           }
-                                      }
-                        );
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                            );
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
-                }
-            }).start();
+                }).start();
+            }
 
             mHandler.postDelayed(this, 2000);
         }
@@ -300,22 +333,5 @@ public class HomeVolunteer extends AppCompatActivity {
             notifyDataSetChanged();
         }
     }
-
-    public void getAddress() {
-        ContentValues params = new ContentValues();
-        params.put("user_email", HomeVolunteer.session_email);
-
-        Requests.request(this, "getAddress", params, response -> {
-            try {
-                JSONObject jsonObject = new JSONObject(response);
-                HomeVolunteer.shopper_address = jsonObject.getString("user_address");
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-        });
-    }
-
 
 }
