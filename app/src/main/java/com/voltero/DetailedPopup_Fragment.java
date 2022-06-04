@@ -94,7 +94,7 @@ public class DetailedPopup_Fragment extends Fragment {
         TextView shopper_address = (TextView)view.findViewById(R.id.shopperAddress);
 
         ContentValues params3 = new ContentValues();
-        params3.put("user_email", HomeVolunteer.session_email);
+        params3.put("user_email", HomeVolunteer.shopper_email);
 
         Requests.request(getActivity(), "getAddress", params3, response -> {
             try {

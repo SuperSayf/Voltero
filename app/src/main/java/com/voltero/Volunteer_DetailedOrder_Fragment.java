@@ -79,21 +79,6 @@ public class Volunteer_DetailedOrder_Fragment extends Fragment {
         }
     }
 
-    public void getAddress() {
-        ContentValues params = new ContentValues();
-        params.put("user_email", HomeVolunteer.session_email);
-
-        Requests.request(getActivity(), "getAddress", params, response -> {
-            try {
-                JSONObject jsonObject = new JSONObject(response);
-                HomeVolunteer.shopper_address = jsonObject.getString("user_address");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-        });
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
