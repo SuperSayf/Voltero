@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -90,9 +89,14 @@ public class DetailedPopup_Fragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_detailed_popup, container, false);
 
+
         TextView shopper_email = (TextView)view.findViewById(R.id.shopperName);
+        TextView shopper_address = (TextView)view.findViewById(R.id.shopperAddress);
+
+        Log.e("address", HomeVolunteer.shopper_address);
 
         shopper_email.setText(HomeVolunteer.shopper_email);
+        shopper_address.setText(HomeVolunteer.shopper_address);
 
         ContentValues params = new ContentValues();
         params.put("user_email", HomeVolunteer.shopper_email);
