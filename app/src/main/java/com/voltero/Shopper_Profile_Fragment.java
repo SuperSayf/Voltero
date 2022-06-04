@@ -1,12 +1,30 @@
 package com.voltero;
 
+import android.content.ContentValues;
+import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
+
+import com.github.dhaval2404.imagepicker.ImagePicker;
+
+import org.jetbrains.annotations.Nullable;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Objects;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +32,8 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class Shopper_Profile_Fragment extends Fragment {
+
+    public static CircleImageView pfp;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -55,10 +75,54 @@ public class Shopper_Profile_Fragment extends Fragment {
         }
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shopper__profile_, container, false);
+        View view = inflater.inflate(R.layout.fragment_shopper__profile_, container, false);
+
+        ContentValues params = new ContentValues();
+        params.put("user_email", MainActivity.user_email);
+
+        Requests.request(requireActivity(), "getImage", params, response -> {
+            try {
+                // Get the response
+                JSONObject jsonObject = new JSONObject(response);
+                if (jsonObject.getString("success").equals("true")) {
+                    String encodedImage = jsonObject.getString("user_image");
+                    // Convert encoded image to bitmap
+                    byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
+                    // convert byte array back to original image
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                pfp.setImageBitmap(BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length));
+                            }
+                        });
+                    }
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        });
+
+        pfp = view.findViewById(R.id.profile_image);
+        pfp.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                // Do stuff
+                ImagePicker.with(requireActivity())
+                        .crop()	    			//Crop image(Optional), Check Customization for more option
+                        .compress(1024)			//Final image size will be less than 1 MB(Optional)
+                        .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
+                        .start();
+            }
+        });
+
+        return view;
     }
 }

@@ -57,6 +57,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'de.hdodenhof:circleimageview:3.1.0' // Circle Image View - Sayf
     implementation 'com.royrodriguez:transitionbutton:0.2.0' // Transition Button - Sayf
+    implementation 'com.github.dhaval2404:imagepicker:2.1' // Image Picker - Sayf
 
     // Mapbox
     implementation "com.mapbox.navigation:android:2.2.2"
