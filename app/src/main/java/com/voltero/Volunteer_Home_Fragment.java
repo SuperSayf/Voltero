@@ -26,11 +26,15 @@ public class Volunteer_Home_Fragment extends Fragment {
 
     public static String session_id;
     public static String shopper_email;
+    public static String shopper_fname;
+    public static String shopper_lname;
+    public static String shopper_address;
+    public static String shopper_image;
 
     private RecyclerView courseRV;
 
     // Arraylist for storing data
-    private ArrayList<GroceryCard> orderArrayList;
+    private ArrayList<OrderCard> orderArrayList;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -89,12 +93,16 @@ public class Volunteer_Home_Fragment extends Fragment {
                 if (sessions.getJSONObject(0).getString("message").equals("Found")) {
                     for (int i = 0; i < sessions.length(); ++i) {
                         JSONObject session = sessions.getJSONObject(i);
-                        session_id = session.getString("session_id");
                         shopper_email = session.getString("user_email");
-                        orderArrayList.add(new GroceryCard(shopper_email, "https://bit.ly/3wGTdRm"));
+                        shopper_fname = session.getString("user_firstname");
+                        shopper_lname = session.getString("user_surname");
+                        shopper_address = session.getString("user_address");
+                        shopper_image = session.getString("user_image");
+                        String name = shopper_fname + ' ' + shopper_lname;
+                        orderArrayList.add(new OrderCard(shopper_email, name, shopper_address, shopper_image));
                     }
                 } else {
-                    orderArrayList.add(new GroceryCard("No available sessions", "https://bit.ly/3MHPwS8"));
+                    orderArrayList.add(new OrderCard("","No available sessions","", "https://bit.ly/3MHPwS8"));
                 }
                 if (isAdded()) {
                     requireActivity().runOnUiThread(new Runnable() {
