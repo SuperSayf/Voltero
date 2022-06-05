@@ -43,8 +43,8 @@
 
         <ImageButton
             android:id="@+id/decrease"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="45dp"
+            android:layout_height="46dp"
             android:backgroundTint="#334155"
             android:contentDescription="TODO"
             android:scaleType="fitCenter"
@@ -54,7 +54,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.89"
-            app:srcCompat="@android:drawable/editbox_background_normal"
+            app:srcCompat="@drawable/minus"
             app:tint="#FFFFFF"
             tools:ignore="TouchTargetSizeCheck,ImageContrastCheck" />
 
