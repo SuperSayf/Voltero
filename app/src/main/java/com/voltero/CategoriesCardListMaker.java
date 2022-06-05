@@ -95,7 +95,7 @@ public class CategoriesCardListMaker extends RecyclerView.Adapter<CategoriesCard
         public Viewholder(@NonNull View itemView) {
             super(itemView);
             courseIV = itemView.findViewById(R.id.idIVCourseImage);
-            courseNameTV = itemView.findViewById(R.id.idTVCourseName);
+            courseNameTV = itemView.findViewById(R.id.txtComment);
             cardView = itemView.findViewById(R.id.groceryCard);
             idIVCourseImagePlace = itemView.findViewById(R.id.idIVCourseImagePlace);
         }
