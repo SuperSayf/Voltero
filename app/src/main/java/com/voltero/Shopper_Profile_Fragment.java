@@ -13,6 +13,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Base64;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -42,7 +43,6 @@ public class Shopper_Profile_Fragment extends Fragment {
 
     public Button btnUpdate;
 
-    public String txt_email;
     public String txt_address;
     public String txt_cell;
     public String txt_fname;
@@ -99,11 +99,10 @@ public class Shopper_Profile_Fragment extends Fragment {
 
         EditText user_email = (EditText)view.findViewById(R.id.txtEmail);
         EditText user_address = (EditText)view.findViewById(R.id.txtAddress);
-        EditText password = (EditText)view.findViewById(R.id.txtPassword);
-        EditText confirm_password = (EditText)view.findViewById(R.id.txtConfirmPassword);
         EditText user_cell = (EditText)view.findViewById(R.id.txtCell);
         TextView user_name = (TextView)view.findViewById(R.id.txtSurname);
         TextView user_type = (TextView)view.findViewById(R.id.txtAccountType);
+
 
         ContentValues params = new ContentValues();
         params.put("user_email", MainActivity.user_email);
@@ -145,6 +144,28 @@ public class Shopper_Profile_Fragment extends Fragment {
     });
 
         btnUpdate = (Button)view.findViewById(R.id.btnUpdate);
+
+        user_email.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                btnUpdate.setVisibility(View.VISIBLE);
+                return false;
+            }
+        });
+        user_address.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                btnUpdate.setVisibility(View.VISIBLE);
+                return false;
+            }
+        });
+        user_cell.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                btnUpdate.setVisibility(View.VISIBLE);
+                return false;
+            }
+        });
 
         btnUpdate.setOnClickListener(new View.OnClickListener()
         {
