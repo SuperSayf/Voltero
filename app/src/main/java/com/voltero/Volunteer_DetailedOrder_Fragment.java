@@ -23,6 +23,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Objects;
+
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -190,6 +196,30 @@ public class Volunteer_DetailedOrder_Fragment extends Fragment {
             closeSession = (Button) view.findViewById(R.id.closeOrder);
 
             closeSession.setOnClickListener(v -> {
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            OkHttpClient client = new OkHttpClient();
+                            HttpUrl.Builder urlBuilder = Objects.requireNonNull(HttpUrl.parse("https://lamp.ms.wits.ac.za/~s2430888/sendMessage.php")).newBuilder();
+                            urlBuilder.addQueryParameter("session_id", HomeVolunteer.session_ID);
+                            urlBuilder.addQueryParameter("user_email", HomeVolunteer.session_email);
+                            urlBuilder.addQueryParameter("msg_content", "SessionTerminated23892839283928938293891231361731563516351351625313131453143652");
+                            urlBuilder.addQueryParameter("msg_seen", "false");
+
+                            String url = urlBuilder.build().toString();
+
+                            Request request = new Request.Builder()
+                                    .url(url)
+                                    .build();
+                            Response response = client.newCall(request).execute();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
+
                 Requests.request(activity, "closeSession", params2, response -> {
                     try {
                         JSONObject jsonObject = new JSONObject(response);
@@ -199,6 +229,10 @@ public class Volunteer_DetailedOrder_Fragment extends Fragment {
                                 @Override
                                 public void run() {
                                     HomeVolunteer.session_email = "";
+                                    HomeVolunteer.session_started = false;
+                                    HomeVolunteer.session_ID = "";
+                                    HomeVolunteer.isInSession = "false";
+                                    HomeVolunteer.session_initialized = true;
                                     Toast.makeText(activity, "Order completed!", Toast.LENGTH_LONG).show();
                                 }
                             });

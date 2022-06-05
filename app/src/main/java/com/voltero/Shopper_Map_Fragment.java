@@ -60,41 +60,11 @@ public class Shopper_Map_Fragment extends Fragment {
         }
     }
 
-    private void showDialog() {
-        new AppRatingDialog.Builder()
-                .setPositiveButtonText("Submit")
-                .setNegativeButtonText("Cancel")
-                .setNeutralButtonText("Later")
-                .setNoteDescriptions(Arrays.asList("Very Bad", "Not good", "Quite ok", "Very Good", "Excellent !!!"))
-                .setDefaultRating(0)
-                .setThreshold(5)
-                .setTitle("Please rate your experience")
-                .setDescription("Please select some stars and give your feedback")
-                .setCommentInputEnabled(true)
-                .setDefaultComment("The volunteer was very helpful")
-                .setStarColor(R.color.starColor)
-                .setNoteDescriptionTextColor(R.color.noteDescriptionTextColor)
-                .setTitleTextColor(R.color.titleTextColor)
-                .setDescriptionTextColor(R.color.contentTextColor)
-                .setHint("Please write your comment here ...")
-                .setHintTextColor(R.color.hintTextColor)
-                .setCommentTextColor(R.color.commentTextColor)
-                .setCommentBackgroundColor(R.color.colorPrimaryDark)
-                .setDialogBackgroundColor(R.color.rateAppDialogBackgroundColor)
-                .setWindowAnimation(R.style.MyDialogFadeAnimation)
-                .setCancelable(false)
-                .setCanceledOnTouchOutside(false)
-                .create(requireActivity())
-                .show();
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_shopper__map_, container, false);
-
-        showDialog();
 
         return view;
     }

@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
+import com.hosseiniseyro.apprating.AppRatingDialog;
 import com.hosseiniseyro.apprating.listener.RatingDialogListener;
 
 import org.jetbrains.annotations.Nullable;
@@ -29,6 +30,7 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -242,6 +244,34 @@ public class HomeShopper extends AppCompatActivity implements RatingDialogListen
         });
     }
 
+    private void showDialog() {
+        new AppRatingDialog.Builder()
+                .setPositiveButtonText("Submit")
+                .setNegativeButtonText("Cancel")
+                .setNeutralButtonText("Later")
+                .setNoteDescriptions(Arrays.asList("Very Bad", "Not good", "Quite ok", "Very Good", "Excellent !!!"))
+                .setDefaultRating(0)
+                .setThreshold(5)
+                .setTitle("Please rate your experience")
+                .setDescription("Please select some stars and give your feedback")
+                .setCommentInputEnabled(true)
+                .setDefaultComment("The volunteer was very helpful")
+                .setStarColor(R.color.starColor)
+                .setNoteDescriptionTextColor(R.color.noteDescriptionTextColor)
+                .setTitleTextColor(R.color.titleTextColor)
+                .setDescriptionTextColor(R.color.contentTextColor)
+                .setHint("Please write your comment here ...")
+                .setHintTextColor(R.color.hintTextColor)
+                .setCommentTextColor(R.color.commentTextColor)
+                .setCommentBackgroundColor(R.color.colorPrimaryDark)
+                .setDialogBackgroundColor(R.color.rateAppDialogBackgroundColor)
+                .setWindowAnimation(R.style.MyDialogFadeAnimation)
+                .setCancelable(false)
+                .setCanceledOnTouchOutside(false)
+                .create(this)
+                .show();
+    }
+
     public void startRepeating() {
         mHandler.postDelayed(mHandlerTask, 500);
     }
@@ -308,20 +338,36 @@ public class HomeShopper extends AppCompatActivity implements RatingDialogListen
                                                       if (jsonObject.getString("found").equals("true")) {
                                                           String message = jsonObject.getString("msg_content");
                                                           JSONObject json = new JSONObject();
-                                                          try {
-                                                              json.put("message", message);
-                                                              json.put("byServer", "true");
 
-                                                              // Get the current fragment
-                                                              Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_container);
-                                                              // Check if the current fragment is the chat fragment
-                                                              if (!(currentFragment instanceof Shopper_Chat_Fragment)) {
-                                                                  bottomNav.setCount(6, String.valueOf(messageCount++));
+                                                          if (message.equals("SessionTerminated23892839283928938293891231361731563516351351625313131453143652")) {
+                                                              // Session has been terminated
+                                                              System.out.println("Session has been terminated");
+                                                              runOnUiThread(new Runnable() {
+                                                                  @Override
+                                                                  public void run() {
+                                                                      Toast.makeText(HomeShopper.this, "Session has been terminated", Toast.LENGTH_SHORT).show();
+                                                                      showDialog();
+                                                                  }
+                                                              });
+                                                                session_started = false;
+                                                                cart_complete = false;
+                                                                isInSession = "false";
+                                                          } else {
+                                                              try {
+                                                                  json.put("message", message);
+                                                                  json.put("byServer", "true");
+
+                                                                  // Get the current fragment
+                                                                  Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_container);
+                                                                  // Check if the current fragment is the chat fragment
+                                                                  if (!(currentFragment instanceof Shopper_Chat_Fragment)) {
+                                                                      bottomNav.setCount(6, String.valueOf(messageCount++));
+                                                                  }
+
+                                                                  adapter.addItem(json);
+                                                              } catch (JSONException e) {
+                                                                  e.printStackTrace();
                                                               }
-
-                                                              adapter.addItem(json);
-                                                          } catch (JSONException e) {
-                                                              e.printStackTrace();
                                                           }
                                                       }
                                                   } catch (JSONException e) {
