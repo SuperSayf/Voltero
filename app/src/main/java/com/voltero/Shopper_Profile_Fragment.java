@@ -126,13 +126,13 @@ public class Shopper_Profile_Fragment extends Fragment {
                         public void run() {
                             String name =txt_fname + ' ' + txt_lname;
                             user_name.setText(name);
-                            user_email.setText(MainActivity.user_email);
-                            user_address.setText(txt_address);
-                            user_cell.setText(txt_cell);
+                            user_email.setText("Email: " + MainActivity.user_email);
+                            user_address.setText("Address: " + txt_address);
+                            user_cell.setText("Cell: " + txt_cell);
                             if (txt_type.equals("1")) {
-                                user_type.setText(" Shopper");
+                                user_type.setText("User Type: Shopper");
                             } else {
-                                user_type.setText(" Volunteer");
+                                user_type.setText("User Type: Volunteer");
                             }
 
 
@@ -150,6 +150,8 @@ public class Shopper_Profile_Fragment extends Fragment {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 btnUpdate.setVisibility(View.VISIBLE);
+                // Clear the text field
+                user_email.setText("");
                 return false;
             }
         });
@@ -157,6 +159,8 @@ public class Shopper_Profile_Fragment extends Fragment {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 btnUpdate.setVisibility(View.VISIBLE);
+                // Clear the text field
+                user_address.setText("");
                 return false;
             }
         });
@@ -164,6 +168,8 @@ public class Shopper_Profile_Fragment extends Fragment {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 btnUpdate.setVisibility(View.VISIBLE);
+                // Clear the text field
+                user_cell.setText("");
                 return false;
             }
         });
