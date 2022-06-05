@@ -58,6 +58,7 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0' // Circle Image View - Sayf
     implementation 'com.royrodriguez:transitionbutton:0.2.0' // Transition Button - Sayf
     implementation 'com.github.dhaval2404:imagepicker:2.1' // Image Picker - Sayf
+    implementation 'io.github.kaustubhpatange:imageloaderview:0.7-beta04' // Image Loader - Sayf
 
     // Mapbox
     implementation "com.mapbox.navigation:android:2.2.2"
