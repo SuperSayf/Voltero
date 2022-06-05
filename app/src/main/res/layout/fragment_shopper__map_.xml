@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/detailedOrder"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="69dp"
-    android:id="@+id/categories"
     tools:context=".Shopper_Map_Fragment">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/idRVCourse"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/idRVCourse" />
+        android:paddingTop="40dp"
+        android:paddingBottom="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/volEmail"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -18,8 +27,56 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminate="true"
+        android:indeterminateTint="@color/white"
         android:indeterminateTintMode="src_atop"
-        android:indeterminateTint="@color/black"
-        android:layout_gravity = "center"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profileImage"
+        android:layout_width="65dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/ic_profile"
+        app:civ_border_color="#FFFFFF"
+        app:civ_border_width="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.092"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.047" />
+
+    <TextView
+        android:id="@+id/volName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_bold"
+        android:textColor="#FFFFFF"
+        android:gravity="center"
+        android:textSize="13dp"
+        app:layout_constraintBottom_toTopOf="@+id/idRVCourse"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/volEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_bold"
+        android:textColor="#FFFFFF"
+        android:gravity="center"
+        android:textSize="13dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.128" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
