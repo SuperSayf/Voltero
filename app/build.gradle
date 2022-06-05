@@ -59,6 +59,7 @@ dependencies {
     implementation 'com.royrodriguez:transitionbutton:0.2.0' // Transition Button - Sayf
     implementation 'com.github.dhaval2404:imagepicker:2.1' // Image Picker - Sayf
     implementation 'io.github.kaustubhpatange:imageloaderview:0.7-beta04' // Image Loader - Sayf
+    implementation 'com.github.hosseiniSeyRo:android-app-rating:1.1.2'  // App Rating - Sayf
 
     // Mapbox
     implementation "com.mapbox.navigation:android:2.2.2"
