@@ -1,6 +1,7 @@
 package com.voltero;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.dhaval2404.imagepicker.ImagePicker;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -224,8 +226,22 @@ public class Volunteer_Profile_Fragment extends Fragment {
             }
         });
 
+        Button btnLogout = (Button) view.findViewById(R.id.btnLogout);
+        btnLogout.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                MainActivity.user_email = "";
+                MainActivity.user_type = "";
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
         pfp = view.findViewById(R.id.profile_image);
-        pfp.setOnClickListener(new View.OnClickListener()
+        FloatingActionButton changeImage = view.findViewById(R.id.changeImage);
+        changeImage.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
