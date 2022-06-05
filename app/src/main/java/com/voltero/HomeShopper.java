@@ -352,6 +352,10 @@ public class HomeShopper extends AppCompatActivity implements RatingDialogListen
                                                                 session_started = false;
                                                                 cart_complete = false;
                                                                 isInSession = "false";
+
+                                                              ContentValues sessionParams = new ContentValues();
+                                                              sessionParams.put("user_email", MainActivity.user_email);
+                                                              Requests.request(HomeShopper.this, "openSession", sessionParams, response2 -> {    });
                                                           } else {
                                                               try {
                                                                   json.put("message", message);
