@@ -1,5 +1,6 @@
 package com.voltero;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
@@ -92,6 +93,7 @@ public class Shopper_Profile_Fragment extends Fragment {
     }
 
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
