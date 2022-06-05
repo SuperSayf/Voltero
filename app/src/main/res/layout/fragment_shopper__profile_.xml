@@ -30,7 +30,7 @@
         android:layout_width="104dp"
         android:layout_height="100dp"
         android:layout_marginTop="5dp"
-        android:src="@drawable/user"
+        android:src="@drawable/progress_animation"
         app:civ_border_color="#FFFFFF"
         app:civ_border_width="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
