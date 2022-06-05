@@ -7,7 +7,6 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -109,7 +108,7 @@ public class GridCardListMaker extends RecyclerView.Adapter<GridCardListMaker.Vi
         public Viewholder(@NonNull View itemView) {
             super(itemView);
             courseIV = itemView.findViewById(R.id.idIVCourseImage);
-            courseNameTV = itemView.findViewById(R.id.idTVCourseName);
+            courseNameTV = itemView.findViewById(R.id.txtComment);
             cardView = itemView.findViewById(R.id.groceryCard);
             idIVCourseImagePlace = itemView.findViewById(R.id.idIVCourseImagePlace);
 

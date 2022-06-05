@@ -1,17 +1,22 @@
 package com.voltero;
 
+import android.content.ContentValues;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.hosseiniseyro.apprating.AppRatingDialog;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import java.util.Arrays;
-import java.util.Objects;
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,6 +24,18 @@ import java.util.Objects;
  * create an instance of this fragment.
  */
 public class Shopper_Map_Fragment extends Fragment {
+
+    public static String rator_email;
+    public static String rator_fname;
+    public static String rator_lname;
+    public static String rator_comment;
+    public static String rator_rating;
+    public static String rator_image;
+
+    private RecyclerView courseRV;
+
+    // Arraylist for storing data
+    private ArrayList<RatingCard> ratingArrayList;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -65,6 +82,47 @@ public class Shopper_Map_Fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_shopper__map_, container, false);
+
+        ContentValues params = new ContentValues();
+        params.put("user_email", HomeShopper.session_email);
+        Log.e("session email", HomeShopper.session_email);
+
+        Requests.request(getActivity(), "findRatings", params, response -> {
+            try {
+                JSONArray ratings = new JSONArray(response);
+                courseRV = view.findViewById(R.id.idRVCourse);
+                ratingArrayList = new ArrayList<>();
+
+                    for (int i = 0; i < ratings.length(); ++i) {
+                        JSONObject rating = ratings.getJSONObject(i);
+                        rator_email = rating.getString("rating_from");
+                        rator_fname = rating.getString("rators_firstname");
+                        rator_lname = rating.getString("rators_surname");
+                        rator_comment = rating.getString("rating_comment");
+                        rator_image = rating.getString("rators_image");
+                        rator_rating = rating.getString("rating_stars");
+                        String name = rator_fname + ' ' + rator_lname;
+                        ratingArrayList.add(new RatingCard(rator_email, rator_rating, name, rator_comment, rator_image));
+                    }
+
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            courseRV.setHasFixedSize(true);
+                            RatingListMaker ratingListMaker = new RatingListMaker(getActivity(), ratingArrayList);
+                            courseRV.setLayoutManager(new LinearLayoutManager(getActivity()));
+                            courseRV.setAdapter(ratingListMaker);
+                            // Stop the progressBar
+                            view.findViewById(R.id.progressBar).setVisibility(View.GONE);
+                        }
+                    });
+                }
+            } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    });
 
         return view;
     }

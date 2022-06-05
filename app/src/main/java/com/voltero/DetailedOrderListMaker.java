@@ -9,9 +9,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kpstv.imageloaderview.ImageLoaderView;
@@ -80,7 +77,7 @@ public class DetailedOrderListMaker extends RecyclerView.Adapter<DetailedOrderLi
         public Viewholder(@NonNull View itemView) {
             super(itemView);
             courseIV = itemView.findViewById(R.id.idIVCourseImage);
-            courseNameTV = itemView.findViewById(R.id.idTVCourseName);
+            courseNameTV = itemView.findViewById(R.id.txtComment);
             courseQuantity = itemView.findViewById(R.id.idCourseQuantity);
             idIVCourseImagePlace = itemView.findViewById(R.id.idIVCourseImagePlace);
         }
