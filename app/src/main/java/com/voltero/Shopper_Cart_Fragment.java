@@ -147,6 +147,7 @@ public class Shopper_Cart_Fragment extends Fragment {
                     new Handler(Looper.getMainLooper()).post(new Runnable() {
                         @Override
                         public void run() {
+                            HomeShopper.cart_complete = true;
                             Toast.makeText(activity,"Order placed", Toast.LENGTH_SHORT).show();
                         }
                     });

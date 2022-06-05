@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -71,7 +70,7 @@ public class HomeVolunteer extends AppCompatActivity {
         ContentValues params = new ContentValues();
         params.put("user_email", MainActivity.user_email);
 
-        Requests.request(this, "isInSession", params, response -> {
+        Requests.request(this, "isInSessionVolunteer", params, response -> {
             try {
                 // Get the response
                 JSONObject jsonObject = new JSONObject(response);

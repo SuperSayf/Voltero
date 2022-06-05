@@ -100,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
                             transitionButton.stopAnimation(TransitionButton.StopAnimationStyle.EXPAND, new TransitionButton.OnAnimationStopEndListener() {
                                 @Override
                                 public void onAnimationStopEnd() {
+                                    Requests.request(MainActivity.this, "openSession", sessionParams, response2 -> {    });
                                     Intent intent = new Intent(getBaseContext(), HomeShopper.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                                     startActivity(intent);
@@ -126,9 +127,6 @@ public class MainActivity extends AppCompatActivity {
                         Requests.showMessage(MainActivity.this, "Email or password is incorrect");
                     }
                 });
-
-                if(user_type.equals("1"))
-                    Requests.request(MainActivity.this, "openSession", sessionParams, response2 -> {    });
             }
         }, 2000);
     }
