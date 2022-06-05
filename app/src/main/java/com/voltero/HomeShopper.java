@@ -15,6 +15,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -44,8 +45,26 @@ import timber.log.Timber;
 public class HomeShopper extends AppCompatActivity implements RatingDialogListener {
 
     @Override
-    public void onPositiveButtonClickedWithComment(int rate, String comment) {
-        // interpret results and comment, send it to analytics etc...
+    public void onPositiveButtonClickedWithComment(int rate, @NonNull String comment) {
+        ContentValues params = new ContentValues();
+        params.put("user_email", HomeShopper.session_email);
+        params.put("rating_from", MainActivity.user_email);
+        params.put("rating_stars", String.valueOf(rate));
+        params.put("rating_comment", comment);
+
+        Requests.request(this, "postFeedback", params, response -> {
+            try {
+                // Get the response
+                JSONObject jsonObject = new JSONObject(response);
+                if (jsonObject.getString("message").equals("Rating added successfully")) {
+                    Requests.showMessage(this, "Rating added successfully");
+                } else {
+                    Requests.showMessage(this, "Error adding rating");
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     @Override
