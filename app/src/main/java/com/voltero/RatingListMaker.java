@@ -35,7 +35,7 @@ public class RatingListMaker extends RecyclerView.Adapter<RatingListMaker.Viewho
     @NonNull
     @Override
     public RatingListMaker.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.order_card_layout, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rating_card_layout, parent, false);
         return new RatingListMaker.Viewholder(view);
     }
 
@@ -45,7 +45,7 @@ public class RatingListMaker extends RecyclerView.Adapter<RatingListMaker.Viewho
         holder.rator_email.setText(model.getRator_email());
         holder.rator_name.setText(model.getRator_name());
         holder.rator_comment.setText(model.getRator_comment());
-        holder.rator_rating.setNumStars(0);
+        holder.rator_rating.setNumStars(Integer.parseInt(model.getRator_rating()));
 
         ContentValues params = new ContentValues();
         params.put("user_email", model.getRator_email());
@@ -77,7 +77,6 @@ public class RatingListMaker extends RecyclerView.Adapter<RatingListMaker.Viewho
     public int getItemCount() { return RatingsArrayList.size(); }
 
     public class Viewholder extends RecyclerView.ViewHolder {
-        //private ImageLoaderView idIVCourseImagePlace;
         private CircleImageView pfp;
         private RatingBar rator_rating;
         private TextView rator_email;
