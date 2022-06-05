@@ -53,6 +53,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    // Do nothing when android back button is pressed
+    @Override
+    public void onBackPressed() {
+        // Do nothing
+    }
+
     public void doLogin(View v) {
         InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
