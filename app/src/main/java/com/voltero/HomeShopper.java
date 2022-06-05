@@ -80,7 +80,7 @@ public class HomeShopper extends AppCompatActivity {
         bottomNav.add(new MeowBottomNavigation.Model(1, R.drawable.ic_home));
         bottomNav.add(new MeowBottomNavigation.Model(2, R.drawable.ic_category));
         bottomNav.add(new MeowBottomNavigation.Model(3, R.drawable.ic_search));
-        bottomNav.add(new MeowBottomNavigation.Model(4, R.drawable.ic_cart));
+        bottomNav.add(new MeowBottomNavigation.Model(4, R.drawable.cartlogo));
         bottomNav.add(new MeowBottomNavigation.Model(5, R.drawable.ic_map));
         bottomNav.add(new MeowBottomNavigation.Model(6, R.drawable.ic_chat));
         bottomNav.add(new MeowBottomNavigation.Model(7, R.drawable.ic_profile));

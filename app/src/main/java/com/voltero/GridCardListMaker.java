@@ -7,6 +7,7 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.kpstv.imageloaderview.ImageLoaderView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -40,11 +42,37 @@ public class GridCardListMaker extends RecyclerView.Adapter<GridCardListMaker.Vi
     public void onBindViewHolder(@NonNull GridCardListMaker.Viewholder holder, int position) {
         GroceryCard model = groceryCardArrayList.get(position);
         holder.courseNameTV.setText(model.getCourse_name());
+//        Picasso.get()
+//                .load(model.getCourse_image()) // internet path
+//                .placeholder(android.R.drawable.screen_background_light_transparent)
+//                .resize(500, 500).centerCrop()
+//                .into(holder.courseIV);
+
+        // Load image with Picasso and if the image has finished loading, then set the animation
         Picasso.get()
                 .load(model.getCourse_image()) // internet path
-                .placeholder(android.R.drawable.screen_background_light_transparent)
+                .placeholder(R.drawable.progress_animation)
                 .resize(500, 500).centerCrop()
-                .into(holder.courseIV);
+                .priority(Picasso.Priority.HIGH)
+                .into(holder.courseIV, new com.squareup.picasso.Callback() {
+                    @Override
+                    public void onSuccess() {
+                        ImageLoaderView imageLoaderView = (ImageLoaderView) holder.idIVCourseImagePlace;
+                        // Make it invisible
+                        imageLoaderView.setVisibility(View.INVISIBLE);
+
+                        // Make the picture visible
+                        holder.courseIV.setVisibility(View.VISIBLE);
+                        // Make the text visible
+                        holder.courseNameTV.setVisibility(View.VISIBLE);
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        Toast.makeText(context, "One or more images failed to load", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
 
         holder.cardView.setOnClickListener(v -> {
             HomeShopper.grocery_name = model.getCourse_name();
@@ -72,6 +100,7 @@ public class GridCardListMaker extends RecyclerView.Adapter<GridCardListMaker.Vi
     public int getItemCount() { return groceryCardArrayList.size(); }
 
     public class Viewholder extends RecyclerView.ViewHolder {
+        private ImageLoaderView idIVCourseImagePlace;
         private ImageView courseIV;
         private TextView courseNameTV;
         private CardView cardView;
@@ -82,6 +111,7 @@ public class GridCardListMaker extends RecyclerView.Adapter<GridCardListMaker.Vi
             courseIV = itemView.findViewById(R.id.idIVCourseImage);
             courseNameTV = itemView.findViewById(R.id.idTVCourseName);
             cardView = itemView.findViewById(R.id.groceryCard);
+            idIVCourseImagePlace = itemView.findViewById(R.id.idIVCourseImagePlace);
 
         }
     }
