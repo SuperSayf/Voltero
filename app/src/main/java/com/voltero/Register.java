@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -93,7 +95,7 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
         params.put("user_surname", txtSurname.getText().toString());
         params.put("user_email", txtEmail.getText().toString());
         params.put("user_password", bPassword);
-        params.put("shopper_address", txtAddress.getText().toString());
+        params.put("user_address", txtAddress.getText().toString());
         params.put("user_type", SelectedItem);
         params.put("user_cell", txtCell.getText().toString());
 
@@ -102,7 +104,6 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
             try {
                 // Get the response
                 JSONObject jsonObject = new JSONObject(response);
-
                 if (jsonObject.getString("success").equals("true")) {
                     // Show the activity_main and close this activity
                     Intent intent = new Intent(this, MainActivity.class);
