@@ -21,4 +21,13 @@
         android:indeterminateTint="@color/black"
         android:layout_gravity = "center"/>
 
+    <Button
+        android:id="@+id/refresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:background="#FF081220"
+        android:backgroundTint="#081220"
+        android:text="Refresh" />
+
 </FrameLayout>
