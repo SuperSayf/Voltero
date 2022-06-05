@@ -1,11 +1,11 @@
 package com.voltero;
 
-public class CardBuilder {
+public class GroceryCard {
     private String course_name;
     private String course_image;
 
     // Constructor
-    public CardBuilder(String course_name, String course_image) {
+    public GroceryCard(String course_name, String course_image) {
         this.course_name = course_name;
         this.course_image = course_image;
     }

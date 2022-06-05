@@ -4,20 +4,19 @@ import android.content.ContentValues;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,11 +27,15 @@ public class Volunteer_Home_Fragment extends Fragment {
 
     public static String session_id;
     public static String shopper_email;
+    public static String shopper_fname;
+    public static String shopper_lname;
+    public static String shopper_address;
+    public static String shopper_image;
 
     private RecyclerView courseRV;
 
     // Arraylist for storing data
-    private ArrayList<CardBuilder> cardBuilderArrayList;
+    private ArrayList<OrderCard> orderArrayList;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -86,27 +89,30 @@ public class Volunteer_Home_Fragment extends Fragment {
             try {
                 JSONArray sessions = new JSONArray(response);
                 courseRV = view.findViewById(R.id.idRVCourse);
-                cardBuilderArrayList = new ArrayList<>();
+                orderArrayList = new ArrayList<>();
 
                 if (sessions.getJSONObject(0).getString("message").equals("Found")) {
                     for (int i = 0; i < sessions.length(); ++i) {
                         JSONObject session = sessions.getJSONObject(i);
-                        session_id = session.getString("session_id");
                         shopper_email = session.getString("user_email");
-                        // TODO: Update the session_with to the volunteer email
-                        cardBuilderArrayList.add(new CardBuilder(shopper_email, "https://bit.ly/3wGTdRm"));
+                        shopper_fname = session.getString("user_firstname");
+                        shopper_lname = session.getString("user_surname");
+                        shopper_address = session.getString("user_address");
+                        shopper_image = session.getString("user_image");
+                        String name = shopper_fname + ' ' + shopper_lname;
+                        orderArrayList.add(new OrderCard(shopper_email, name, shopper_address, shopper_image));
                     }
                 } else {
-                    cardBuilderArrayList.add(new CardBuilder("No sessions available", "https://bit.ly/3MHPwS8"));
+                    orderArrayList.add(new OrderCard("","No available sessions","", "https://bit.ly/3MHPwS8"));
                 }
                 if (isAdded()) {
                     requireActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             courseRV.setHasFixedSize(true);
-                            LinearCardListMaker linearCardListMaker = new LinearCardListMaker(getActivity(), cardBuilderArrayList);
+                            OrderListMaker orderListMaker = new OrderListMaker(getActivity(), orderArrayList);
                             courseRV.setLayoutManager(new LinearLayoutManager(getActivity()));
-                            courseRV.setAdapter(linearCardListMaker);
+                            courseRV.setAdapter(orderListMaker);
                             // Stop the progressBar
                             view.findViewById(R.id.progressBar).setVisibility(View.GONE);
                         }
@@ -116,6 +122,53 @@ public class Volunteer_Home_Fragment extends Fragment {
                 e.printStackTrace();
             }
 
+        });
+
+        Button refresh = view.findViewById(R.id.refresh);
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ContentValues params = new ContentValues();
+
+                Requests.request(getActivity(), "findSessions", params, response -> {
+                    try {
+                        JSONArray sessions = new JSONArray(response);
+                        courseRV = view.findViewById(R.id.idRVCourse);
+                        orderArrayList = new ArrayList<>();
+
+                        if (sessions.getJSONObject(0).getString("message").equals("Found")) {
+                            for (int i = 0; i < sessions.length(); ++i) {
+                                JSONObject session = sessions.getJSONObject(i);
+                                shopper_email = session.getString("user_email");
+                                shopper_fname = session.getString("user_firstname");
+                                shopper_lname = session.getString("user_surname");
+                                shopper_address = session.getString("user_address");
+                                shopper_image = session.getString("user_image");
+                                String name = shopper_fname + ' ' + shopper_lname;
+                                orderArrayList.add(new OrderCard(shopper_email, name, shopper_address, shopper_image));
+                            }
+                        } else {
+                            orderArrayList.add(new OrderCard("","No available sessions","", "https://bit.ly/3MHPwS8"));
+                        }
+                        if (isAdded()) {
+                            requireActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    courseRV.setHasFixedSize(true);
+                                    OrderListMaker orderListMaker = new OrderListMaker(getActivity(), orderArrayList);
+                                    courseRV.setLayoutManager(new LinearLayoutManager(getActivity()));
+                                    courseRV.setAdapter(orderListMaker);
+                                    // Stop the progressBar
+                                    view.findViewById(R.id.progressBar).setVisibility(View.GONE);
+                                }
+                            });
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                });
+            }
         });
 
         return view;

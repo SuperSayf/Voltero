@@ -26,7 +26,7 @@ public class Shopper_Home_Fragment extends Fragment {
     private RecyclerView courseRV;
 
     // Arraylist for storing data
-    private ArrayList<CardBuilder> cardBuilderArrayList;
+    private ArrayList<GroceryCard> groceryCardArrayList;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -81,19 +81,19 @@ public class Shopper_Home_Fragment extends Fragment {
                 //TODO: change categories
                 JSONArray categories = new JSONArray(response);
                 courseRV = view.findViewById(R.id.idRVCourse);
-                cardBuilderArrayList = new ArrayList<>();
+                groceryCardArrayList = new ArrayList<>();
                 for (int i = 0; i < categories.length(); ++i) {
                     JSONObject object = categories.getJSONObject(i);
                     String grc_name = object.getString("grc_name");
                     String grc_image = object.getString("grc_image");
-                    cardBuilderArrayList.add(new CardBuilder(grc_name, grc_image));
+                    groceryCardArrayList.add(new GroceryCard(grc_name, grc_image));
                 }
                 if (isAdded()) {
                     requireActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             courseRV.setHasFixedSize(true);
-                            GridCardListMaker cardListMaker = new GridCardListMaker(getActivity(), cardBuilderArrayList);
+                            GridCardListMaker cardListMaker = new GridCardListMaker(getActivity(), groceryCardArrayList);
                             courseRV.setLayoutManager(new GridLayoutManager(getActivity(), 2));
                             courseRV.setAdapter(cardListMaker);
                             // Stop the progressBar

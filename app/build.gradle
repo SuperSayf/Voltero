@@ -54,8 +54,12 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment:2.4.2' // Navigation library - Sayf
     implementation 'com.frlgrd:animated-edit-text:1.0.0' // Animated Edit Text - Sayf
     implementation 'com.github.gayanvoice:android-animations:1.0.2' // Animations - Sayf
-
     implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'de.hdodenhof:circleimageview:3.1.0' // Circle Image View - Sayf
+    implementation 'com.royrodriguez:transitionbutton:0.2.0' // Transition Button - Sayf
+    implementation 'com.github.dhaval2404:imagepicker:2.1' // Image Picker - Sayf
+    implementation 'io.github.kaustubhpatange:imageloaderview:0.7-beta04' // Image Loader - Sayf
+    implementation 'com.github.hosseiniSeyRo:android-app-rating:1.1.2'  // App Rating - Sayf
 
     // Mapbox
     implementation "com.mapbox.navigation:android:2.2.2"

@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <gradient
-        android:startColor="#ffffff"
-        android:endColor="#191654"
+        android:startColor="#03071e"
+        android:endColor="#004e89"
         android:angle="135"/>
 </shape>
+
+    <!--Teal Colour:-->
+    <!--    android:startColor="#03071e"-->
+    <!--    android:endColor="#0096ab"-->
+
+    <!--Other Dark Colour:-->
+    <!--    android:startColor="#03071e"-->
+    <!--    android:endColor="#407ba7"-->

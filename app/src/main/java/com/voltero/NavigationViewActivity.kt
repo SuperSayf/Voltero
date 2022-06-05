@@ -187,10 +187,7 @@ class NavigationViewActivity : AppCompatActivity() {
 
     @SuppressLint("LogNotTimber")
     private fun setLitioners() {
-        
-        binding.currentLocation.setOnClickListener {
-            getUserCurrentLocation()
-        }
+
         binding.navigationLocation.setOnClickListener {
             if (navigationLocationProvider.lastLocation?.longitude != null && navigationLocationProvider.lastLocation?.latitude != null) {
                 val intent = Intent(this, NavigationToLocation::class.java)
@@ -302,7 +299,6 @@ class NavigationViewActivity : AppCompatActivity() {
         cardsMediator.addSearchBottomSheetsEventsListener(object :
             SearchMediator.SearchBottomSheetsEventsListener {
             override fun onOpenPlaceBottomSheet(place: SearchPlace) {
-                binding.currentLocation.visibility = View.GONE
                 binding.navigationLocation.visibility = View.VISIBLE
                 destinationCoordinates = place.coordinate
                 showMarker(place.coordinate)
@@ -324,7 +320,6 @@ class NavigationViewActivity : AppCompatActivity() {
                 searchResults: List<SearchResult>,
                 responseInfo: ResponseInfo,
             ) {
-                binding.currentLocation.visibility = View.GONE
                 showMarkers(searchResults.mapNotNull { it.coordinate })
             }
 
@@ -381,7 +376,6 @@ class NavigationViewActivity : AppCompatActivity() {
 
     private fun clearMarkers() {
         markerCoordinates.clear()
-        binding.currentLocation.visibility = View.VISIBLE
         binding.navigationLocation.visibility = View.GONE
         updateCamera(currentLocationObserver)
         updateMarkersOnMap()
