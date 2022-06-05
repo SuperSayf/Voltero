@@ -19,6 +19,28 @@
         android:layout_width="match_parent"
         android:layout_height="147dp">
 
+        <com.kpstv.imageloaderview.ImageLoaderView
+            android:id="@+id/idIVCourseImagePlace"
+            android:layout_width="405dp"
+            android:layout_height="147dp"
+            android:layout_margin="0dp"
+            android:contentDescription="@string/app_name"
+            android:padding="5dp"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:shimmering="true"
+            app:overlay_drawable="@drawable/progress_animation"
+            app:overlay_drawable_tint="?attr/colorControlNormal"
+            app:overlay_tinting="true"
+            app:backgroundColor="#334155"
+            app:corner_radius="10dp"
+            app:overlay_drawable_secondary_tint="#334155"
+            />
+
         <ImageButton
             android:id="@+id/decrease"
             android:layout_width="50dp"
