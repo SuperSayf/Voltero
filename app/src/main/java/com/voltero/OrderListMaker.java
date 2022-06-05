@@ -96,7 +96,7 @@ public class OrderListMaker extends RecyclerView.Adapter<OrderListMaker.Viewhold
 
         public Viewholder(@NonNull View itemView) {
             super(itemView);
-            pfp = itemView.findViewById(R.id.courseIV);
+            pfp = itemView.findViewById(R.id.profileImage);
             courseNameTV = itemView.findViewById(R.id.txtComment);
             cardView = itemView.findViewById(R.id.orderCard);
             //idIVCourseImagePlace = itemView.findViewById(R.id.idIVCourseImagePlace);

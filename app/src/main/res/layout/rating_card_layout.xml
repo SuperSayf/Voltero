@@ -17,11 +17,11 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/relativeLayout2"
         android:layout_width="match_parent"
-        android:layout_height="147dp">
+        android:layout_height="164dp">
 
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/courseIV"
+            android:id="@+id/profileImage"
             android:layout_width="65dp"
             android:layout_height="67dp"
             android:layout_marginTop="5dp"
@@ -30,10 +30,12 @@
             app:civ_border_width="2dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.047"
+            app:layout_constraintHorizontal_bias="0.011"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.146" />
+            app:layout_constraintVertical_bias="0.0" />
+
+        <!--        TODO: Set string size-->
 
         <TextView
             android:id="@+id/txtComment"
@@ -41,8 +43,8 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:fontFamily="@font/roboto_bold"
-            android:gravity="center"
-            android:maxEms="7"
+            android:gravity="left"
+            android:maxEms="9"
             android:maxLines="3"
             android:text="Comment"
             android:textColor="#FFFFFF"
@@ -50,44 +52,47 @@
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.647"
+            app:layout_constraintHorizontal_bias="0.626"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.28" />
+            app:layout_constraintVertical_bias="0.577" />
 
         <TextView
             android:id="@+id/txtName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="left"
             android:text="Name"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.263"
+            app:layout_constraintHorizontal_bias="0.01"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.696" />
 
         <TextView
             android:id="@+id/ratorEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="left"
             android:text="email"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.269"
+            app:layout_constraintHorizontal_bias="0.01"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.125" />
+            app:layout_constraintVertical_bias="0.565" />
 
-                <RatingBar
+        <RatingBar
             android:id="@+id/ratingBar2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.82"
+            app:layout_constraintHorizontal_bias="0.753"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.822" />
+            app:layout_constraintVertical_bias="0.14" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

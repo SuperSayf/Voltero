@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -118,8 +117,8 @@ public class Volunteer_DetailedOrder_Fragment extends Fragment {
         } else {
             view = inflater.inflate(R.layout.fragment_detailed_order_active_, container, false);
 
-            TextView shopper_name = (TextView)view.findViewById(R.id.shopperName);
-            TextView shopper_address = (TextView)view.findViewById(R.id.shopperAddress);
+            TextView shopper_name = (TextView)view.findViewById(R.id.volName);
+            TextView shopper_address = (TextView)view.findViewById(R.id.volEmail);
             TextView shopper_cell = (TextView)view.findViewById(R.id.shopperCell);
 
             ContentValues params3 = new ContentValues();

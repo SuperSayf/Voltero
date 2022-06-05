@@ -1,22 +1,27 @@
 package com.voltero;
 
 import android.content.ContentValues;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,12 +30,18 @@ import java.util.ArrayList;
  */
 public class Shopper_Map_Fragment extends Fragment {
 
+    public static CircleImageView pfp;
+
     public static String rator_email;
     public static String rator_fname;
     public static String rator_lname;
     public static String rator_comment;
     public static String rator_rating;
     public static String rator_image;
+
+    public String txt_fname;
+    public String txt_lname;
+    public String txt_email;
 
     private RecyclerView courseRV;
 
@@ -82,10 +93,60 @@ public class Shopper_Map_Fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_shopper__map_, container, false);
+        TextView vol_name = (TextView)view.findViewById(R.id.volName);
+        TextView vol_email = (TextView)view.findViewById(R.id.volEmail);
+        pfp = view.findViewById(R.id.profileImage);
 
         ContentValues params = new ContentValues();
         params.put("user_email", HomeShopper.session_email);
-        Log.e("session email", HomeShopper.session_email);
+
+
+        Requests.request(getActivity(), "getDetails", params, response -> {
+            try {
+                JSONArray user_details = new JSONArray(response);
+                Log.e("details", user_details.toString());
+                for (int i = 0; i < user_details.length(); ++i) {
+                    JSONObject object = user_details.getJSONObject(i);
+                    txt_fname = object.getString("user_firstname");
+                    txt_lname = object.getString("user_surname");
+                }
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            String name =txt_fname + ' ' + txt_lname;
+                            vol_name.setText(name);
+                            vol_email.setText(HomeShopper.session_email);
+                        }
+                    });
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        });
+
+        Requests.request(requireActivity(), "getImage", params, response -> {
+            try {
+                // Get the response
+                JSONObject jsonObject = new JSONObject(response);
+                if (jsonObject.getString("success").equals("true")) {
+                    String encodedImage = jsonObject.getString("user_image");
+                    // Convert encoded image to bitmap
+                    byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
+                    // convert byte array back to original image
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                pfp.setImageBitmap(BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length));
+                            }
+                        });
+                    }
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        });
 
         Requests.request(getActivity(), "findRatings", params, response -> {
             try {
