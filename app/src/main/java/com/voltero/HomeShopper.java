@@ -26,6 +26,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
+import com.hosseiniseyro.apprating.listener.RatingDialogListener;
 
 import org.jetbrains.annotations.Nullable;
 import org.json.JSONException;
@@ -49,7 +50,27 @@ import render.animations.Bounce;
 import render.animations.Render;
 import timber.log.Timber;
 
-public class HomeShopper extends AppCompatActivity {
+public class HomeShopper extends AppCompatActivity implements RatingDialogListener {
+
+    @Override
+    public void onPositiveButtonClickedWithComment(int rate, String comment) {
+        // interpret results and comment, send it to analytics etc...
+    }
+
+    @Override
+    public void onPositiveButtonClickedWithoutComment(int rate) {
+        // interpret results, send it to analytics etc...
+    }
+
+    @Override
+    public void onNegativeButtonClicked() {
+
+    }
+
+    @Override
+    public void onNeutralButtonClicked() {
+
+    }
 
     // Global variables
     public static List<JSONObject> messagesList = new ArrayList<>();
