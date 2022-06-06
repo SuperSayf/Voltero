@@ -8,15 +8,26 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="colorPrimaryDark">#4D000000</color>
+    <color name="colorPrimaryDark">#FFFFFF</color>
     <color name="starColor">#FFEB3B</color>
     <color name="noteDescriptionTextColor">#FFEB3B</color>
     <color name="titleTextColor">#FFFFFF</color>
-    <color name="descriptionTextColor">#A6FFFFFF</color>
-    <color name="commentTextColor">#FFFFFF</color>
-    <color name="hintTextColor">#55000000</color>
-    <color name="contentTextColor">#ffffff</color>
-    <color name="rateAppDialogBackgroundColor">#4550B9</color>
+    <color name="descriptionTextColor">#FFFFFF</color>
+    <color name="commentTextColor">#FF000000</color>
+    <color name="hintTextColor">#FF000000</color>
+    <color name="contentTextColor">#FFFFFF</color>
+    <color name="rateAppDialogBackgroundColor">#FF004E89</color>
+
+
+<!--    <color name="colorPrimaryDark">#4D000000</color>-->
+<!--    <color name="starColor">#FFEB3B</color>-->
+<!--    <color name="noteDescriptionTextColor">#FFEB3B</color>-->
+<!--    <color name="titleTextColor">#FFFFFF</color>-->
+<!--    <color name="descriptionTextColor">#A6FFFFFF</color>-->
+<!--    <color name="commentTextColor">#FFFFFF</color>-->
+<!--    <color name="hintTextColor">#55000000</color>-->
+<!--    <color name="contentTextColor">#ffffff</color>-->
+<!--    <color name="rateAppDialogBackgroundColor">#334155</color>-->
 
 <!--    FF03DAC5-->
 </resources>
