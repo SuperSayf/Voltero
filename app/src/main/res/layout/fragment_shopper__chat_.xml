@@ -10,14 +10,16 @@
     tools:context=".Shopper_Chat_Fragment">
 
     <FrameLayout
-            android:id="@+id/sendb"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="12dp"
-            android:background="@drawable/background_chat_input">
+        android:id="@+id/sendb"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/background_chat_input">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@id/send"
@@ -32,13 +34,13 @@
 
     <EditText
         android:id="@+id/messageBox"
-        android:layout_width="334dp"
+        android:layout_width="338dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="7dp"
         android:layout_marginBottom="12dp"
-        android:layout_toStartOf="@id/send"
+        android:layout_toStartOf="@+id/sendb"
         android:background="@drawable/background_chat_input"
         android:hint="Enter a message"
         android:padding="8dp"
