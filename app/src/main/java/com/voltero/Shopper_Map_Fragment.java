@@ -114,8 +114,8 @@ public class Shopper_Map_Fragment extends Fragment {
                         @Override
                         public void run() {
                             String name =txt_fname + ' ' + txt_lname;
-                            vol_name.setText(name);
-                            vol_email.setText(HomeShopper.session_email);
+                            vol_name.setText("Volunteer: " + name);
+                            vol_email.setText("Email: " + HomeShopper.session_email);
                         }
                     });
                 }
