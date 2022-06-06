@@ -69,17 +69,21 @@ public class OrderListMaker extends RecyclerView.Adapter<OrderListMaker.Viewhold
             }
         });
 
-        holder.cardView.setOnClickListener(v -> {
-            HomeVolunteer.shopper_email =  model.getCourse_name();
+        if(model.getShopper_name().equals("No available sessions")){
+            holder.cardView.setClickable(false);
+        } else {
+            holder.cardView.setOnClickListener(v -> {
+                HomeVolunteer.shopper_email =  model.getCourse_name();
 
-            AppCompatActivity activity = (AppCompatActivity) v.getContext();
-            Fragment fragment = new DetailedPopup_Fragment();
-            activity.getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.nav_host_fragment_container, fragment, null)
-                    .addToBackStack(null)
-                    .commit();
-        });
+                AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                Fragment fragment = new DetailedPopup_Fragment();
+                activity.getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.nav_host_fragment_container, fragment, null)
+                        .addToBackStack(null)
+                        .commit();
+            });
+        }
 
     }
 
