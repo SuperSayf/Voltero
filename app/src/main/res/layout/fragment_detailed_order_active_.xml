@@ -12,13 +12,14 @@
         android:id="@+id/idRVCourse"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="100dp"
+        android:paddingTop="200dp"
         android:paddingBottom="100dp"
         app:layout_constraintBottom_toTopOf="@+id/closeOrder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/volEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/volName"
+        app:layout_constraintVertical_bias="0.67" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -53,12 +54,12 @@
         android:fontFamily="@font/roboto_bold"
         android:textColor="#FFFFFF"
         android:textSize="13dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/shopperCell"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.049" />
+        app:layout_constraintVertical_bias="0.23" />
 
     <TextView
         android:id="@+id/volEmail"
@@ -72,7 +73,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.177" />
+        app:layout_constraintVertical_bias="0.144" />
 
     <TextView
         android:id="@+id/shopperCell"
@@ -81,11 +82,11 @@
         android:fontFamily="@font/roboto_bold"
         android:textColor="#FFFFFF"
         android:textSize="13dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/volEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.114" />
+        app:layout_constraintVertical_bias="0.666" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
