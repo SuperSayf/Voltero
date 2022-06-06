@@ -52,10 +52,10 @@
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.048"
+            app:layout_constraintHorizontal_bias="0.268"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.776" />
+            app:layout_constraintVertical_bias="0.767" />
 
         <TextView
             android:id="@+id/txtName"
@@ -64,6 +64,7 @@
             android:fontFamily="@font/roboto_bold"
             android:gravity="left"
             android:text="Name"
+            android:textColor="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.312"
@@ -79,8 +80,8 @@
             android:max="5"
             android:numStars="5"
             android:progressTint="@color/white"
-            android:scaleX="1.5"
-            android:scaleY="1.5"
+            android:scaleX="2"
+            android:scaleY="2"
             android:transformPivotX="0dp"
             android:transformPivotY="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
