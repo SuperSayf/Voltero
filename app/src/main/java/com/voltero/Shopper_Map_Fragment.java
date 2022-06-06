@@ -104,7 +104,6 @@ public class Shopper_Map_Fragment extends Fragment {
         Requests.request(getActivity(), "getDetails", params, response -> {
             try {
                 JSONArray user_details = new JSONArray(response);
-                Log.e("details", user_details.toString());
                 for (int i = 0; i < user_details.length(); ++i) {
                     JSONObject object = user_details.getJSONObject(i);
                     txt_fname = object.getString("user_firstname");

@@ -39,7 +39,7 @@ public class RatingListMaker extends RecyclerView.Adapter<RatingListMaker.Viewho
     @Override
     public void onBindViewHolder(@NonNull RatingListMaker.Viewholder holder, int position) {
         RatingCard model = RatingsArrayList.get(position);
-        holder.rator_email.setText(model.getRator_email());
+        //holder.rator_email.setText(model.getRator_email());
         holder.rator_name.setText(model.getRator_name());
         holder.rator_comment.setText(model.getRator_comment());
         holder.rator_rating.setRating(Float.parseFloat(model.getRator_rating()));
@@ -76,7 +76,7 @@ public class RatingListMaker extends RecyclerView.Adapter<RatingListMaker.Viewho
     public class Viewholder extends RecyclerView.ViewHolder {
         private CircleImageView pfp;
         private RatingBar rator_rating;
-        private TextView rator_email;
+        //private TextView rator_email;
         private TextView rator_name;
         private TextView rator_comment;
 
@@ -84,7 +84,7 @@ public class RatingListMaker extends RecyclerView.Adapter<RatingListMaker.Viewho
             super(itemView);
             pfp = itemView.findViewById(R.id.profileImage);
             rator_rating = itemView.findViewById(R.id.ratingBar2);
-            rator_email = itemView.findViewById(R.id.ratorEmail);
+            //rator_email = itemView.findViewById(R.id.ratorEmail);
             rator_name = itemView.findViewById(R.id.txtName);
             rator_comment = itemView.findViewById(R.id.txtComment);
         }
