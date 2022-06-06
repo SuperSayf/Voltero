@@ -43,6 +43,7 @@ public class RatingListMaker extends RecyclerView.Adapter<RatingListMaker.Viewho
         holder.rator_name.setText(model.getRator_name());
         holder.rator_comment.setText(model.getRator_comment());
         holder.rator_rating.setRating(Float.parseFloat(model.getRator_rating()));
+        holder.rator_rating.setIsIndicator(true);
 
         ContentValues params = new ContentValues();
         params.put("user_email", model.getRator_email());
