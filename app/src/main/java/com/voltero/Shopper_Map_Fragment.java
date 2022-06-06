@@ -42,7 +42,7 @@ public class Shopper_Map_Fragment extends Fragment {
     public String txt_fname;
     public String txt_lname;
     public String txt_email;
-    public String average_rating;
+    public String txt_avg_rating;
 
     private RecyclerView courseRV;
 
@@ -96,6 +96,7 @@ public class Shopper_Map_Fragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_shopper__map_, container, false);
         TextView vol_name = (TextView)view.findViewById(R.id.volName);
         TextView vol_email = (TextView)view.findViewById(R.id.volEmail);
+        TextView vol_avg = (TextView)view.findViewById(R.id.Avg);
         pfp = view.findViewById(R.id.profileImage);
 
         ContentValues params = new ContentValues();
@@ -109,15 +110,16 @@ public class Shopper_Map_Fragment extends Fragment {
                     JSONObject object = user_details.getJSONObject(i);
                     txt_fname = object.getString("user_firstname");
                     txt_lname = object.getString("user_surname");
-                    average_rating = object.getString("average_rating");
+                    txt_avg_rating = object.getString("average_rating");
                 }
                 if (isAdded()) {
                     requireActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             String name =txt_fname + ' ' + txt_lname;
-                            vol_name.setText("Volunteer: " + name+ '\n' + '\n' + "Average Rating: " + average_rating);
+                            vol_name.setText("Volunteer: " + name);
                             vol_email.setText("Email: " + HomeShopper.session_email);
+                            vol_avg.setText("Average Rating: " + txt_avg_rating);
                         }
                     });
                 }
