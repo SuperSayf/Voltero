@@ -42,6 +42,7 @@ public class Shopper_Map_Fragment extends Fragment {
     public String txt_fname;
     public String txt_lname;
     public String txt_email;
+    public String average_rating;
 
     private RecyclerView courseRV;
 
@@ -108,13 +109,14 @@ public class Shopper_Map_Fragment extends Fragment {
                     JSONObject object = user_details.getJSONObject(i);
                     txt_fname = object.getString("user_firstname");
                     txt_lname = object.getString("user_surname");
+                    average_rating = object.getString("average_rating");
                 }
                 if (isAdded()) {
                     requireActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             String name =txt_fname + ' ' + txt_lname;
-                            vol_name.setText("Volunteer: " + name);
+                            vol_name.setText("Volunteer: " + name+ '\n' + '\n' + "Average Rating: " + average_rating);
                             vol_email.setText("Email: " + HomeShopper.session_email);
                         }
                     });
