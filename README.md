@@ -54,6 +54,8 @@ access token
 | Logo Colour 2     | ![#219ebc](https://via.placeholder.com/10/219ebc?text=+) #219ebc   |
 | Theme Colour      | ![#334155](https://via.placeholder.com/10/334155?text=+) #334155   |
 
+- ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) `#f03c15`
+
 
 ## Documentation
 
