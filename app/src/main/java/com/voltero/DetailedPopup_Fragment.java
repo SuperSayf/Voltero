@@ -172,36 +172,45 @@ public class DetailedPopup_Fragment extends Fragment {
         params2.put("session_with", MainActivity.user_email);
 
         acceptSession = (Button)view.findViewById(R.id.accept);
-
-        acceptSession.setOnClickListener(v -> {
-            Requests.request(activity, "acceptSession", params2, response -> {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    String message = jsonObject.getString("message");
-                    if (message.equals("success")) {
-                        new Handler(Looper.getMainLooper()).post(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(activity, HomeVolunteer.shopper_email + "'s order accepted", Toast.LENGTH_LONG).show();
-                                HomeVolunteer.session_started = true;
-                                HomeVolunteer.session_initialized = false;
-                                HomeVolunteer.isInSession = "true";
-                            }
-                        });
-                    } else {
-                        new Handler(Looper.getMainLooper()).post(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(activity, "Error", Toast.LENGTH_LONG).show();
-                            }
-                        });
+        if(HomeVolunteer.isInSession.equals("false")){
+            acceptSession.setOnClickListener(v -> {
+                Requests.request(activity, "acceptSession", params2, response -> {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String message = jsonObject.getString("message");
+                        if (message.equals("success")) {
+                            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(activity, HomeVolunteer.shopper_email + "'s order accepted", Toast.LENGTH_LONG).show();
+                                    HomeVolunteer.session_started = true;
+                                    HomeVolunteer.session_initialized = false;
+                                    HomeVolunteer.isInSession = "true";
+                                }
+                            });
+                        } else {
+                            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(activity, "Error", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        }
+                    } catch (JSONException e){
+                        Requests.showMessage(activity, "Error with request");
                     }
-                } catch (JSONException e){
-                    Requests.showMessage(activity, "Error with request");
+                });
+            });
+
+        } else {
+            acceptSession.setClickable(false);
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(activity, "Already in a session", Toast.LENGTH_LONG).show();
                 }
             });
-        });
-
+        }
 
         return view;
     }
