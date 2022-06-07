@@ -50,6 +50,7 @@
             android:textColor="#FFFFFF"
             android:textSize="16sp"
             android:visibility="visible"
+            android:paddingStart="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.268"
