@@ -48,13 +48,23 @@ access token
 
 | Color             | Hex                                                                |
 | ----------------- | ------------------------------------------------------------------ |
+| Background Colour | `#000113`   |
+| Font Colour       | `#ffffff`   |
+| Logo Colour 1     | `#215abc`   |
+| Logo Colour 2     | `#219ebc`   |
+| Theme Colour      | `#334155`   |
+
+<!--
+| Color             | Hex                                                                |
+| ----------------- | ------------------------------------------------------------------ |
 | Background Colour | ![#000113](https://via.placeholder.com/15/000113/000000?text=+) `#000113`  |
 | Font Colour       | ![#ffffff](https://via.placeholder.com/15/ffffff?text=+) `#ffffff`   |
 | Logo Colour 1     | ![#215abc](https://via.placeholder.com/10/215abc?text=+) #215abc   |
 | Logo Colour 2     | ![#219ebc](https://via.placeholder.com/10/219ebc?text=+) #219ebc   |
 | Theme Colour      | ![#334155](https://via.placeholder.com/10/334155?text=+) #334155   |
 
-- ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) `#f03c15`
+-->
+
 
 
 ## Documentation
