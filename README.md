@@ -11,6 +11,11 @@ people who should not be out shopping themselves.
 - Volunteers should be able to view the requestor’s location so thatthey can use something like google maps to navigate there
 - At risk individuals should be able to post messages of thanks on volunteers’ profiles
 
+## Server Type
+We were required to use a LAMP server, using MySQL to store our data with php scripts.
+
+
+LAMP is an open source Web development platform that uses Linux as the operating system, Apache as the Web server, MySQL as the relational database management system and PHP as the object-oriented scripting language.
 
 
 ## Acknowledgements
