@@ -78,7 +78,7 @@ access token
 
 ## Voltero - App promo
 
-[![Watch the video](https://imgur.com/KN3q7YD.png)](https://www.youtube.com/watch?v=53X53cIdpsE)
+[Video](https://www.youtube.com/watch?v=53X53cIdpsE)
 
 ## Authors
 
