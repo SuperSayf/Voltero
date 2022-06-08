@@ -75,6 +75,11 @@ access token
 ## Demo Video
 
 [Video](https://linktodocumentation)
+
+## Voltero - App promo
+
+[![Watch the video](https://imgur.com/KN3q7YD.png)](https://www.youtube.com/watch?v=53X53cIdpsE)
+
 ## Authors
 
 - [Sayfullah Jumoorty](https://github.com/SuperSayf)
