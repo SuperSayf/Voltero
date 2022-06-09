@@ -74,12 +74,12 @@ access token
 
 ## Documentation
 
-[Documentation](https://linktodocumentation)
+[Documentation](https://drive.google.com/file/d/1oSXgYZEJE2_ihFfqd1qwXi4zrgS0IImw/view?usp=sharing)
 
 
 ## Demo Video
 
-[Video](https://linktodocumentation)
+[Video](https://www.youtube.com/watch?v=bbg4S_U7ikM)
 
 ## Voltero - App promo
 
