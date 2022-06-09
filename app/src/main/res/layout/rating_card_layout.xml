@@ -17,11 +17,14 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/relativeLayout2"
         android:layout_width="match_parent"
-        android:layout_height="147dp">
+        android:layout_height="134dp">
+        <!--        android:layout_height="159dp">-->
 
+
+        <!--        TODO: Set string size-->
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/courseIV"
+            android:id="@+id/profileImage"
             android:layout_width="65dp"
             android:layout_height="67dp"
             android:layout_marginTop="5dp"
@@ -30,64 +33,64 @@
             app:civ_border_width="2dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.047"
+            app:layout_constraintHorizontal_bias="0.026"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.146" />
+            app:layout_constraintVertical_bias="0.1" />
 
         <TextView
             android:id="@+id/txtComment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-            android:fontFamily="@font/roboto_bold"
-            android:gravity="center"
-            android:maxEms="7"
-            android:maxLines="3"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="left"
+            android:maxLines="4"
             android:text="Comment"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
             android:visibility="visible"
+            android:paddingStart="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.647"
+            app:layout_constraintHorizontal_bias="0.268"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.28" />
+            app:layout_constraintVertical_bias="0.767" />
 
         <TextView
             android:id="@+id/txtName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="left"
             android:text="Name"
+            android:textColor="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.263"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/ratorEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="email"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.269"
+            app:layout_constraintHorizontal_bias="0.312"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.125" />
+            app:layout_constraintVertical_bias="0.153" />
 
-                <RatingBar
+        <RatingBar
             android:id="@+id/ratingBar2"
+            style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:max="5"
+            android:numStars="5"
+            android:progressTint="@color/white"
+            android:scaleX="2"
+            android:scaleY="2"
+            android:transformPivotX="0dp"
+            android:transformPivotY="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.82"
+            app:layout_constraintHorizontal_bias="0.276"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.822" />
+            app:layout_constraintVertical_bias="0.363" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
