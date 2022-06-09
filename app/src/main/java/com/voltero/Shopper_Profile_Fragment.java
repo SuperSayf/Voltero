@@ -132,9 +132,9 @@ public class Shopper_Profile_Fragment extends Fragment {
                             user_address.setText("Address: " + txt_address);
                             user_cell.setText("Cell: " + txt_cell);
                             if (txt_type.equals("1")) {
-                                user_type.setText("User Type: Shopper");
+                                user_type.setText(" User Type: Shopper");
                             } else {
-                                user_type.setText("User Type: Volunteer");
+                                user_type.setText(" User Type: Volunteer");
                             }
 
 

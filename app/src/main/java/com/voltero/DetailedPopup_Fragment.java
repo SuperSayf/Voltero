@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -95,8 +94,8 @@ public class DetailedPopup_Fragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_detailed_popup, container, false);
 
 
-        TextView shopper_name = (TextView)view.findViewById(R.id.shopperName);
-        TextView shopper_address = (TextView)view.findViewById(R.id.shopperAddress);
+        TextView shopper_name = (TextView)view.findViewById(R.id.volName);
+        TextView shopper_address = (TextView)view.findViewById(R.id.volEmail);
         TextView shopper_cell = (TextView)view.findViewById(R.id.shopperCell);
 
         ContentValues params3 = new ContentValues();
@@ -173,36 +172,45 @@ public class DetailedPopup_Fragment extends Fragment {
         params2.put("session_with", MainActivity.user_email);
 
         acceptSession = (Button)view.findViewById(R.id.accept);
-
-        acceptSession.setOnClickListener(v -> {
-            Requests.request(activity, "acceptSession", params2, response -> {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    String message = jsonObject.getString("message");
-                    if (message.equals("success")) {
-                        new Handler(Looper.getMainLooper()).post(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(activity, HomeVolunteer.shopper_email + "'s order accepted", Toast.LENGTH_LONG).show();
-                                HomeVolunteer.session_started = true;
-                                HomeVolunteer.session_initialized = false;
-                                HomeVolunteer.isInSession = "true";
-                            }
-                        });
-                    } else {
-                        new Handler(Looper.getMainLooper()).post(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(activity, "Error", Toast.LENGTH_LONG).show();
-                            }
-                        });
+        if(HomeVolunteer.isInSession.equals("false")){
+            acceptSession.setOnClickListener(v -> {
+                Requests.request(activity, "acceptSession", params2, response -> {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String message = jsonObject.getString("message");
+                        if (message.equals("success")) {
+                            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(activity, HomeVolunteer.shopper_email + "'s order accepted", Toast.LENGTH_LONG).show();
+                                    HomeVolunteer.session_started = true;
+                                    HomeVolunteer.session_initialized = false;
+                                    HomeVolunteer.isInSession = "true";
+                                }
+                            });
+                        } else {
+                            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(activity, "Error", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        }
+                    } catch (JSONException e){
+                        Requests.showMessage(activity, "Error with request");
                     }
-                } catch (JSONException e){
-                    Requests.showMessage(activity, "Error with request");
+                });
+            });
+
+        } else {
+            acceptSession.setClickable(false);
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(activity, "Already in a session", Toast.LENGTH_LONG).show();
                 }
             });
-        });
-
+        }
 
         return view;
     }

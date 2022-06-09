@@ -58,6 +58,8 @@ import com.mapbox.search.ui.view.place.SearchPlace
 import com.mapbox.search.ui.view.place.SearchPlaceBottomSheetView
 import com.voltero.databinding.ActivityNavigationViewBinding
 
+// Source: https://docs.mapbox.com/android/navigation/guides/drop-in-ui/
+// Demo Repo: https://github.com/virvainfotech/Mapbox-SDK-Example/tree/46725a4f6232629e976167176936b5fbb12b8df8
 
 class NavigationViewActivity : AppCompatActivity() {
 

@@ -38,8 +38,11 @@ public class Requests
         {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e)
-            {
-                Toast.makeText(activity, ERROR_MSG, Toast.LENGTH_SHORT).show(); // Show error message
+            {activity.runOnUiThread(new Runnable() {
+                public void run() {
+                    Toast.makeText(activity, ERROR_MSG, Toast.LENGTH_SHORT).show(); // Show error message
+                }
+            });
             }
 
             @Override

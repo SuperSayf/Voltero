@@ -125,7 +125,11 @@ public class HomeVolunteer extends AppCompatActivity {
                     currentTab = 3;
                 }
                 else  if (item.getId() ==2){
-                    fragment = new Volunteer_DetailedOrder_Fragment();
+                    if (isInSession.equals("true")) {
+                        fragment = new Volunteer_DetailedOrder_Fragment();
+                    } else {
+                        fragment = new StartASession();
+                    }
                     currentTab = 2;
                 }
                 else {
