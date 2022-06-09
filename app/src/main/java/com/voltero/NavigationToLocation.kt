@@ -71,6 +71,10 @@ import com.voltero.databinding.ActivityNavigationLocationBinding
 import java.util.*
 import kotlin.math.roundToInt
 
+// Source: https://docs.mapbox.com/android/navigation/guides/turn-by-turn-navigation/
+// Demo Repo: https://github.com/virvainfotech/Mapbox-SDK-Example/tree/46725a4f6232629e976167176936b5fbb12b8df8
+
+
 class NavigationToLocation : AppCompatActivity() {
 
     private companion object {
