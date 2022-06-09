@@ -38,8 +38,6 @@ change resources, use core Mapbox tools, and more. Mapbox APIs
 are divided into four distinct services: Maps, Navigation, Search, 
 and Accounts.
 
-[Documentation](https://docs.mapbox.com/)
-
 #### Changing the Token:
 If they want to change the token, go to grade.properties 
 file, and change 
@@ -47,7 +45,7 @@ MAPBOX_DOWNLOADS_TOKEN to their own private token
 and in strings.xml, change mapbox_access_token to their public 
 access token
 
-
+[Documentation](https://docs.mapbox.com/)
 
 ## Logo
 ![Logo](https://imgur.com/KN3q7YD.png)
