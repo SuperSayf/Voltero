@@ -12,10 +12,9 @@ $result = $link->query($query);
 
 // Array with session_id, session_id is then extracted into variable 
 $row = $result->fetch_assoc();
-$session_id = $row[session_id];
 
 // Return every row in the cartItem table as a json array
-$query = "SELECT * FROM cartItem WHERE cart_session_id = $session_id";
+$query = "SELECT * FROM cartItem WHERE cart_session_id = '$row[session_id]'";
 $result = $link->query($query);
 
 // Create an array to hold all the rows

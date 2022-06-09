@@ -8,9 +8,21 @@ $link  = new mysqli("127.0.0.1", $username, $password, $database);
 $user_email = $_REQUEST["user_email"];
 $session_with = $_REQUEST["session_with"];
 
+// Finds session_id corresponding to user_email
+$query = "SELECT session_id FROM sessions WHERE user_email = '$user_email' AND session_with = '$session_with' AND cart_complete = 'true' AND  session_complete = 'false' ";
+$result = $link->query($query);
+
+// Array with session_id, session_id is then extracted into variable 
+$row = $result->fetch_assoc();
+
+// Return every row in the cartItem table as a json array
+$query = "DELETE FROM cartItem WHERE cart_session_id = '$row[session_id]'";
+$result = $link->query($query);
+
 // Find in the sessions table where user_email = '$user_email' and session_with = '$session_with' and session_complete = "false" and update the session_complete to "true"
 $query = "UPDATE sessions SET session_complete = 'true' WHERE user_email = '$user_email' AND session_with = '$session_with' AND cart_complete = 'true' AND  session_complete = 'false'";
 $result = $link->query($query);
+
 
 // Count the number of rows where the session_with = user_email and session_complete = "false"
 $query = "SELECT * FROM sessions WHERE user_email = '$user_email' AND cart_complete = 'true' AND session_complete = 'false'";

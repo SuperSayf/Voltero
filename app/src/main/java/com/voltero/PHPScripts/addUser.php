@@ -6,8 +6,8 @@ $link  = new mysqli("127.0.0.1", $username, $password, $database);
 
 $user_firstname = $_REQUEST['user_firstname'];
 $user_surname = $_REQUEST['user_surname'];
-$user_password = $_REQUEST['user_password'];
 $user_email = $_REQUEST['user_email'];
+$user_password = $_REQUEST['user_password'];
 $user_address = $_REQUEST['user_address'];
 $user_type = $_REQUEST['user_type'];
 $user_cell = $_REQUEST['user_cell'];
