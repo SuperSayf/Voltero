@@ -19,6 +19,8 @@ import kotlinx.parcelize.Parcelize
 import java.util.LinkedList
 import java.util.concurrent.CopyOnWriteArrayList
 
+// Source: https://docs.mapbox.com/android/search/guides/search/
+// Demo Repo: https://github.com/virvainfotech/Mapbox-SDK-Example/tree/46725a4f6232629e976167176936b5fbb12b8df8
 
 class SearchMediator(
     private val searchBottomSheetView: SearchBottomSheetView,
