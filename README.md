@@ -45,7 +45,7 @@ MAPBOX_DOWNLOADS_TOKEN to their own private token
 and in strings.xml, change mapbox_access_token to their public 
 access token
 
-
+[Documentation](https://docs.mapbox.com/)
 
 ## Logo
 ![Logo](https://imgur.com/KN3q7YD.png)
