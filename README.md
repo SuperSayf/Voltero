@@ -11,19 +11,16 @@ people who should not be out shopping themselves.
 - Volunteers should be able to view the requestor’s location so thatthey can use something like google maps to navigate there
 - At risk individuals should be able to post messages of thanks on volunteers’ profiles
 
+## Preview
+
+![Demo](https://github.com/SuperSayf/Voltero/blob/experimental/AppPromo%20(Extra)%20LowQuality.gif)
+
+
 ## Server Type
 We were required to use a LAMP server, using MySQL to store our data with php scripts.
 
 
 LAMP is an open source Web development platform that uses Linux as the operating system, Apache as the Web server, MySQL as the relational database management system and PHP as the object-oriented scripting language.
-
-
-## Acknowledgements
-
- - [Image Picker for Android](https://github.com/Dhaval2404/ImagePicker)
- - [Android Animations](https://github.com/gayanvoice/android-animations)
- - [Image Loader](https://github.com/KaustubhPatange/ImageLoaderView)
- - [Android App Rating](https://github.com/hosseiniSeyRo/android-app-rating)
 
 
 ## API Reference
@@ -45,7 +42,7 @@ MAPBOX_DOWNLOADS_TOKEN to their own private token
 and in strings.xml, change mapbox_access_token to their public 
 access token
 
-[Documentation](https://docs.mapbox.com/)
+[Mapbox documentation](https://docs.mapbox.com/)
 
 ## Logo
 ![Logo](https://imgur.com/KN3q7YD.png)
@@ -74,16 +71,23 @@ access token
 
 ## Documentation
 
-[Documentation](https://drive.google.com/file/d/1n_-7pLueJ-5HeROkVlSnpe3R4fi2MLu_/view?usp=sharing)
+[Voltero Project Documentation](https://drive.google.com/file/d/1n_-7pLueJ-5HeROkVlSnpe3R4fi2MLu_/view?usp=sharing)
 
 
-## Demo Video
+## App Demo
 
-[Video](https://www.youtube.com/watch?v=bbg4S_U7ikM)
+[Go to video](https://www.youtube.com/watch?v=bbg4S_U7ikM)
 
-## Voltero - App promo
+## App Promo
 
-[Video](https://www.youtube.com/watch?v=53X53cIdpsE)
+[Go to video](https://www.youtube.com/watch?v=53X53cIdpsE)
+
+## Acknowledgements
+
+ - [Image Picker for Android](https://github.com/Dhaval2404/ImagePicker)
+ - [Android Animations](https://github.com/gayanvoice/android-animations)
+ - [Image Loader](https://github.com/KaustubhPatange/ImageLoaderView)
+ - [Android App Rating](https://github.com/hosseiniSeyRo/android-app-rating)
 
 ## Authors
 
