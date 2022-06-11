@@ -88,6 +88,13 @@ access token
  - [Android Animations](https://github.com/gayanvoice/android-animations)
  - [Image Loader](https://github.com/KaustubhPatange/ImageLoaderView)
  - [Android App Rating](https://github.com/hosseiniSeyRo/android-app-rating)
+ - [Bcrypt](https://github.com/patrickfav/bcrypt)
+ - [okhttp](https://github.com/square/okhttp)
+ - [picasso](https://github.com/square/picasso)
+ - [Meowbar](https://github.com/oneHamidreza/MeowBottomNavigationJava)
+ - [CircleImageView](https://github.com/hdodenhof/CircleImageView)
+ - [TransitionButton](https://github.com/roynx98/transition-button-android)
+ - [Mapbox](https://github.com/mapbox)
 
 ## Authors
 
