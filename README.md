@@ -1,7 +1,7 @@
 # Project Voltero
 
 The virus causes much higher death rates in at risk individuals such as the elderly. But these groups
-ofpeople still need to purchase neccessities. The app allows people to volunteer to do shopping for
+of people still need to purchase neccessities. The app allows people to volunteer to do shopping for
 people who should not be out shopping themselves.
 
 - At risk individuals should be able to request items, with each item being a free text entry to allow flexibility
